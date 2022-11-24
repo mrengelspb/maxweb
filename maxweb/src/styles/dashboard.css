@@ -6,7 +6,6 @@
 
 .dashboard--container {
     width: 95%;
-    border: 2px solid blue;
     display: flex;
     box-sizing: border-box;
     padding: 20px 20px;

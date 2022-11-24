@@ -1,0 +1,16 @@
+.show {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.submit {
+    margin-left: 90%;
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
