@@ -19,7 +19,7 @@ export default function Header() {
         <List size={32} />
       </button>
 
-      <div className="header--menu">
+      <div className="header--menu hidden">
         <button type="button" onClick={() => handleCloseMenu()} className="header--menu__close">
           <XLg size={30} />
         </button>
