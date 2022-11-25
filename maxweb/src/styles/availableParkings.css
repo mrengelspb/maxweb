@@ -1,0 +1,10 @@
+.availableParkings {
+    text-align: center;
+}
+
+.availableParkings--counter {
+    padding: 30px;
+    color: white;
+    background-color: darkblue;
+    display: block;
+}

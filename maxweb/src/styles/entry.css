@@ -1,0 +1,20 @@
+.entry--info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.entry--data {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.entry--button {
+    width: 200px;
+    margin: 20px 40% 0px 40%;
+    background-color: aqua;
+    border: none;
+    padding: 20px 10px;
+}

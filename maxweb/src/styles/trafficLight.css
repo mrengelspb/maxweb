@@ -1,0 +1,18 @@
+.trafficLight {
+
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    box-shadow: inset 0px 5px 5px gray;
+}
+
+.circle__yellow {
+    background-color: yellow;
+}
+
+.circle__green {
+    background-color: green;
+}
