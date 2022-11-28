@@ -1,8 +1,12 @@
-import User from '../Entities/User.js';
+const { User } = require('../Entities/User.js');
 
-export class Login {
-  user (DB, account) {
+class Login {
+  account (DB, account) {
     const user = new User(account.userName, account.password);
     DB.loginUser(user);
   }
 }
+
+module.exports = {
+  Login
+};

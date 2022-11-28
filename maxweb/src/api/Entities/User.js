@@ -1,6 +1,10 @@
-export class User {
+class User {
   constructor (userName, password) {
-    this.name = userName;
-    this.role = password;
+    this.userName = userName;
+    this.password = password;
   }
+}
+
+module.exports = {
+  User
 }

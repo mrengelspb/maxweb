@@ -1,12 +1,44 @@
+const { DBMysql } = require('./data_provider/DBMysql.js');
+const { Login } = require('./Use_Cases/LoginUser.js');
 const express = require('express');
-
-const app = express();
+const { User } = require('./Entities/User.js');
+const route = express.Router();
 require('dotenv').config();
 
-app.get("/", (req, res) => {
-    res.send("Hello World !")
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
+const dbmysql = new DBMysql({
+  host: process.env.HOST_DB,
+  user: process.env.USER_DB,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
+  port: process.env.PORT_DB,
+})
+
+
+app.post("/", (req, res) => {
+  const account = req.body;
+  const login = new Login();
+  const User = new User(account, userName, account.password);
+  login.account(dbmysql, account);
+  console.log(dbmysql.results)
 });
 
-app.listen(process.debugPort, ()=> {
-    console.log(`Server listen in port ${process.PORT}`);
+app.post("/ingreso", () => {
+
+});
+
+app.post("/admin", (req, res) => {
+  
+});
+
+app.post("/operador", (req, res) => {
+
+});
+
+
+
+app.listen(process.env.PORT, () => {
+  console.log(`Server listen in port ${process.env.PORT}`);
 });
