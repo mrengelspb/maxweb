@@ -1,9 +1,9 @@
 const { User } = require('../Entities/User.js');
 
 class Login {
-  account (DB, account) {
+  account (DB, account, res) {
     const user = new User(account.userName, account.password);
-    DB.loginUser(user);
+    DB.loginUser(user, res);
   }
 }
 

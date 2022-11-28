@@ -8,7 +8,7 @@ class DBMysql extends InterfaceDatabase {
     this.connection = mysql.createConnection(config);
   }
 
-  loginUser(account) {
+  loginUser(account, res) {
     this.connection.connect((err) => {
       if (err) {
         console.error('Error corresponding ' + err.stack);
@@ -21,7 +21,7 @@ class DBMysql extends InterfaceDatabase {
       if (err) {
         console.error(err.message);
       }
-      console.log(results);
+      res.send(results[0]);
     });
 
     this.connection.end();

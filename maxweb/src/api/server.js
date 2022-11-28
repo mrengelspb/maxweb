@@ -1,8 +1,6 @@
 const { DBMysql } = require('./data_provider/DBMysql.js');
 const { Login } = require('./Use_Cases/LoginUser.js');
 const express = require('express');
-const { User } = require('./Entities/User.js');
-const route = express.Router();
 require('dotenv').config();
 
 const app = express();
@@ -16,13 +14,10 @@ const dbmysql = new DBMysql({
   port: process.env.PORT_DB,
 })
 
-
 app.post("/", (req, res) => {
   const account = req.body;
   const login = new Login();
-  const User = new User(account, userName, account.password);
-  login.account(dbmysql, account);
-  console.log(dbmysql.results)
+  login.account(dbmysql, account, res);
 });
 
 app.post("/ingreso", () => {
@@ -36,8 +31,6 @@ app.post("/admin", (req, res) => {
 app.post("/operador", (req, res) => {
 
 });
-
-
 
 app.listen(process.env.PORT, () => {
   console.log(`Server listen in port ${process.env.PORT}`);
