@@ -1,31 +1,35 @@
-const { DBMysql } = require('./data_provider/DBMysql.js');
-const { Login } = require('./Use_Cases/LoginUser.js');
 const express = require('express');
 require('dotenv').config();
+const session = require('express-session');
+const TokenGenerator = require('uuid-token-generator');
+const cookieParser = require('cookie-parser');
+const login_route = require('./interface/Routes/Router');
 
 const app = express();
+const tokgen = new TokenGenerator(); 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
-const dbmysql = new DBMysql({
-  host: process.env.HOST_DB,
-  user: process.env.USER_DB,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
-  port: process.env.PORT_DB,
-})
+app.use(cookieParser());
+app.use(session({
+  secret: tokgen.generate(),
+  saveUninitialized: true,
+  cookie: {maxAge: 1000 * 60 * 60 * 24},
+  resave: false
+}));
 
-app.post("/", (req, res) => {
-  const account = req.body;
-  const login = new Login();
-  login.account(dbmysql, account, res);
-});
+app.use("/", login_route);
 
 app.post("/ingreso", () => {
 
 });
 
-app.post("/admin", (req, res) => {
-  
+app.get("/admin", (req, res) => {
+  console.log(req.session);
+  if (req.session.user_name) {
+    res.send(req.session)
+  } else {
+    res.send("Session not Found !");
+  }
 });
 
 app.post("/operador", (req, res) => {

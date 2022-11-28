@@ -8,23 +8,14 @@ class DBMysql extends InterfaceDatabase {
     this.connection = mysql.createConnection(config);
   }
 
-  loginUser(account, res) {
-    this.connection.connect((err) => {
-      if (err) {
-        console.error('Error corresponding ' + err.stack);
-        return;
-      }
-      console.log('connected as id ' + this.connection.threadId);
+  query(sql, account) {
+    return new Promise((resolve, reject) => {
+      this.connection.query(sql, [account.userName, account.password], (err, results) => {
+        if (err)
+          return reject(err);
+        resolve(results);
+      });
     });
-
-    this.connection.query('CALL loginUser(?, ?)', [account.userName, account.password], (err, results, fields) => {
-      if (err) {
-        console.error(err.message);
-      }
-      res.send(results[0]);
-    });
-
-    this.connection.end();
   }
 }
 
