@@ -18,11 +18,18 @@ export default function Action({ children, text }) {
             <Input placeholder="Nombre Usuario" type="text" />
             <Input placeholder="Contraseña" type="password" />
             <hr />
-            <Input placeholder="Nombres" type="text" />
-            <Input placeholder="Apellidos" type="text" />
+            <Input placeholder="Primer Nombre" type="text" />
+            <Input placeholder="Segundo Nombre" type="text" />
+            <Input placeholder="Primer Apellido" type="text" />
+            <Input placeholder="Segundo Apellido" type="text" />
+            <Input placeholder="Número de identificación" type="number" />
             <Input placeholder="Teléfono" type="text" />
             <Input placeholder="Dirreción" type="text" />
             <Input placeholder="Email" type="text" />
+            <label htmlFor="birth_date">
+              Fecha de Nacimiento:
+              <input id="birth_date" htmlFor="birth_date" type="date" />
+            </label>
             <label htmlFor="rol">
               Eligue un Rol:
               <select id="rol" name="rol">
