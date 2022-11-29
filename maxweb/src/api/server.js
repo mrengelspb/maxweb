@@ -3,7 +3,9 @@ require('dotenv').config();
 const session = require('express-session');
 const TokenGenerator = require('uuid-token-generator');
 const cookieParser = require('cookie-parser');
-const login_route = require('./interface/Routes/Router');
+const login_route = require('./interface/Routes/login_route.js');
+const admin_route = require('./interface/Routes/admin_route.js');
+const entry_route = require('./interface/Routes/entry_route.js');
 
 const app = express();
 const tokgen = new TokenGenerator(); 
@@ -18,19 +20,8 @@ app.use(session({
 }));
 
 app.use("/", login_route);
-
-app.post("/ingreso", () => {
-
-});
-
-app.get("/admin", (req, res) => {
-  console.log(req.session);
-  if (req.session.user_name) {
-    res.send(req.session)
-  } else {
-    res.send("Session not Found !");
-  }
-});
+app.use("/", admin_route);
+app.use("/", entry_route);
 
 app.post("/operador", (req, res) => {
 

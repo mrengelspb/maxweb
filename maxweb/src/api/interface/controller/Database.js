@@ -3,7 +3,7 @@ class InterfaceDatabase {
 
   }
 
-  LoginUser () {
+  query () {
     throw new Error('Method not Implement !');
   }
 }

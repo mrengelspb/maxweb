@@ -8,9 +8,9 @@ class DBMysql extends InterfaceDatabase {
     this.connection = mysql.createConnection(config);
   }
 
-  query(sql, account) {
+  query(sql, args) {
     return new Promise((resolve, reject) => {
-      this.connection.query(sql, [account.userName, account.password], (err, results) => {
+      this.connection.query(sql, args, (err, results) => {
         if (err)
           return reject(err);
         resolve(results);
@@ -19,4 +19,12 @@ class DBMysql extends InterfaceDatabase {
   }
 }
 
-module.exports = { DBMysql };
+module.exports = {
+  dbmysql: new DBMysql({
+    host: process.env.HOST_DB,
+    user: process.env.USER_DB,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE,
+    port: process.env.PORT_DB,
+  })
+};
