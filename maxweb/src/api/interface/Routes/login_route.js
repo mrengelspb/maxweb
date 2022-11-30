@@ -8,10 +8,15 @@ login_route.post('/', (req, res, next) => {
   const login = new Login();
   const result = login.account(dbmysql, account);
   result.then(data => {
-    req.session.data = JSON.parse(JSON.stringify(data[0]));
-    res.send(JSON.parse(JSON.stringify(data[0])));
+    const info = JSON.parse(JSON.stringify(data[0]));
+    req.session.data = info;  
+    if (info.length == 0) {
+      res.status(404).send({message: "User not Found !"});
+    } else {
+      res.status(200).send(info);
+    }
   }).catch((err) => {
-    res.send({ message: err.message });
+    res.status(404).send({ message: err.message });
   });
 });
 

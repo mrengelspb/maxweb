@@ -8,7 +8,7 @@ class UserController {
     }
 
     finalize(DB, args) {
-        return DB.query('CALL finalize()', args)            
+        return DB.query('CALL finalize(?, ?, ?, ?, ?)', args)            
     }
 }
 
