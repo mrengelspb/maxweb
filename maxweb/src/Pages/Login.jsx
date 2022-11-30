@@ -1,19 +1,58 @@
-import React from 'react';
-import Form from '../Components/Form';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Title from '../Components/Title';
 import Input from '../Components/Input';
-import Button from '../Components/Button';
+import SignUp from '../Components/signUp_context';
 import '../styles/login.css';
 
 export default function Login() {
+  const navigate = useNavigate();
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const { value } = this.context;
+  const [authenticated, setAuthenticated] = useState(value);
+
+  const handlerUserName = (event) => {
+    setUserName(event.target.value);
+  };
+
+  const handlerPassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const SubmitHandler = (event) => {
+    event.preventDefault();
+    fetch('http://localhost:3000/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userName,
+        password,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          setAuthenticated(true);
+          navigate('/admin');
+        }
+        return response.json();
+      })
+      .catch((err) => {
+        console.log(err, err.message);
+      });
+  };
+
   return (
+
     <main className="login">
-      <Form>
+      <form method="post" onSubmit={SubmitHandler}>
         <Title text="MawWellPOS" />
-        <Input placeholder="Nombre de Usuario" type="text" />
-        <Input placeholder="Contraseña" type="password" />
-        <Button text="Ingresar" />
-      </Form>
+        <Input placeholder="Nombre de Usuario" type="text" value={userName} handler={handlerUserName} />
+        <Input placeholder="Contraseña" type="password" value={password} handler={handlerPassword} />
+        <button type="submit">Ingresar</button>
+      </form>
     </main>
   );
 }
