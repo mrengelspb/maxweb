@@ -5,11 +5,10 @@ import Input from '../Components/Input';
 import SignUp from '../Components/signUp_context';
 import '../styles/login.css';
 
-export default function Login() {
+function Login({value}) {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const { value } = this.context;
   const [authenticated, setAuthenticated] = useState(value);
 
   const handlerUserName = (event) => {
@@ -56,3 +55,7 @@ export default function Login() {
     </main>
   );
 }
+
+Login.contextType = SignUp;
+
+export default Login;
