@@ -35,9 +35,11 @@ entry_route.get('/ingreso', (req, res, next) => {
 entry_route.put("/ingreso", (req, res, next) => {
   if (req.session.data) {
     const args = [
-      req.body.in,
+      req.body.ID_ticket,
       req.body.out,
-      req.body.total
+      req.body.total,
+      req.body.state,
+      req.body.min_used
     ]
     let user = null;
     switch (req.session.data[0].level_access) {
@@ -53,7 +55,7 @@ entry_route.put("/ingreso", (req, res, next) => {
     }
     const result = user.finalize(dbmysql, args)
     result.then((data) => {
-      res.send(JSON.parse(JSON.stringify(data[0])));
+      res.send(JSON.parse(JSON.stringify(data)));
     }).catch((err) => {
       res.send({message: err.message});
     })

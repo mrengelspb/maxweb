@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 require('dotenv').config();
 const session = require('express-session');
 const TokenGenerator = require('uuid-token-generator');
@@ -18,6 +19,7 @@ app.use(session({
   cookie: {maxAge: 1000 * 60 * 60 * 24},
   resave: false
 }));
+app.use(cors());
 
 app.use("/", login_route);
 app.use("/", admin_route);
