@@ -1,10 +1,10 @@
 const express = require('express');
-const { Login } = require('../../Use_Cases/LoginUser');
+const { Login } = require('../../Aplication/Login');
 const entry_route = express.Router();
-const { dbmysql } = require('../../data_providers/DBMysql.js');
-const Admin = require('../../Use_Cases/Admin.js');
-const Operator = require('../../Use_Cases/Operator.js');
-const Supervisor = require('../../Use_Cases/Supervisor.js');
+const { dbmysql } = require('../../Infrastructure/DBMysql.js');
+const Admin = require('../../Aplication/Admin.js');
+const Operator = require('../../Aplication/Operator.js');
+const Supervisor = require('../../Aplication/Supervisor.js');
 const { User } = require('../../Entities/User');
 
 entry_route.get('/ingreso', (req, res, next) => {

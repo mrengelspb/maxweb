@@ -1,4 +1,4 @@
-const { InterfaceDatabase } = require('../interface/controller/Database.js');
+const { InterfaceDatabase } = require('../interface/controller/Database.js.js.js');
 const mysql = require('mysql');
 
 class DBMysql extends InterfaceDatabase {
