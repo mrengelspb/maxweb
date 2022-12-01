@@ -29,7 +29,7 @@ export default function Header() {
               <div className="menu--icon">
                 <PersonCircle size={32} />
               </div>
-              <p className="menu--text">Bienvenido Nombre, Rol</p>
+              <p className="menu--text">Bienvenido User, role</p>
             </li>
             <li className="nav--item">Menu 1</li>
             <li className="nav--item">Menu 2</li>

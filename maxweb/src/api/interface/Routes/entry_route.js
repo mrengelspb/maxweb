@@ -7,33 +7,17 @@ const Operator = require('../../Aplication/Operator.js');
 const Supervisor = require('../../Aplication/Supervisor.js');
 const { User } = require('../../Entities/User');
 
-entry_route.get('/ingreso', (req, res, next) => {
+entry_route.post('/ingreso', (req, res, next) => {
   const {ID_ticket} = req.body;
-  if (req.session.data) {
-    let user = null;
-    switch (req.session.data[0].level_access) {
-      case "admin":
-          user = new Admin();
-        break;
-      case "operator":
-          user = new Operator();
-        break;
-      case "supervisor":
-          user = new Supervisor();
-        break;
-    }
+    let user = new Admin();
     const result = user.search(dbmysql, ID_ticket);
     result.then((data) => {
       res.send(JSON.parse(JSON.stringify(data[0])));
     });
-  } else {
-    res.send({message: "Please Sign Up !"});
-  }
 });
 
 
 entry_route.put("/ingreso", (req, res, next) => {
-  if (req.session.data) {
     const args = [
       req.body.ID_ticket,
       req.body.out,
@@ -41,27 +25,13 @@ entry_route.put("/ingreso", (req, res, next) => {
       req.body.state,
       req.body.min_used
     ]
-    let user = null;
-    switch (req.session.data[0].level_access) {
-      case "admin":
-          user = new Admin();
-        break;
-      case "operator":
-          user = new Operator();
-        break;
-      case "supervisor":
-          user = new Supervisor();
-        break;
-    }
+    let user = new Admin();
     const result = user.finalize(dbmysql, args)
     result.then((data) => {
       res.send(JSON.parse(JSON.stringify(data)));
     }).catch((err) => {
       res.send({message: err.message});
     })
-  } else {
-    res.send({message: "Please Sign Up !"});
-  }
 });
 
 module.exports = entry_route;

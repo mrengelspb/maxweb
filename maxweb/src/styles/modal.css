@@ -1,0 +1,31 @@
+.modal {
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.active {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+.modal--container {
+    align-items: center;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    min-height: 450px;
+    justify-content: space-around;
+    padding: 20px 20px;
+    width: 550px;
+    background-color: white;
+}

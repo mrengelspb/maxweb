@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Title from '../Components/Title';
 import Input from '../Components/Input';
-import SignUp from '../Components/signUp_context';
 import '../styles/login.css';
 
-function Login({value}) {
-  const navigate = useNavigate();
+function Login() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [authenticated, setAuthenticated] = useState(value);
 
   const handlerUserName = (event) => {
     setUserName(event.target.value);
@@ -33,11 +29,12 @@ function Login({value}) {
     })
       .then((response) => {
         if (response.status === 200) {
-          setAuthenticated(true);
-          navigate('/admin');
+          window.location.href = '/admin';
+        } else {
+          return response.json();
         }
-        return response.json();
       })
+      .then((res) => console.log(res))
       .catch((err) => {
         console.log(err, err.message);
       });
@@ -55,7 +52,5 @@ function Login({value}) {
     </main>
   );
 }
-
-Login.contextType = SignUp;
 
 export default Login;
