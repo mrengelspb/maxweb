@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Person, Tools } from 'react-bootstrap-icons';
 import Title from '../Components/Title';
 import Action from '../Components/Action';
@@ -6,21 +6,25 @@ import Header from '../Components/Header';
 import '../styles/dashboard.css';
 
 export default function Dashboard() {
+  const [state, setState] = useState({
+    user_name: "Invitado",
+    role: "Invitado"
+  });
 
   useEffect(() => {
     fetch('http://localhost:3000/admin')
       .then((response) => response.json())
       .then((res) => {
-        console.log(res[0]);
+        setState(res[0]);
       })
       .catch((err) => {
         console.log(err, err);
-      });
+      }, []);
   });
 
   return (
     <>
-      <Header />
+      <Header state={state} />
       <div className="dashboard">
         <Title text="Panel de Control" />
 
