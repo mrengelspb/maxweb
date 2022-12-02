@@ -11,5 +11,5 @@ export default function Form({ method, handlerSubmit, children }) {
 }
 
 Form.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.array.isRequired,
 };
