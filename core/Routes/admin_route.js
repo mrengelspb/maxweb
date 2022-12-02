@@ -1,16 +1,15 @@
 const express = require('express');
 const admin_route = express.Router();
-const { dbmysql } = require('../data_providers/DBMysql.js');
+const { dbmysql } = require('../Repository/DBMysql.js');
 const AdminController = require('../interface/controller/AdminController.js');
+const OperatorInteractor = require('../Application/OperatorInteractor.js');
 
-admin_route.get('/admin', (req, res, next) => {
-  if (req.session.data) {
-    res.send(req.session.data);
-  } else {
-    res.send({
-      message: "Session not Found !"
-    });
-  }
+admin_route.get('/admin/:id', (req, res, next) => {
+  const {id} = req.params;
+  const operatorInteractor = new OperatorInteractor();
+  const operator = operatorInteractor.getOperator({DB: dbmysql, id});
+  res.send({status: "Ok"})
+  console.log(operator);
 });
 
 admin_route.post('/admin', (req, res, next) => {

@@ -1,4 +1,4 @@
-class User {
+class Account {
   constructor (userName, password) {
     this.userName = userName;
     this.password = password;
@@ -9,5 +9,5 @@ class User {
 }
 
 module.exports = {
-  User
+  Account
 }

@@ -1,7 +1,7 @@
 const express = require('express');
 const product_route = express.Router();
-const { dbmysql } = require('../data_providers/DBMysql.js');
-const {ProductInterator} = require('../Use_Cases/Product.js');
+const { dbmysql } = require('../Repository/DBMysql.js');
+const {ProductInterator} = require('../Application/Product.js');
 
 
 product_route.get('/producto/:id', (req, res, next) => {
