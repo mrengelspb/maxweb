@@ -4,10 +4,10 @@ require('dotenv').config();
 const session = require('express-session');
 const TokenGenerator = require('uuid-token-generator');
 const cookieParser = require('cookie-parser');
-const login_route = require('./interface/Routes/login_route.js');
-const admin_route = require('./interface/Routes/admin_route.js');
-const entry_route = require('./interface/Routes/entry_route.js');
-const product_route = require('./interface/Routes/product_route.js');
+const login_route = require('./Routes/login_route.js');
+const admin_route = require('./Routes/admin_route.js');
+const entry_route = require('./Routes/entry_route.js');
+const product_route = require('./Routes/product_route.js');
 
 const app = express();
 const tokgen = new TokenGenerator(); 
