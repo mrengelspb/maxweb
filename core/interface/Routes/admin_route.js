@@ -40,7 +40,7 @@ admin_route.post('/admin', (req, res, next) => {
   result.then(data => {
     res.send(data);
   }).catch((err) => {
-    res.send({message: err.message});
+    res.status(500).send({message: err.message});
   })
 });
 
