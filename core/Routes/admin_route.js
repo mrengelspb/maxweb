@@ -7,10 +7,12 @@ const OperatorInteractor = require('../Application/OperatorInteractor.js');
 admin_route.get('/admin/:id', (req, res, next) => {
   const {id} = req.params;
   const operatorInteractor = new OperatorInteractor();
-  const operator = operatorInteractor.getOperator({DB: dbmysql, id});
-  res.send({status: "Ok"})
-  console.log(operator);
-});
+  const response = operatorInteractor.getOperator({DB: dbmysql, id});
+  response.then((data) => {
+    res.send(data[0][0]);
+   })
+  }
+)
 
 admin_route.post('/admin', (req, res, next) => {
   const data = req.body;
