@@ -42,9 +42,9 @@ export default function SearchTicketForm({data}) {
 
   return (
     <form className="searchTicketForm" onSubmit={handlerUpdateTicket}>
-      <input type="text" value={In} placeholder="Ingreso" />
-      <input type="text" value={Out} placeholder="Salida" />
-      <input type="text" value={Time} placeholder="Tiempo" />
+      <input type="text" value={In} onChange={() => {}} placeholder="Ingreso" />
+      <input type="text" value={Out} onChange={() => {}} placeholder="Salida" />
+      <input type="text" value={Time} onChange={() => {}} placeholder="Tiempo" />
       <span>Total:{Total}</span>
       <span />
       <button className="entry--button" type="submit" >Finalizar</button>

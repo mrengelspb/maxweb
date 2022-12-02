@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const login_route = require('./interface/Routes/login_route.js');
 const admin_route = require('./interface/Routes/admin_route.js');
 const entry_route = require('./interface/Routes/entry_route.js');
+const product_route = require('./interface/Routes/product_route.js');
 
 const app = express();
 const tokgen = new TokenGenerator(); 
@@ -24,6 +25,7 @@ app.use(cors());
 app.use("/", login_route);
 app.use("/", admin_route);
 app.use("/", entry_route);
+app.use("/", product_route);
 
 app.post("/operador", (req, res) => {
 
