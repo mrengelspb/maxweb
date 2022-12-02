@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from '../Components/Header';
 import SearchTicket from '../Components/SearchTicket';
 import Clock from '../Components/Clock';
@@ -8,20 +8,21 @@ import AvailableParkings from '../Components/AvailableParkings';
 import '../styles/entry.css';
 
 export default function Entry() {
+  const [data, setData] = useState(null);
+
   return (
     <>
       <Header />
       <div className="entry">
         <div className="entry--info">
-          <SearchTicket />
+          <SearchTicket setData={setData} />
           <Clock />
         </div>
         <div className="entry--data">
           <TrafficLight />
-          <SearchTicketForm />
+          <SearchTicketForm data={data} />
           <AvailableParkings />
         </div>
-        <button className="entry--button" type="button">Finalizar</button>
       </div>
     </>
   );

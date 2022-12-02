@@ -1,19 +1,56 @@
-import React from 'react';
-import Form from '../Components/Form';
+import React, { useState } from 'react';
 import Title from '../Components/Title';
 import Input from '../Components/Input';
-import Button from '../Components/Button';
 import '../styles/login.css';
 
-export default function Login() {
+function Login() {
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handlerUserName = (event) => {
+    setUserName(event.target.value);
+  };
+
+  const handlerPassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const SubmitHandler = (event) => {
+    event.preventDefault();
+    fetch('http://localhost:3000/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userName,
+        password,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          window.location.href = '/admin';
+        } else {
+          return response.json();
+        }
+      })
+      .then((res) => console.log(res))
+      .catch((err) => {
+        console.log(err, err.message);
+      });
+  };
+
   return (
+
     <main className="login">
-      <Form>
+      <form method="post" onSubmit={SubmitHandler}>
         <Title text="MawWellPOS" />
-        <Input placeholder="Nombre de Usuario" type="text" />
-        <Input placeholder="Contraseña" type="password" />
-        <Button text="Ingresar" />
-      </Form>
+        <Input placeholder="Nombre de Usuario" type="text" value={userName} handler={handlerUserName} />
+        <Input placeholder="Contraseña" type="password" value={password} handler={handlerPassword} />
+        <button type="submit">Ingresar</button>
+      </form>
     </main>
   );
 }
+
+export default Login;
