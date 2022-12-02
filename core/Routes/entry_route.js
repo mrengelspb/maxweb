@@ -1,11 +1,11 @@
 const express = require('express');
-const { Login } = require('../../Use_Cases/LoginUser');
+const { Login } = require('../Use_Cases/LoginUser');
 const entry_route = express.Router();
-const { dbmysql } = require('../../data_providers/DBMysql.js');
-const Admin = require('../../Use_Cases/Admin.js');
-const Operator = require('../../Use_Cases/Operator.js');
-const Supervisor = require('../../Use_Cases/Supervisor.js');
-const { User } = require('../../Entities/User');
+const { dbmysql } = require('../data_providers/DBMysql.js');
+const Admin = require('../Use_Cases/Admin.js');
+const Operator = require('../Use_Cases/Operator.js');
+const Supervisor = require('../Use_Cases/Supervisor.js');
+const { User } = require('../Entities/User');
 
 entry_route.post('/ingreso', (req, res, next) => {
   const {ID_ticket} = req.body;
