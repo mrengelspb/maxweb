@@ -1,7 +1,7 @@
 const express = require('express');
 const admin_route = express.Router();
-const { dbmysql } = require('../../data_providers/DBMysql.js');
-const AdminController = require('../controller/AdminController.js');
+const { dbmysql } = require('../data_providers/DBMysql.js');
+const AdminController = require('../interface/controller/AdminController.js');
 
 admin_route.get('/admin', (req, res, next) => {
   if (req.session.data) {

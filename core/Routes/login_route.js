@@ -1,7 +1,7 @@
 const express = require('express');
 const login_route = express.Router();
-const { dbmysql } = require('../../data_providers/DBMysql.js');
-const Login = require('../../Use_Cases/LoginUser.js');
+const { dbmysql } = require('../data_providers/DBMysql.js');
+const Login = require('../Use_Cases/LoginUser.js');
 
 login_route.post('/', (req, res, next) => {
   const account = req.body;
