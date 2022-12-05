@@ -19,6 +19,13 @@ class Mysql {
   }
 
   query(sql, args) {
+    this.connection.connect((err) => {
+      if (err) {
+        console.error('error connecting: ' + err.stack);
+        return;
+      }
+      console.log('connected as id ' + this.connection.threadId);
+    });
     return new Promise((resolve, reject) => {
       this.connection.query(sql, args, (err, results) => {
         if (err)
