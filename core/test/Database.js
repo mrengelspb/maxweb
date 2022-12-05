@@ -28,3 +28,13 @@ class Mysql {
     })
   }
 }
+
+module.exports = {
+  database: new Mysql({
+    host: process.env.HOST_DB,
+    user: process.env.USER_DB,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE,
+    port: process.env.PORT_DB,
+  })
+}

@@ -1,9 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+const { database } = require('./Database.js');
 require('dotenv').config();
 
 const app = express();
-const tokgen = new TokenGenerator();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
