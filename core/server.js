@@ -8,6 +8,7 @@ const login_route = require('./Routes/login_route.js');
 const admin_route = require('./Routes/admin_route.js');
 const entry_route = require('./Routes/entry_route.js');
 const product_route = require('./Routes/product_route.js');
+const factura = require('./Routes/factura.js');
 
 const app = express();
 const tokgen = new TokenGenerator(); 
@@ -26,6 +27,7 @@ app.use("/", login_route);
 app.use("/", admin_route);
 app.use("/", entry_route);
 app.use("/", product_route);
+app.use("/", factura);
 
 app.post("/operador", (req, res) => {
 
