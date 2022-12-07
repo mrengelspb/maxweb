@@ -8,8 +8,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.get("/", (req, res) => {
-    const query = database.query('SELECT * FROM sch_spbmaxweb.tbl_personal_data;');
+app.get("/consultas", (req, res) => {
+    const query = database.query('CALL pa_fe_consultas(?, ?)', [1, process.env.RUC]);
+    query.then((response) => {
+        console.log(response);
+        res.status(200).send(JSON.parse(JSON.stringify(response)));
+    })
+    .catch((err) => {
+        console.error(err);
+    })
+});
+
+app.get("/product/:id", (req, res) => {
+    const query = database.query('CALL pa_pr_searchProductById(?)', [req.params.id]);
     query.then((response) => {
         res.status(200).send(JSON.parse(JSON.stringify(response)));
     })

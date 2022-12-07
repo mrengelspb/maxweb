@@ -6,7 +6,7 @@ class ProductInterator {
         return db.query('CALL add_product(?, ?)', info);
     }
     getProduct(db, id) {
-        return db.query('CALL search_product(?)', id);
+        return db.query('CALL pa_pr_searchProductById(?)', id);
     }
 }
 

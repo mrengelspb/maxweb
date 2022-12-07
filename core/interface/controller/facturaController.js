@@ -1,12 +1,9 @@
 // const Factura = require('../../Entities/factura.js');
 
 class FacturaController {
-    constructor(){
-
-    }
 
     getClientData(DB, args){
-        return DB.query('CALL getClientData(?)', args);
+        return DB.query('CALL pa_cl_getClientData(?, ?)', [1, args]);
     }
 }
 
