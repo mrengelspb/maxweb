@@ -29,9 +29,6 @@ app.use("/", entry_route);
 app.use("/", product_route);
 app.use("/", factura);
 
-app.post("/operador", (req, res) => {
-
-});
 
 app.listen(process.env.PORT, () => {
   console.log(`Server listen in port ${process.env.PORT}`);

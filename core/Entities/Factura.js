@@ -1,3 +1,5 @@
+const module11 = require('../modulo-11.js');
+
 class Factura {
   constructor(ambiente_codigo, emision_codigo, numero_serie,
     identification_number, id_fe_emisoragret, date, tipo_comprobante) {
@@ -7,23 +9,22 @@ class Factura {
     this.identification_number = identification_number;
     this.id_fe_emisoragret = id_fe_emisoragret;
     this.date = date;
-    this.tipo_comprobante = tipo_comprobante
-    this.numero_comprobante;
+    this.tipo_comprobante = tipo_comprobante;
   }
 
-  generar_codigo() {
+  generar_codigo(numero_comprobante) {
+    // codigo numerico
+    // digito verificador
     this.date = this.date.replaceAll("-","");
-    return this.date + this.tipo_comprobante + this.identification_number + this.ambiente_codigo 
-    + this.emision_codigo + this.numero_comprobante; 
+    const codigo = this.date + this.tipo_comprobante + this.identification_number
+    + this.ambiente_codigo + this.numero_serie
+    + numero_comprobante + "11223344" + this.emision_codigo;
+    const digito_verificador = module11(codigo);
+    return codigo + digito_verificador;
   }
+
   getNumeroComprobante(DB){
-    const query = DB.query(`CALL pa_lsri_numeroComprobante()`, []);
-    query
-      .then((res) => {
-        res = JSON.parse(JSON.stringify(res[0][0]));
-        console.log(res.state);
-        this.numero_comprobante = res.state; 
-      });
+    return DB.query(`CALL pa_lsri_numeroComprobante()`, []);
   }
 }
 

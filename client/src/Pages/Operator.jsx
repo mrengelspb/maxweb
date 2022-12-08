@@ -115,11 +115,15 @@ function ModalButton({ action, state }) {
         identification_number: ID,
         id_fe_emisoragret: state.id_fe_emisoragret,
         date: today,
-        tipo_comprobante: "01",
+        tipo_comprobante: '01',
+        razon_social: state.razon_social,
       }),
     })
       .then((response) => response.json())
-      .then((res) => console.log(res));
+      .then((res) => {
+        console.log(res);
+        console.log(res.code.length);
+      });
   };
 
   const handlerSearchData = () => {
