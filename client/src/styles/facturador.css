@@ -1,0 +1,27 @@
+.listproducts--header {
+    display: flex;
+    width: 100%;
+}
+
+.listproducts--column {
+    text-align: center;
+    width: 200px;
+    border: 1px solid black;
+}
+
+.listproducts--row {
+    text-align: center;
+    display: flex;
+}
+
+.listproducts--item {
+    width: 200px;
+}
+
+.listproducts--body {
+
+}
+
+.camposadicionales--container {
+    display: flex;
+}

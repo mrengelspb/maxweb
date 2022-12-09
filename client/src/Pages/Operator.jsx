@@ -35,6 +35,7 @@ function ModalButton({ action, state }) {
   const [car, setCar] = useState([]);
   const [id, setId] = useState('');
   const [cantidad, setCantidad] = useState(1);
+  const [descuento, setDescuento] = useState(0);
   const [subTotal, setSubTotal] = useState(0);
   const [iva, setIva] = useState(0);
   const [total, setTotal] = useState(0);
@@ -88,6 +89,10 @@ function ModalButton({ action, state }) {
     setCantidad(ev.target.value);
   };
 
+  const handlerDescuento = (ev) => {
+    setDescuento(ev.target.value);
+  };
+
   const handlerSearchBarSlider = () => {
     const btnFinalClient = document.getElementsByClassName('btnFinalClient');
     btnFinalClient[0].classList.toggle('hidden');
@@ -102,7 +107,6 @@ function ModalButton({ action, state }) {
 
   const handlerEmitir = (ev) => {
     ev.preventDefault();
-
     fetch('http://localhost:3000/factura/emitir', {
       method: 'POST',
       headers: {
@@ -117,6 +121,10 @@ function ModalButton({ action, state }) {
         date: today,
         tipo_comprobante: '01',
         razon_social: state.razon_social,
+        lista_productos: car,
+        subTotal,
+        iva,
+        total
       }),
     })
       .then((response) => response.json())
@@ -159,7 +167,7 @@ function ModalButton({ action, state }) {
     })
       .then((response) => response.json())
       .then((res) => {
-        setCar([...car, [res[0], parseInt(cantidad)]]);
+        setCar([...car, [res[0], parseInt(cantidad), descuento]]);
       })
       .catch((err) => {
         console.log({ message: err.message, err });
@@ -171,7 +179,7 @@ function ModalButton({ action, state }) {
   };
 
   for (const item of car) {
-    list.push(<li key={item[0].id_fe_listaProductos}>{item[0]['nombre_producto/servicio']}</li>);
+    list.push(<li key={item[0]?.id_fe_listaProductos}>{item[0]['nombre_producto/servicio']}</li>);
   }
 
   if (action === 'Finalizar') {
@@ -182,6 +190,7 @@ function ModalButton({ action, state }) {
           <form onSubmit={handlerSearch}>
             <input type="number" placeholder="Id producto" onChange={handlerProduct} />
             <input type="number" value={cantidad} onChange={handlerCantidad} placeholder="Cantidad" />
+            <input type="number" value={descuento} onChange={handlerDescuento} />
             <button type="submit">Buscar</button>
             <ul>
               {list}

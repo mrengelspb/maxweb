@@ -8,8 +8,9 @@ import Login from './Pages/Login';
 import Dashboard from './Pages/Dashboard';
 import Operator from './Pages/Operator';
 import Entry from './Pages/Entry';
-import './App.css';
 import Product from './Pages/Product';
+import Facturador from './Pages/Facturador';
+import './App.css';
 
 function App() {
   const [state, setState] = useState({});
@@ -34,6 +35,7 @@ function App() {
           <Route exact path="/operador" element={<Operator state={state} />} />
           <Route exact path="/ingreso" element={<Entry />} />
           <Route exact path="/producto" element={<Product />} />
+          <Route exact path="/facturador" element={<Facturador />} />
           <Route path="*" element={<h1>Page No Found Error 404</h1>} />
         </Routes>
       </BrowserRouter>
