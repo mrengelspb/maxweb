@@ -35,7 +35,7 @@ function App() {
           <Route exact path="/operador" element={<Operator state={state} />} />
           <Route exact path="/ingreso" element={<Entry />} />
           <Route exact path="/producto" element={<Product />} />
-          <Route exact path="/facturador" element={<Facturador />} />
+          <Route exact path="/facturador" element={<Facturador state={state} />} />
           <Route path="*" element={<h1>Page No Found Error 404</h1>} />
         </Routes>
       </BrowserRouter>
