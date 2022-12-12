@@ -30,7 +30,9 @@ const Buscador = ({ ID, setID, client, setClient, addressI,
   };
 
   const handlerSearchData = (ev) => {
-    ev.preventDefault();
+    if (ev) {
+      ev.preventDefault();
+    }
     fetch('http://localhost:3000/factura_con_datos', {
       method: 'POST',
       headers: {
@@ -60,6 +62,12 @@ const Buscador = ({ ID, setID, client, setClient, addressI,
     //guardar datos del usuario
   }
 
+  const handleKeyDown = (ev) => {
+    if (ev.key == 'Enter') {
+      handlerSearchData();
+    }
+  };
+
   return (
     <div className='buscador--container'>
       <Title text="Datos Personales" />
@@ -67,7 +75,7 @@ const Buscador = ({ ID, setID, client, setClient, addressI,
         <div className="sliderContainer">
           <form onSubmit={handlerSearchData}>
             <div className="searchBarContainer">
-              <input type="text" onChange={handlerId} placeholder="Ingresar Ruc o CI" />
+              <input type="text" onKeyDown={handleKeyDown} onChange={handlerId} placeholder="Ingresar Ruc o CI" />
               <button type="submit">Buscar</button>
               <input type="reset" value="Limpiar" />
             </div>

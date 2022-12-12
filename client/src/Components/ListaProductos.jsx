@@ -30,8 +30,8 @@ const Row = ({ item, handlerTable }) => {
       <div className="listproducts--item">
         <input type="number" className='item--descuento' value={item.descuento || descuento} onChange={handlerDescuento} min="0" />
       </div>
-      <div className="listproducts--item">{item['Porcentaje de IVA']}</div>
       <div className="listproducts--item">{item.valor_unitario * (item.cantidad || cantidad)}</div>
+      <div className="listproducts--item">{item['Porcentaje de IVA']}</div>
     </div>
   )
 };
@@ -55,8 +55,8 @@ const ListProducts = ({ car, handlerTable }) => {
           <div className="listproducts--column">Cantidad</div>
           <div className="listproducts--column">Valor Unitario</div>
           <div className="listproducts--column">Descuento</div>
-          <div className="listproducts--column">Iva</div>
           <div className="listproducts--column">Total</div>
+          <div className="listproducts--column">Iva</div>
         </div>
         <div className="listproducts--body">
           {list}
