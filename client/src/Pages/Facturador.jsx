@@ -8,7 +8,7 @@ import '../styles/facturador.css';
 const Facturador = ({ state }) => {
 
   const [car, setCar] = useState([]);
-  const [formaPago, setFormaPago] = useState();
+  const [formaPago, setFormaPago] = useState('Efectivo');
   const [ID, setID] = useState('');
   const [client, setClient] = useState('');
   const [addressI, setAddress] = useState('');
@@ -26,6 +26,9 @@ const Facturador = ({ state }) => {
   const [iva, setIva] = useState(0);
   const [discounts, setDiscounts] = useState(0);
   const [today, setToday] = useState(new Date().toISOString().substring(0, 10));
+  const [time, setTime] = useState(0);
+  const [timeLimit, setTimeLimit] = useState('Dias');
+  const [identType, setIdentType] = useState('');
 
   const handlerTable = () => {
     let totalByItem = 0;
@@ -43,6 +46,18 @@ const Facturador = ({ state }) => {
     setTotal((totalByItem - disc) + ((totalByItem - disc) * 12 / 100));
   };
 
+  const handlerTime = (ev) => {
+    setTime(ev.target.value);
+  };
+
+  const handlerTimeLimit = (ev) => {
+    setTimeLimit(ev.target.value);
+  };
+
+  const handlerPropina = (ev) => {
+    setPropina(ev.target.value);
+  };
+
   const handlerEmitir = (ev) => {
     ev.preventDefault();
     fetch('http://localhost:3000/factura/emitir', {
@@ -56,9 +71,18 @@ const Facturador = ({ state }) => {
         numero_serie: state.serial_number,
         identification_number: ID,
         id_fe_emisoragret: state.id_fe_emisoragret,
+        dir_establecimiento_matriz: state.dir_establecimiento_matriz,
+        contribuyente_especial: state.contribuyente_especial,
+        obligado_a_llevar_contabilidad: state.obligado_a_llevar_contabilidad,
+        numero_RUC: state.numero_RUC,
+        razon_social: state.razon_social,
+        comercial_name:state.comercial_name,
+        codigo_punto_emision: state.codigo_punto_emision,
+        address: state.address,
+        codDoc: state.codDoc,
+        estab: state.estab,
         date: today,
         tipo_comprobante: '01',
-        razon_social: state.razon_social,
         lista_productos: car,
         total,
         subTotal,
@@ -70,7 +94,16 @@ const Facturador = ({ state }) => {
         propina,
         ice,
         iva,
-        discounts
+        discounts,
+        ID,
+        client,
+        emailI,
+        addressI,
+        phone,
+        formaPago,
+        time,
+        timeLimit,
+        identType
       }),
     })
       .then((response) => response.json())
@@ -88,17 +121,17 @@ const Facturador = ({ state }) => {
       <Header />
       <div className='facturador--container'>
         <Buscador ID={ID} setID={setID} client={client} setClient={setClient} addressI={addressI} setAddress={setAddress} emailI={emailI}
-        setEmail={setEmail} phone={phone} setPhone={setPhone} today={today} setToday={setToday} />
+        setEmail={setEmail} phone={phone} setPhone={setPhone} today={today} setToday={setToday} identType={identType} setIdentType={setIdentType}/>
         <hr />
         <Productos car={car} setCar={setCar} handlerTable={handlerTable}/>
         <hr />
-        <CamposAdicionales handlerEmitir={handlerEmitir} formaPago={formaPago} setFormaPago={setFormaPago} subTotal={subTotal}
+        <CamposAdicionales time={time} timeLimit={timeLimit} handlerTime={handlerTime} handlerTimeLimit={handlerTimeLimit}
+        handlerEmitir={handlerEmitir} formaPago={formaPago} setFormaPago={setFormaPago} subTotal={subTotal}
         discounts={discounts} subTotalNeto={subTotalNeto} subTotalConImpuestos={subTotalConImpuestos} 
         subTotalSinImpuestos={subTotalSinImpuestos} subTotalNoObjetoIva={subTotalNoObjetoIva} 
-        subTotalExcentoIva={subTotalExcentoIva} propina={propina} ice={ice} iva={iva} total={total}/>
+        subTotalExcentoIva={subTotalExcentoIva} propina={propina} handlerPropina={handlerPropina} ice={ice} iva={iva} total={total}/>
       </div>
     </>
-
   )
 }
 

@@ -22,7 +22,7 @@ const Row = ({ item, handlerTable }) => {
 
   return (
     <div className='listproducts--row'>
-      <div className="listproducts--item">{item['nombre_producto/servicio']}</div>
+      <div className="listproducts--item">{item.nombre_producto}</div>
       <div className="listproducts--item">
         <input type="number" className='item--cantidad' min="0" value={item.cantidad || cantidad} onChange={handlerCantidad}/>
       </div>
@@ -31,7 +31,7 @@ const Row = ({ item, handlerTable }) => {
         <input type="number" className='item--descuento' value={item.descuento || descuento} onChange={handlerDescuento} min="0" />
       </div>
       <div className="listproducts--item">{item.valor_unitario * (item.cantidad || cantidad)}</div>
-      <div className="listproducts--item">{item['Porcentaje de IVA']}</div>
+      <div className="listproducts--item">{item.porcentaje_iva}</div>
     </div>
   )
 };

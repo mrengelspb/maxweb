@@ -3,7 +3,7 @@ import Title from '../Components/Title';
 
 
 const Buscador = ({ ID, setID, client, setClient, addressI,
-  setAddress, emailI, setEmail, phone, setPhone, today, setToday }) => {
+  setAddress, emailI, setEmail, phone, setPhone, today, setToday, identType, setIdentType }) => {
 
   const handlerId = (ev) => {
     setID(ev.target.value);
@@ -68,6 +68,10 @@ const Buscador = ({ ID, setID, client, setClient, addressI,
     }
   };
 
+  const handlerIdentType = (ev) => {
+    setIdentType(ev.target.value);
+  }
+
   return (
     <div className='buscador--container'>
       <Title text="Datos Personales" />
@@ -76,6 +80,12 @@ const Buscador = ({ ID, setID, client, setClient, addressI,
           <form onSubmit={handlerSearchData}>
             <div className="searchBarContainer">
               <input type="text" onKeyDown={handleKeyDown} onChange={handlerId} placeholder="Ingresar Ruc o CI" />
+              <select id="tipo_identificacion" value={identType} onChange={handlerIdentType}>I                <option value="04">RUC</option>
+                <option value="05">CEDULA</option>
+                <option value="06">PASAPORTE</option>
+                <option value="07">VENTACONSFINAL</option>
+                <option value="08">IDENTEXTERIOR</option>
+              </select>
               <button type="submit">Buscar</button>
               <input type="reset" value="Limpiar" />
             </div>

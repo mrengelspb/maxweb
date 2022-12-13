@@ -25,7 +25,8 @@ const SearchBar = ({car, setCar, handlerTable}) => {
         res.cantidad = 1;
         res.descuento = 0;
         res.total = 1 * res.valor_unitario;
-          setCar([...car, res]);
+        console.log(res);
+        setCar([...car, res]);
       })
       .catch((err) => {
         console.log({ message: err.message, err });

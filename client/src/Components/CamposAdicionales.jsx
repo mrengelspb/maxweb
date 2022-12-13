@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Control = ({ formaPago, setFormaPago, handlerEmitir }) => {
+const Control = ({propina, handlerPropina, time, timeLimit, handlerTime, handlerTimeLimit,
+  formaPago, setFormaPago, handlerEmitir }) => {
   
   
   const handlerFormaPago = (ev) => {
@@ -11,13 +12,19 @@ const Control = ({ formaPago, setFormaPago, handlerEmitir }) => {
     <div>
       <select id="pay" name="pay" value={formaPago} onChange={handlerFormaPago}>
         <optgroup label="Forma de pago" />
-        <option value="cash">Efectivo</option>
-        <option value="electronic">Dinero electrónico</option>
-        <option value="credit">Tarjeta de crédito</option>
-        <option value="others">Otros</option>
+        <option value="01">Efectivo</option>
+        <option value="02">Dinero electrónico</option>
+        <option value="03">Tarjeta de crédito</option>
+        <option value="04">Otros</option>
+      </select>
+      <input type="number" min="0" value={time} onChange={handlerTime}/>
+      <select ip="timelimit" value={timeLimit} onChange={handlerTimeLimit}>
+        <option value="dias">Dias</option>
+        <option value="meses">Meses</option>
+        <option value="años">Años</option>
       </select>
       <label name="propina" id="propina">
-        <input type="checkbox" name="propina" id="propina" />
+        <input type="number" name="propina" id="propina" value={propina} onChange={handlerPropina}/>
          Propina del 10%
       </label>
       <button type="button" onClick={handlerEmitir}>Emitir factura</button>
@@ -44,11 +51,12 @@ const Table = ({ subTotal, discounts, subTotalNeto, subTotalSinImpuestos,
   )
 }
 
-const CamposAdicionales = ({ handlerEmitir, formaPago, setFormaPago, subTotal, discounts,
-  subTotalNeto, subTotalSinImpuestos, subTotalConImpuestos, subTotalNoObjetoIva, subTotalExcentoIva, propina, ice, iva, total }) => {
+const CamposAdicionales = ({propina, handlerPropina, time, timeLimit, handlerTime, handlerTimeLimit, handlerEmitir, formaPago, setFormaPago, subTotal, discounts,
+  subTotalNeto, subTotalSinImpuestos, subTotalConImpuestos, subTotalNoObjetoIva, subTotalExcentoIva, ice, iva, total }) => {
   return (
     <div className="camposadicionales--container">
-      <Control formaPago={formaPago} setFormaPago={setFormaPago} handlerEmitir={handlerEmitir} />
+      <Control time={time} timeLimit={timeLimit} handlerTime={handlerTime} handlerTimeLimit={handlerTimeLimit}
+        formaPago={formaPago} setFormaPago={setFormaPago} handlerEmitir={handlerEmitir} propina={propina} handlerPropina={handlerPropina} />
       <Table subTotal={subTotal} discounts={discounts} subTotalNeto={subTotalNeto} subTotalConImpuestos={subTotalConImpuestos}
       subTotalSinImpuestos={subTotalSinImpuestos} subTotalNoObjetoIva={subTotalNoObjetoIva}
       subTotalExcentoIva={subTotalExcentoIva} propina={propina} ice={ice} iva={iva} total={total} />

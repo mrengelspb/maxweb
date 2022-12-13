@@ -13,13 +13,16 @@ class Factura {
   }
 
   generar_codigo(numero_comprobante) {
-    // codigo numerico
-    // digito verificador
     this.date = this.date.replaceAll("-","");
     const codigo = this.date + this.tipo_comprobante + this.identification_number
     + this.ambiente_codigo + this.numero_serie
     + numero_comprobante + "11223344" + this.emision_codigo;
-    const digito_verificador = module11(codigo);
+    let digito_verificador = module11(codigo);
+    if (digito_verificador == 11) {
+      digito_verificador = 0;
+    } else if (digito_verificador === 10) {
+      digito_verificador = 1;
+    }
     return codigo + digito_verificador;
   }
 
