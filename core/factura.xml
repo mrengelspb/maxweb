@@ -1,0 +1,95 @@
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <factura xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:/C:/borrar/xsd/111-xsd-1_V2.1.0.xsd" id="comprobante" version="version0">
+        <infoTributaria>
+            <ambiente>1</ambiente>
+            <tipoEmision>11</tipoEmision>
+            <razonSocial>RENGEL RIVERA MATEO SANTIAGO</razonSocial>
+            <nombreComercial>Soluciones Plan B</nombreComercial>
+            <ruc>104961925001</ruc>
+            <claveAcceso>2022121401888888888888810010010000000481122334412</claveAcceso>
+            <codDoc>001</codDoc>
+            <estab>001</estab>
+            <ptoEmi>1</ptoEmi>
+            <secuencial>000000049</secuencial>
+            <dirMatriz>La republica 2-70</dirMatriz>
+            <agenteRetencion>0</agenteRetencion>
+            <contribuyenteRimpe>CONTRIBUYENTE RÉGIMEN RIMPE</contribuyenteRimpe>
+        </infoTributaria>
+
+        <infoFactura>
+            <fechaEmision>2022-12-14</fechaEmision>
+            <dirEstablecimiento>La Republica 2-70</dirEstablecimiento>
+            <obligadoContabilidad>NO</obligadoContabilidad>
+            <tipoIdentificacionComprador></tipoIdentificacionComprador>
+            <razonSocialComprador>PRUEBAS SERVICIO DE RENTAS INTERNAS</razonSocialComprador>
+            <identificacionComprador>8888888888888</identificacionComprador>
+            <direccionComprador>Dir Pruebas SRI</direccionComprador>
+            <totalSinImpuestos>20</totalSinImpuestos>
+            <totalDescuento>0</totalDescuento>
+            <totalConImpuestos>
+                <totalImpuesto>
+                <codigo>2</codigo>
+                <codigoPorcentaje>3</codigoPorcentaje>
+                <baseImponible>22.4</baseImponible>
+                <valor>2.4</valor>
+            </totalImpuesto>
+                
+            </totalConImpuestos>
+            <propina>0</propina>
+            <importeTotal>22.4</importeTotal>
+            <moneda>DOLAR</moneda>
+            <pagos>
+                <pago>
+                <formaPago>Efectivo</formaPago>
+                <total>22.4</total>
+                <plazo>0</plazo>
+                <unidadTiempo>Dias</unidadTiempo>
+            </pago>
+            </pagos>
+        </infoFactura>
+
+        <detalles>
+            <detalle>
+                    <codigoPrincipal>SPB-PG001</codigoPrincipal>
+                    <codigoAuxiliar>002</codigoAuxiliar>
+                    <descripcion>Cerveza</descripcion>
+                    <cantidad>4</cantidad>
+                    <precioUnitario>3</precioUnitario>
+                    <descuento>0</descuento>
+                    <precioTotalSinImpuesto>12</precioTotalSinImpuesto>
+                    <impuestos>
+                    <impuesto>
+                        <codigo>2</codigo>
+                        <codigoPorcentaje>3</codigoPorcentaje>
+                        <tarifa>12</tarifa>
+                        <baseImponible>12</baseImponible>
+                        <valor>1.44</valor>
+                    </impuesto>
+                    </impuestos>
+                 </detalle><detalle>
+                    <codigoPrincipal>SPB-CV001</codigoPrincipal>
+                    <codigoAuxiliar>T003</codigoAuxiliar>
+                    <descripcion>Mantenca de chancho</descripcion>
+                    <cantidad>4</cantidad>
+                    <precioUnitario>2</precioUnitario>
+                    <descuento>0</descuento>
+                    <precioTotalSinImpuesto>8</precioTotalSinImpuesto>
+                    <impuestos>
+                    <impuesto>
+                        <codigo>2</codigo>
+                        <codigoPorcentaje>0</codigoPorcentaje>
+                        <tarifa>0</tarifa>
+                        <baseImponible>8</baseImponible>
+                        <valor>0.96</valor>
+                    </impuesto>
+                    </impuestos>
+                 </detalle>
+        </detalles>
+
+        <infoAdicional>
+            <campoAdicional nombre="Vendedor ">Vendedor</campoAdicional>
+            <campoAdicional nombre="Correo ">ventas@solucionesplanb.com.ec</campoAdicional>
+            <campoAdicional nombre="Ciudad ">CUENCA</campoAdicional>
+        </infoAdicional>
+    

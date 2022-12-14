@@ -4,6 +4,7 @@ const { dbmysql } = require('../data_providers/DBMysql.js');
 const FacturaController = require('../interface/controller/facturaController.js');
 const Factura = require('../Entities/Factura.js');
 const XmlGenerate = require('../Xml.js');
+const fs = require('fs');
 require('dotenv').config();
 
 factura.get("/factura/consultas", (req, res, next) => {
@@ -66,13 +67,19 @@ factura.post('/factura/emitir', (req, res, next) => {
       result
         .then((r) => {
           // agente  de retencion
-          // tipo de identificacion
           const xml = XmlGenerate(lista_productos, ambiente_codigo, emision_codigo,
             razon_social, comercial_name, numero_RUC, code, codDoc, estab, codigo_punto_emision,
             secuencial, dir_establecimiento_matriz, "0", contribuyente_especial, date, address,
             obligado_a_llevar_contabilidad, identType, client, ID, addressI, subTotalNeto, discounts,
             propina, time, timeLimit, total, formaPago, iva);
             console.log(xml);
+          fs.writeFile('./factura.xml', xml, (content, err) => {
+            if (err) {
+              console.err(err);
+              throw new Error(err);
+            }
+            console.log("File written successfully !");
+          });
           res.status(200).send(JSON.parse(JSON.stringify({
             code: code,
             state: r,
@@ -83,7 +90,7 @@ factura.post('/factura/emitir', (req, res, next) => {
           console.log({err: err.message, err});
         })
    })
-    .catch((err) => { err.message, err}); 
+    .catch((err) => { err.message, err});
 });
 
 module.exports = factura;
