@@ -7,42 +7,42 @@
             <razonSocial>RENGEL RIVERA MATEO SANTIAGO</razonSocial>
             <nombreComercial>Soluciones Plan B</nombreComercial>
             <ruc>104961925001</ruc>
-            <claveAcceso>2022121401888888888888810010010000000481122334412</claveAcceso>
+            <claveAcceso>2022121501888888888888810010010000001041122334410</claveAcceso>
             <codDoc>001</codDoc>
             <estab>001</estab>
             <ptoEmi>1</ptoEmi>
-            <secuencial>000000049</secuencial>
+            <secuencial>000000105</secuencial>
             <dirMatriz>La republica 2-70</dirMatriz>
             <agenteRetencion>0</agenteRetencion>
             <contribuyenteRimpe>CONTRIBUYENTE RÉGIMEN RIMPE</contribuyenteRimpe>
         </infoTributaria>
 
         <infoFactura>
-            <fechaEmision>2022-12-14</fechaEmision>
+            <fechaEmision>2022-12-15</fechaEmision>
             <dirEstablecimiento>La Republica 2-70</dirEstablecimiento>
             <obligadoContabilidad>NO</obligadoContabilidad>
             <tipoIdentificacionComprador></tipoIdentificacionComprador>
             <razonSocialComprador>PRUEBAS SERVICIO DE RENTAS INTERNAS</razonSocialComprador>
             <identificacionComprador>8888888888888</identificacionComprador>
             <direccionComprador>Dir Pruebas SRI</direccionComprador>
-            <totalSinImpuestos>20</totalSinImpuestos>
+            <totalSinImpuestos>60</totalSinImpuestos>
             <totalDescuento>0</totalDescuento>
             <totalConImpuestos>
                 <totalImpuesto>
                 <codigo>2</codigo>
                 <codigoPorcentaje>3</codigoPorcentaje>
-                <baseImponible>22.4</baseImponible>
-                <valor>2.4</valor>
+                <baseImponible>67.2</baseImponible>
+                <valor>7.2</valor>
             </totalImpuesto>
                 
             </totalConImpuestos>
             <propina>0</propina>
-            <importeTotal>22.4</importeTotal>
+            <importeTotal>67.2</importeTotal>
             <moneda>DOLAR</moneda>
             <pagos>
                 <pago>
                 <formaPago>Efectivo</formaPago>
-                <total>22.4</total>
+                <total>67.2</total>
                 <plazo>0</plazo>
                 <unidadTiempo>Dias</unidadTiempo>
             </pago>
@@ -54,34 +54,17 @@
                     <codigoPrincipal>SPB-PG001</codigoPrincipal>
                     <codigoAuxiliar>002</codigoAuxiliar>
                     <descripcion>Cerveza</descripcion>
-                    <cantidad>4</cantidad>
+                    <cantidad>20</cantidad>
                     <precioUnitario>3</precioUnitario>
                     <descuento>0</descuento>
-                    <precioTotalSinImpuesto>12</precioTotalSinImpuesto>
+                    <precioTotalSinImpuesto>60</precioTotalSinImpuesto>
                     <impuestos>
                     <impuesto>
                         <codigo>2</codigo>
                         <codigoPorcentaje>3</codigoPorcentaje>
                         <tarifa>12</tarifa>
-                        <baseImponible>12</baseImponible>
-                        <valor>1.44</valor>
-                    </impuesto>
-                    </impuestos>
-                 </detalle><detalle>
-                    <codigoPrincipal>SPB-CV001</codigoPrincipal>
-                    <codigoAuxiliar>T003</codigoAuxiliar>
-                    <descripcion>Mantenca de chancho</descripcion>
-                    <cantidad>4</cantidad>
-                    <precioUnitario>2</precioUnitario>
-                    <descuento>0</descuento>
-                    <precioTotalSinImpuesto>8</precioTotalSinImpuesto>
-                    <impuestos>
-                    <impuesto>
-                        <codigo>2</codigo>
-                        <codigoPorcentaje>0</codigoPorcentaje>
-                        <tarifa>0</tarifa>
-                        <baseImponible>8</baseImponible>
-                        <valor>0.96</valor>
+                        <baseImponible>60</baseImponible>
+                        <valor>7.2</valor>
                     </impuesto>
                     </impuestos>
                  </detalle>
@@ -92,4 +75,5 @@
             <campoAdicional nombre="Correo ">ventas@solucionesplanb.com.ec</campoAdicional>
             <campoAdicional nombre="Ciudad ">CUENCA</campoAdicional>
         </infoAdicional>
+    </factura>
     

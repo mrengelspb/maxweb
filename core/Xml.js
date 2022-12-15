@@ -111,6 +111,7 @@ module.exports =  function XmlGenerate (ListProducts, ambiente, emision, razon_s
             <campoAdicional nombre="Correo ">ventas@solucionesplanb.com.ec</campoAdicional>
             <campoAdicional nombre="Ciudad ">CUENCA</campoAdicional>
         </infoAdicional>
+    </factura>
     `
 
     return schema;

@@ -5,6 +5,8 @@ const FacturaController = require('../interface/controller/facturaController.js'
 const Factura = require('../Entities/Factura.js');
 const XmlGenerate = require('../Xml.js');
 const fs = require('fs');
+const SignedXml = require('xml-crypto').SignedXml;
+const p12 = require('p12-pem');
 require('dotenv').config();
 
 factura.get("/factura/consultas", (req, res, next) => {
@@ -65,14 +67,13 @@ factura.post('/factura/emitir', (req, res, next) => {
       const result = dbmysql.query('CALL pa_lsri_insertFactura(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', args);
       
       result
-        .then((r) => {
+        .then(async (r) => {
           // agente  de retencion
           const xml = XmlGenerate(lista_productos, ambiente_codigo, emision_codigo,
             razon_social, comercial_name, numero_RUC, code, codDoc, estab, codigo_punto_emision,
             secuencial, dir_establecimiento_matriz, "0", contribuyente_especial, date, address,
             obligado_a_llevar_contabilidad, identType, client, ID, addressI, subTotalNeto, discounts,
             propina, time, timeLimit, total, formaPago, iva);
-            console.log(xml);
           fs.writeFile('./factura.xml', xml, (content, err) => {
             if (err) {
               console.err(err);
@@ -80,6 +81,36 @@ factura.post('/factura/emitir', (req, res, next) => {
             }
             console.log("File written successfully !");
           });
+
+          let {pemKey, pemCertificate, commonName} = p12.getPemFromP12('./firma_electronica.p12',  'Gasper1baby');
+          let pemKey2 = pemKey.slice(0, 31) + "\n" + pemKey.slice(31);
+          pemKey2 = pemKey.slice(0, pemKey2.length - 30) + "\n" + pemKey.slice(pemKey2.length - 30);
+          
+          var xml2 = "<library>" +
+                      "<book>" +
+                        "<name>Harry Potter</name>" +
+                      "</book>" +
+                    "</library>"
+        
+          var sig = new SignedXml()
+          sig.addReference("//*[local-name(.)='book']");
+          sig.signingKey = fs.readFileSync("./ex3.pem");
+          console.log(sig.signingKey);
+
+          sig.computeSignature(xml2)
+          fs.writeFileSync("signed2.xml", sig.getSignedXml())
+
+
+
+          // const signedXml = new SignedXml();
+          // signedXml.addReference("//*[local-name(.)='infoAdicional']",["http://www.w3.org/2000/09/xmldsig#enveloped-signature"]);
+          // signedXml.signingKey = pemKey2;
+          // signedXml.computeSignature(xml, {
+          //   prefix: 'ds'
+          // });
+
+          // fs.writeFileSync("signed.xml", signedXml.getSignedXml());
+
           res.status(200).send(JSON.parse(JSON.stringify({
             code: code,
             state: r,
