@@ -28,9 +28,9 @@ const Facturador = ({ state }) => {
   const [today, setToday] = useState(new Date().toISOString().substring(0, 10));
   const [time, setTime] = useState(0);
   const [timeLimit, setTimeLimit] = useState('Dias');
-  const [identType, setIdentType] = useState('');
+  const [identType, setIdentType] = useState('04');
 
-  const handlerTable = () => {
+  const handlerTable = () => { 
     let totalByItem = 0;
     let disc = 0;
     for (let i = 0; i < car.length; i++) {
@@ -58,9 +58,10 @@ const Facturador = ({ state }) => {
     setPropina(ev.target.value);
   };
 
-  const handlerEmitir = (ev) => {
+  const handlerEmitir = async (ev) => {
+    console.log(identType);
     ev.preventDefault();
-    fetch('http://localhost:3000/factura/emitir', {
+    const response = await fetch('http://localhost:3000/factura/emitir', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -105,15 +106,12 @@ const Facturador = ({ state }) => {
         timeLimit,
         identType
       }),
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-        console.log(res.code.length);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    });
+
+      if (response.status == 200) {
+        const data = await response.json();
+        console.log(data);
+      }
   };
 
   return (

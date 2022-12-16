@@ -5,3 +5,35 @@
     justify-content: center;
     align-items: center;
 }
+
+.login--form {
+    width: 50vw;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 5px 2px gray;
+}
+
+.login--input {
+    width: 100%;
+    padding: 5px 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.login--infobox {
+    padding: 20px 30px;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.login--infobox__success {
+    border: 1px solid green;
+    background-color: rgb(62, 133, 62);
+}
+
+.login--infobox__err {
+    border: 1px solid red;
+    background-color: rgb(153, 63, 63);
+}

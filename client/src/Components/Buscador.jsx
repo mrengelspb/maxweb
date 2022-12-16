@@ -69,6 +69,7 @@ const Buscador = ({ ID, setID, client, setClient, addressI,
   };
 
   const handlerIdentType = (ev) => {
+    console.log(ev.target.value);
     setIdentType(ev.target.value);
   }
 
@@ -81,6 +82,7 @@ const Buscador = ({ ID, setID, client, setClient, addressI,
             <div className="searchBarContainer">
               <input type="text" onKeyDown={handleKeyDown} onChange={handlerId} placeholder="Ingresar Ruc o CI" />
               <select id="tipo_identificacion" value={identType} onChange={handlerIdentType}>I                <option value="04">RUC</option>
+                <option value="04">RUC</option>
                 <option value="05">CEDULA</option>
                 <option value="06">PASAPORTE</option>
                 <option value="07">VENTACONSFINAL</option>

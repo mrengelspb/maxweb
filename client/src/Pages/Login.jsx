@@ -6,6 +6,7 @@ import '../styles/login.css';
 function Login() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
   const handlerUserName = (event) => {
     setUserName(event.target.value);
@@ -36,6 +37,7 @@ function Login() {
       })
       .then((res) => console.log(res))
       .catch((err) => {
+        setMessage(err.message);
         console.log(err, err.message);
       });
   };
@@ -43,10 +45,11 @@ function Login() {
   return (
 
     <main className="login">
-      <form method="post" onSubmit={SubmitHandler}>
+      <form className="login--form" method="post" onSubmit={SubmitHandler}>
         <Title text="MawWellPOS" />
-        <Input placeholder="Nombre de Usuario" type="text" value={userName} handler={handlerUserName} />
-        <Input placeholder="Contraseña" type="password" value={password} handler={handlerPassword} />
+        <input className="login--input" placeholder="Nombre de Usuario" type="text" value={userName} onChange={handlerUserName} />
+        <input className="login--input" placeholder="Contraseña" type="password" value={password} onChange={handlerPassword} />
+        { message !== '' ?? <span className="login--infobox login--infobox__state" >{message}</span> }
         <button type="submit">Ingresar</button>
       </form>
     </main>

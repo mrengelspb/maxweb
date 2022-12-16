@@ -7,6 +7,8 @@ const XmlGenerate = require('../Xml.js');
 const fs = require('fs');
 const SignedXml = require('xml-crypto').SignedXml;
 const p12 = require('p12-pem');
+const soap = require('soap');
+const base64 = require('base-64');
 require('dotenv').config();
 
 factura.get("/factura/consultas", (req, res, next) => {
@@ -74,48 +76,60 @@ factura.post('/factura/emitir', (req, res, next) => {
             secuencial, dir_establecimiento_matriz, "0", contribuyente_especial, date, address,
             obligado_a_llevar_contabilidad, identType, client, ID, addressI, subTotalNeto, discounts,
             propina, time, timeLimit, total, formaPago, iva);
-          fs.writeFile('./factura.xml', xml, (content, err) => {
-            if (err) {
-              console.err(err);
-              throw new Error(err);
+
+          fs.writeFileSync('./factura.xml', xml);
+
+          let { pemKey, pemCertificate } = p12.getPemFromP12('./firma_electronica.p12',  'Gasper1baby');
+
+          let pemKey2 = pemKey.slice(0, 31) + "\n" + pemKey.slice(31);
+          pemKey2 = pemKey2.slice(0, pemKey2.length - 29) + "\n" + pemKey2.slice(pemKey2.length - 29);
+          let pemCertificate2 = pemCertificate.slice(0, 27) + "\n" + pemCertificate.slice(27);
+          pemCertificate2 = pemCertificate2.slice(0, pemCertificate2.length - 24) + "\n" + pemCertificate2.slice(pemCertificate.length - 24);
+
+          fs.writeFileSync('./client_public.pem', pemCertificate2 + "\n" + pemKey2)
+        
+          const signedXml = new SignedXml();
+          
+          let pem = pemCertificate.slice(27, pemCertificate.length - 24) + "\n" + pemKey.slice(31, pemKey.length - 29);
+          
+          signedXml.keyInfoProvider = {
+            getKeyInfo: function () {
+              return "<X509Data><X509Certificate>" + pem + "</X509Certificate></X509Data>";
             }
-            console.log("File written successfully !");
+          };
+          signedXml.addReference("//*[local-name(.)='infoAdicional']",["http://www.w3.org/2000/09/xmldsig#enveloped-signature"]);
+          const key = fs.readFileSync("./client_public.pem");
+          signedXml.signingKey = key.toString();
+         
+          signedXml.computeSignature(xml, {
+            prefix: 'ds'
+          });
+          
+          fs.writeFileSync("signed.xml", signedXml.getSignedXml());
+
+          const xml_data = fs.readFileSync("./signed.xml");
+
+          const args = {
+            xml: base64.encode(xml_data.toString().replaceAll("\n", ""))
+            // targetNSAlias: "Recepcion",
+            // targetNamespace: "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl"
+          };
+          // const args = {claveAccesoComprobante: code};
+          const url = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl';
+          const url2 = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl';
+
+          soap.createClient(url, {}, function(err, client) {
+            // res.send(client.describe())
+              //client.autorizacionComprobante(args, function(err, result) {
+              let describe = client.describe();
+              client.validarComprobante(args, function(err, result) {
+                if(err){
+                  console.log(err);
+                } 
+                  res.send({result, describe})
+              });
           });
 
-          let {pemKey, pemCertificate, commonName} = p12.getPemFromP12('./firma_electronica.p12',  'Gasper1baby');
-          let pemKey2 = pemKey.slice(0, 31) + "\n" + pemKey.slice(31);
-          pemKey2 = pemKey.slice(0, pemKey2.length - 30) + "\n" + pemKey.slice(pemKey2.length - 30);
-          
-          var xml2 = "<library>" +
-                      "<book>" +
-                        "<name>Harry Potter</name>" +
-                      "</book>" +
-                    "</library>"
-        
-          var sig = new SignedXml()
-          sig.addReference("//*[local-name(.)='book']");
-          sig.signingKey = fs.readFileSync("./ex3.pem");
-          console.log(sig.signingKey);
-
-          sig.computeSignature(xml2)
-          fs.writeFileSync("signed2.xml", sig.getSignedXml())
-
-
-
-          // const signedXml = new SignedXml();
-          // signedXml.addReference("//*[local-name(.)='infoAdicional']",["http://www.w3.org/2000/09/xmldsig#enveloped-signature"]);
-          // signedXml.signingKey = pemKey2;
-          // signedXml.computeSignature(xml, {
-          //   prefix: 'ds'
-          // });
-
-          // fs.writeFileSync("signed.xml", signedXml.getSignedXml());
-
-          res.status(200).send(JSON.parse(JSON.stringify({
-            code: code,
-            state: r,
-            xml: xml
-          })));
         })
         .catch((err) => {
           console.log({err: err.message, err});

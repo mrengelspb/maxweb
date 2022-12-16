@@ -62,12 +62,11 @@ module.exports =  function XmlGenerate (ListProducts, ambiente, emision, razon_s
     fechaEmision, dirEstablecimiento, obligadoContabilidad, tipoIdentificacionComprador, 
     razonSocialComprador, identificacionComprador, direccionComprador,
     totalSinImpuestos, totalDescuento, propina, time, timeLimit, total, formaPago, iva) {
-    const schema = `
-    <?xml version="1.0" encoding="UTF-8"?>
+    const schema = `<?xml version="1.0" encoding="UTF-8"?>
     <factura xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:/C:/borrar/xsd/111-xsd-1_V2.1.0.xsd" id="comprobante" version="version0">
         <infoTributaria>
             <ambiente>${ambiente}</ambiente>
-            <tipoEmision>${emision}1</tipoEmision>
+            <tipoEmision>${emision}</tipoEmision>
             <razonSocial>${razon_social}</razonSocial>
             <nombreComercial>${nombre_comercial}</nombreComercial>
             <ruc>${ruc}</ruc>
@@ -113,7 +112,6 @@ module.exports =  function XmlGenerate (ListProducts, ambiente, emision, razon_s
         </infoAdicional>
     </factura>
     `
-
     return schema;
 };
 

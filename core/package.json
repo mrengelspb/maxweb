@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "base-64": "^1.0.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -18,6 +19,7 @@
     "node-gyp": "^9.3.0",
     "p12-pem": "^1.0.5",
     "rebuild": "^0.1.2",
+    "soap": "^1.0.0",
     "uuid-token-generator": "^1.0.0",
     "xml-crypto": "^2.1.5",
     "xml2js": "^0.4.23"

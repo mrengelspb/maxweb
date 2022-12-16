@@ -3,46 +3,46 @@
     <factura xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:/C:/borrar/xsd/111-xsd-1_V2.1.0.xsd" id="comprobante" version="version0">
         <infoTributaria>
             <ambiente>1</ambiente>
-            <tipoEmision>11</tipoEmision>
+            <tipoEmision>1</tipoEmision>
             <razonSocial>RENGEL RIVERA MATEO SANTIAGO</razonSocial>
             <nombreComercial>Soluciones Plan B</nombreComercial>
             <ruc>104961925001</ruc>
-            <claveAcceso>2022121501888888888888810010010000001041122334410</claveAcceso>
+            <claveAcceso>2022121601888888888888810010010000002651122334411</claveAcceso>
             <codDoc>001</codDoc>
             <estab>001</estab>
             <ptoEmi>1</ptoEmi>
-            <secuencial>000000105</secuencial>
+            <secuencial>000000266</secuencial>
             <dirMatriz>La republica 2-70</dirMatriz>
             <agenteRetencion>0</agenteRetencion>
             <contribuyenteRimpe>CONTRIBUYENTE RÉGIMEN RIMPE</contribuyenteRimpe>
         </infoTributaria>
 
         <infoFactura>
-            <fechaEmision>2022-12-15</fechaEmision>
+            <fechaEmision>2022-12-16</fechaEmision>
             <dirEstablecimiento>La Republica 2-70</dirEstablecimiento>
             <obligadoContabilidad>NO</obligadoContabilidad>
-            <tipoIdentificacionComprador></tipoIdentificacionComprador>
+            <tipoIdentificacionComprador>04</tipoIdentificacionComprador>
             <razonSocialComprador>PRUEBAS SERVICIO DE RENTAS INTERNAS</razonSocialComprador>
             <identificacionComprador>8888888888888</identificacionComprador>
             <direccionComprador>Dir Pruebas SRI</direccionComprador>
-            <totalSinImpuestos>60</totalSinImpuestos>
+            <totalSinImpuestos>3</totalSinImpuestos>
             <totalDescuento>0</totalDescuento>
             <totalConImpuestos>
                 <totalImpuesto>
                 <codigo>2</codigo>
                 <codigoPorcentaje>3</codigoPorcentaje>
-                <baseImponible>67.2</baseImponible>
-                <valor>7.2</valor>
+                <baseImponible>3.36</baseImponible>
+                <valor>0.36</valor>
             </totalImpuesto>
                 
             </totalConImpuestos>
             <propina>0</propina>
-            <importeTotal>67.2</importeTotal>
+            <importeTotal>3.36</importeTotal>
             <moneda>DOLAR</moneda>
             <pagos>
                 <pago>
                 <formaPago>Efectivo</formaPago>
-                <total>67.2</total>
+                <total>3.36</total>
                 <plazo>0</plazo>
                 <unidadTiempo>Dias</unidadTiempo>
             </pago>
@@ -54,17 +54,17 @@
                     <codigoPrincipal>SPB-PG001</codigoPrincipal>
                     <codigoAuxiliar>002</codigoAuxiliar>
                     <descripcion>Cerveza</descripcion>
-                    <cantidad>20</cantidad>
+                    <cantidad>1</cantidad>
                     <precioUnitario>3</precioUnitario>
                     <descuento>0</descuento>
-                    <precioTotalSinImpuesto>60</precioTotalSinImpuesto>
+                    <precioTotalSinImpuesto>3</precioTotalSinImpuesto>
                     <impuestos>
                     <impuesto>
                         <codigo>2</codigo>
                         <codigoPorcentaje>3</codigoPorcentaje>
                         <tarifa>12</tarifa>
-                        <baseImponible>60</baseImponible>
-                        <valor>7.2</valor>
+                        <baseImponible>3</baseImponible>
+                        <valor>0.36</valor>
                     </impuesto>
                     </impuestos>
                  </detalle>
