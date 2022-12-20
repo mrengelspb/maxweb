@@ -25,7 +25,7 @@ const Facturador = ({ state }) => {
   const [ice, setIce] = useState(0);
   const [iva, setIva] = useState(0);
   const [discounts, setDiscounts] = useState(0);
-  const [today, setToday] = useState(new Date().toISOString().substring(0, 10));
+  const [today, setToday] = useState(new Date().toLocaleString("en-US").split(",")[0]);
   const [time, setTime] = useState(0);
   const [timeLimit, setTimeLimit] = useState('Dias');
   const [identType, setIdentType] = useState('04');
@@ -77,7 +77,7 @@ const Facturador = ({ state }) => {
         obligado_a_llevar_contabilidad: state.obligado_a_llevar_contabilidad,
         numero_RUC: state.numero_RUC,
         razon_social: state.razon_social,
-        comercial_name:state.comercial_name,
+        comercial_name: state.nombre_comercial,
         codigo_punto_emision: state.codigo_punto_emision,
         address: state.address,
         codDoc: state.codDoc,

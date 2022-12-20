@@ -10,24 +10,31 @@ import Operator from './Pages/Operator';
 import Entry from './Pages/Entry';
 import Product from './Pages/Product';
 import Facturador from './Pages/Facturador';
+import Notification from './Components/Notification';
 import './App.css';
 
 function App() {
   const [state, setState] = useState({});
+  const [status, setStatus] = useState('');
+
   useEffect(() => {
     fetch('http://localhost:3000/factura/consultas')
       .then((response) => response.json())
       .then((response) => {
         setState(response[0][0]);
         console.log(response[0][0]);
+        setStatus('Inicio de sesion exitoso');
       })
       .catch((err) => {
-        console.log({ message: err.message, err });
+        setStatus(`Vuelve a intentar ${err.message}!`);
+        console.log(status);
+        // console.log({ message: err.message, err });
       });
   }, []);
 
   return (
     <div className="App">
+      { status !== '' ?? <Notification status={status} /> }
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Login />} />

@@ -297,7 +297,7 @@
     <tipoNegociable>
         <correo>correo0</correo>
     </tipoNegociable>
-    <maquinaFiscal>
+    <maquinaFiscal> 
         <marca>marca0</marca>
         <modelo>modelo0</modelo>
         <serie>serie0</serie>

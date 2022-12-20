@@ -1,79 +1,73 @@
-
-    <?xml version="1.0" encoding="UTF-8"?>
-    <factura xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:/C:/borrar/xsd/111-xsd-1_V2.1.0.xsd" id="comprobante" version="version0">
-        <infoTributaria>
-            <ambiente>1</ambiente>
-            <tipoEmision>1</tipoEmision>
-            <razonSocial>RENGEL RIVERA MATEO SANTIAGO</razonSocial>
-            <nombreComercial>Soluciones Plan B</nombreComercial>
-            <ruc>104961925001</ruc>
-            <claveAcceso>2022121601888888888888810010010000002651122334411</claveAcceso>
-            <codDoc>001</codDoc>
-            <estab>001</estab>
-            <ptoEmi>1</ptoEmi>
-            <secuencial>000000266</secuencial>
-            <dirMatriz>La republica 2-70</dirMatriz>
-            <agenteRetencion>0</agenteRetencion>
-            <contribuyenteRimpe>CONTRIBUYENTE RÉGIMEN RIMPE</contribuyenteRimpe>
-        </infoTributaria>
-
-        <infoFactura>
-            <fechaEmision>2022-12-16</fechaEmision>
-            <dirEstablecimiento>La Republica 2-70</dirEstablecimiento>
-            <obligadoContabilidad>NO</obligadoContabilidad>
-            <tipoIdentificacionComprador>04</tipoIdentificacionComprador>
-            <razonSocialComprador>PRUEBAS SERVICIO DE RENTAS INTERNAS</razonSocialComprador>
-            <identificacionComprador>8888888888888</identificacionComprador>
-            <direccionComprador>Dir Pruebas SRI</direccionComprador>
-            <totalSinImpuestos>3</totalSinImpuestos>
-            <totalDescuento>0</totalDescuento>
-            <totalConImpuestos>
-                <totalImpuesto>
+<?xml version="1.0" encoding="UTF-8"?>
+<factura xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:/C:/borrar/xsd/111-xsd-1_V2.1.0.xsd" id="comprobante" version="version0">
+    <infoTributaria>
+        <ambiente>1</ambiente>
+        <tipoEmision>1</tipoEmision>
+        <razonSocial>RENGEL RIVERA MATEO SANTIAGO</razonSocial>
+        <nombreComercial>Soluciones Plan B</nombreComercial>
+        <ruc>0104961925001</ruc>
+        <claveAcceso>1220202201999999999900110010010000004201122334416</claveAcceso>
+        <codDoc>001</codDoc>
+        <estab>001</estab>
+        <ptoEmi>1</ptoEmi>
+        <secuencial>000000421</secuencial>
+        <dirMatriz>La republica 2-70</dirMatriz>
+        <agenteRetencion>0</agenteRetencion>
+        <contribuyenteRimpe>CONTRIBUYENTE RÉGIMEN RIMPE</contribuyenteRimpe>
+    </infoTributaria>
+    <infoFactura>
+        <fechaEmision>12/20/2022</fechaEmision>
+        <dirEstablecimiento>Terminal Terrestre de Azogues</dirEstablecimiento>
+        <obligadoContabilidad>NO</obligadoContabilidad>
+        <tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+        <razonSocialComprador>PRUEBAS SERVICIO DE RENTAS INTERNAS</razonSocialComprador>
+        <identificacionComprador>9999999999001</identificacionComprador>
+        <direccionComprador>Dir Pruebas SRI</direccionComprador>
+        <totalSinImpuestos>12</totalSinImpuestos>
+        <totalDescuento>0</totalDescuento>
+        <totalConImpuestos>
+            <totalImpuesto>
                 <codigo>2</codigo>
                 <codigoPorcentaje>3</codigoPorcentaje>
-                <baseImponible>3.36</baseImponible>
-                <valor>0.36</valor>
+                <baseImponible>13.44</baseImponible>
+                <valor>1.44</valor>
             </totalImpuesto>
-                
-            </totalConImpuestos>
-            <propina>0</propina>
-            <importeTotal>3.36</importeTotal>
-            <moneda>DOLAR</moneda>
-            <pagos>
-                <pago>
+        </totalConImpuestos>
+        <propina>0</propina>
+        <importeTotal>13.44</importeTotal>
+        <moneda>DOLAR</moneda>
+        <pagos>
+            <pago>
                 <formaPago>Efectivo</formaPago>
-                <total>3.36</total>
+                <total>13.44</total>
                 <plazo>0</plazo>
                 <unidadTiempo>Dias</unidadTiempo>
             </pago>
-            </pagos>
-        </infoFactura>
-
-        <detalles>
-            <detalle>
-                    <codigoPrincipal>SPB-PG001</codigoPrincipal>
-                    <codigoAuxiliar>002</codigoAuxiliar>
-                    <descripcion>Cerveza</descripcion>
-                    <cantidad>1</cantidad>
-                    <precioUnitario>3</precioUnitario>
-                    <descuento>0</descuento>
-                    <precioTotalSinImpuesto>3</precioTotalSinImpuesto>
-                    <impuestos>
-                    <impuesto>
-                        <codigo>2</codigo>
-                        <codigoPorcentaje>3</codigoPorcentaje>
-                        <tarifa>12</tarifa>
-                        <baseImponible>3</baseImponible>
-                        <valor>0.36</valor>
-                    </impuesto>
-                    </impuestos>
-                 </detalle>
-        </detalles>
-
-        <infoAdicional>
-            <campoAdicional nombre="Vendedor ">Vendedor</campoAdicional>
-            <campoAdicional nombre="Correo ">ventas@solucionesplanb.com.ec</campoAdicional>
-            <campoAdicional nombre="Ciudad ">CUENCA</campoAdicional>
-        </infoAdicional>
-    </factura>
-    
+        </pagos>
+    </infoFactura>
+    <detalles>
+        <detalle>
+            <codigoPrincipal>SPB-PG001</codigoPrincipal>
+            <codigoAuxiliar>002</codigoAuxiliar>
+            <descripcion>Cerveza</descripcion>
+            <cantidad>4</cantidad>
+            <precioUnitario>3</precioUnitario>
+            <descuento>0</descuento>
+            <precioTotalSinImpuesto>12</precioTotalSinImpuesto>
+            <impuestos>
+                <impuesto>
+                    <codigo>2</codigo>
+                    <codigoPorcentaje>3</codigoPorcentaje>
+                    <tarifa>12</tarifa>
+                    <baseImponible>12</baseImponible>
+                    <valor>1.44</valor>
+                </impuesto>
+            </impuestos>
+        </detalle>
+    </detalles>
+    <infoAdicional>
+        <campoAdicional nombre="Vendedor ">Vendedor</campoAdicional>
+        <campoAdicional nombre="Correo ">ventas@solucionesplanb.com.ec</campoAdicional>
+        <campoAdicional nombre="Ciudad ">CUENCA</campoAdicional>
+    </infoAdicional>
+</factura>
