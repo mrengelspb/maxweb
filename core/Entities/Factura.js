@@ -22,11 +22,6 @@ class Factura {
       + this.ambiente_codigo + this.numero_serie
       + numero_comprobante + "11223344" + this.emision_codigo;
     let digito_verificador = module11(codigo);
-    if (digito_verificador == 11) {
-      digito_verificador = 0;
-    } else if (digito_verificador === 10) {
-      digito_verificador = 1;
-    }
     return codigo + digito_verificador;
   }
 

@@ -6,40 +6,40 @@
         <razonSocial>RENGEL RIVERA MATEO SANTIAGO</razonSocial>
         <nombreComercial>Soluciones Plan B</nombreComercial>
         <ruc>0104961925001</ruc>
-        <claveAcceso>1220202201999999999900110010010000004201122334416</claveAcceso>
-        <codDoc>001</codDoc>
+        <claveAcceso>2012202201999999999900110010010000004891122334414</claveAcceso>
+        <codDoc>01</codDoc>
         <estab>001</estab>
-        <ptoEmi>1</ptoEmi>
-        <secuencial>000000421</secuencial>
+        <ptoEmi>002</ptoEmi>
+        <secuencial>000000490</secuencial>
         <dirMatriz>La republica 2-70</dirMatriz>
         <agenteRetencion>0</agenteRetencion>
         <contribuyenteRimpe>CONTRIBUYENTE RÉGIMEN RIMPE</contribuyenteRimpe>
     </infoTributaria>
     <infoFactura>
-        <fechaEmision>12/20/2022</fechaEmision>
+        <fechaEmision>20/12/2022</fechaEmision>
         <dirEstablecimiento>Terminal Terrestre de Azogues</dirEstablecimiento>
         <obligadoContabilidad>NO</obligadoContabilidad>
         <tipoIdentificacionComprador>04</tipoIdentificacionComprador>
         <razonSocialComprador>PRUEBAS SERVICIO DE RENTAS INTERNAS</razonSocialComprador>
         <identificacionComprador>9999999999001</identificacionComprador>
         <direccionComprador>Dir Pruebas SRI</direccionComprador>
-        <totalSinImpuestos>12</totalSinImpuestos>
+        <totalSinImpuestos>3</totalSinImpuestos>
         <totalDescuento>0</totalDescuento>
         <totalConImpuestos>
             <totalImpuesto>
                 <codigo>2</codigo>
                 <codigoPorcentaje>3</codigoPorcentaje>
-                <baseImponible>13.44</baseImponible>
-                <valor>1.44</valor>
+                <baseImponible>3.36</baseImponible>
+                <valor>0.36</valor>
             </totalImpuesto>
         </totalConImpuestos>
         <propina>0</propina>
-        <importeTotal>13.44</importeTotal>
+        <importeTotal>3.36</importeTotal>
         <moneda>DOLAR</moneda>
         <pagos>
             <pago>
-                <formaPago>Efectivo</formaPago>
-                <total>13.44</total>
+                <formaPago>01</formaPago>
+                <total>3.36</total>
                 <plazo>0</plazo>
                 <unidadTiempo>Dias</unidadTiempo>
             </pago>
@@ -50,17 +50,17 @@
             <codigoPrincipal>SPB-PG001</codigoPrincipal>
             <codigoAuxiliar>002</codigoAuxiliar>
             <descripcion>Cerveza</descripcion>
-            <cantidad>4</cantidad>
+            <cantidad>1</cantidad>
             <precioUnitario>3</precioUnitario>
             <descuento>0</descuento>
-            <precioTotalSinImpuesto>12</precioTotalSinImpuesto>
+            <precioTotalSinImpuesto>3</precioTotalSinImpuesto>
             <impuestos>
                 <impuesto>
                     <codigo>2</codigo>
                     <codigoPorcentaje>3</codigoPorcentaje>
                     <tarifa>12</tarifa>
-                    <baseImponible>12</baseImponible>
-                    <valor>1.44</valor>
+                    <baseImponible>3</baseImponible>
+                    <valor>0.36</valor>
                 </impuesto>
             </impuestos>
         </detalle>
@@ -70,34 +70,34 @@
         <campoAdicional nombre="Correo ">ventas@solucionesplanb.com.ec</campoAdicional>
         <campoAdicional nombre="Ciudad ">CUENCA</campoAdicional>
     </infoAdicional>
-<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature738019">
-<ds:SignedInfo Id="Signature-SignedInfo22784">
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature833515">
+<ds:SignedInfo Id="Signature-SignedInfo563674">
 <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
 <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
-<ds:Reference Id="SignedPropertiesID853872" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature738019-SignedProperties951633">
+<ds:Reference Id="SignedPropertiesID50356" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature833515-SignedProperties698781">
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>XnDgjmLty1xJ1clhbf+z0Py5pdk=</ds:DigestValue>
+<ds:DigestValue>TvwXBZBOqP49nBHgsOKVoLfNXnY=</ds:DigestValue>
 </ds:Reference>
-<ds:Reference URI="#Certificate589565">
+<ds:Reference URI="#Certificate889024">
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>cfg4EMp5SN5pVc24yzWFZpy3Jus=</ds:DigestValue>
+<ds:DigestValue>n0h0a1nbpqCQkLmhWY2V6n467hA=</ds:DigestValue>
 </ds:Reference>
-<ds:Reference Id="Reference-ID-753442" URI="#comprobante">
+<ds:Reference Id="Reference-ID-153418" URI="#comprobante">
 <ds:Transforms>
 <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>1PVvBXegfnQimjixbLcQ15ab41Y=</ds:DigestValue>
+<ds:DigestValue>fJPhmj1C6bCUT1zfnYGFAZxFSiE=</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
-<ds:SignatureValue Id="SignatureValue59745">
-e/EV2bkwrHaRCeeo7jI/g0A1vKxjp7SiJxzzoTvBGhqKc2itWyYxUV16VUWrrVnlICO/mvCKTNs/
-lpcv+bhdjSzki45iZpOYYHbm9z8UvwzaUbFp95qhXEedYnRQlPX+xbghGdCDbsropZO8HZQcIvgr
-AEB+SQbvrnGCQ+4ctkajMSPZ33Khr26AGn4pmAb2VEloN+N2iO2bVzamrXy71jBXHAVjzJjwUuPX
-thpffbaHc97pduz7BBGTuzVT6O/7zPnviAET/T1v/CZEMpmFehfg/0+B1E3ELLWpwhji83Z9HYz4
-fiETqyRK0Lx/tFyoVnXF6XPgg5hdwJbXhMTUBg==
+<ds:SignatureValue Id="SignatureValue408050">
+F1eeVedRqkhsc/akseBLl1wqXGhIHZfDs6edvRfhKA18Rm+yRlEFB/GVX+Y/vfmoUfBoIyzh7B1V
+XNhdwcAgyeIh8oA1jpI13XGwWlZMAqgIHCNKnX6e9S4kztrxegbPpULTX/tbr0xYtMw+Wkr5Kku8
+qqrtPOos6TruEf6+oCTxK/WBMEeFToWxfzG3S4CUCXmb9v8TqX1g+b0j0XMaK+sarfj3sX3S2Ehg
+KaDm5X5hb21ffz0yG3pm+2Yw6+Wvn3esCzgEjVf3QzN8L3oHGPaPx5JupBBxcU1buNl/harQ3gVr
+05lCV81XQSNWRCgoqzkst6zZZcQlDowwhZ+M0Q==
 </ds:SignatureValue>
-<ds:KeyInfo Id="Certificate589565">
+<ds:KeyInfo Id="Certificate889024">
 <ds:X509Data>
 <ds:X509Certificate>
 MIIL3TCCCcWgAwIBAgIEBoPbiTANBgkqhkiG9w0BAQsFADCBmTELMAkGA1UEBhMCRUMxHTAbBgNV
@@ -169,4 +169,4 @@ L4xnAf/eWzndcl5CCFSx6lgPG/0+BNvAkExsbQ==
 </ds:RSAKeyValue>
 </ds:KeyValue>
 </ds:KeyInfo>
-<ds:Object Id="Signature738019-Object260745"><etsi:QualifyingProperties Target="#Signature738019"><etsi:SignedProperties Id="Signature738019-SignedProperties951633"><etsi:SignedSignatureProperties><etsi:SigningTime>2022-12-20T09:57:20-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>3g2mH9u6q5AUcGYNaAQ4pPZ4oP0=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>109304713</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-753442"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature></factura>
+<ds:Object Id="Signature833515-Object656055"><etsi:QualifyingProperties Target="#Signature833515"><etsi:SignedProperties Id="Signature833515-SignedProperties698781"><etsi:SignedSignatureProperties><etsi:SigningTime>2022-12-20T16:30:02-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>3g2mH9u6q5AUcGYNaAQ4pPZ4oP0=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>109304713</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-153418"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature></factura>

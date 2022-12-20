@@ -6,40 +6,40 @@
         <razonSocial>RENGEL RIVERA MATEO SANTIAGO</razonSocial>
         <nombreComercial>Soluciones Plan B</nombreComercial>
         <ruc>0104961925001</ruc>
-        <claveAcceso>1220202201999999999900110010010000004201122334416</claveAcceso>
-        <codDoc>001</codDoc>
+        <claveAcceso>2012202201999999999900110010010000004891122334414</claveAcceso>
+        <codDoc>01</codDoc>
         <estab>001</estab>
-        <ptoEmi>1</ptoEmi>
-        <secuencial>000000421</secuencial>
+        <ptoEmi>002</ptoEmi>
+        <secuencial>000000490</secuencial>
         <dirMatriz>La republica 2-70</dirMatriz>
         <agenteRetencion>0</agenteRetencion>
         <contribuyenteRimpe>CONTRIBUYENTE RÉGIMEN RIMPE</contribuyenteRimpe>
     </infoTributaria>
     <infoFactura>
-        <fechaEmision>12/20/2022</fechaEmision>
+        <fechaEmision>20/12/2022</fechaEmision>
         <dirEstablecimiento>Terminal Terrestre de Azogues</dirEstablecimiento>
         <obligadoContabilidad>NO</obligadoContabilidad>
         <tipoIdentificacionComprador>04</tipoIdentificacionComprador>
         <razonSocialComprador>PRUEBAS SERVICIO DE RENTAS INTERNAS</razonSocialComprador>
         <identificacionComprador>9999999999001</identificacionComprador>
         <direccionComprador>Dir Pruebas SRI</direccionComprador>
-        <totalSinImpuestos>12</totalSinImpuestos>
+        <totalSinImpuestos>3</totalSinImpuestos>
         <totalDescuento>0</totalDescuento>
         <totalConImpuestos>
             <totalImpuesto>
                 <codigo>2</codigo>
                 <codigoPorcentaje>3</codigoPorcentaje>
-                <baseImponible>13.44</baseImponible>
-                <valor>1.44</valor>
+                <baseImponible>3.36</baseImponible>
+                <valor>0.36</valor>
             </totalImpuesto>
         </totalConImpuestos>
         <propina>0</propina>
-        <importeTotal>13.44</importeTotal>
+        <importeTotal>3.36</importeTotal>
         <moneda>DOLAR</moneda>
         <pagos>
             <pago>
-                <formaPago>Efectivo</formaPago>
-                <total>13.44</total>
+                <formaPago>01</formaPago>
+                <total>3.36</total>
                 <plazo>0</plazo>
                 <unidadTiempo>Dias</unidadTiempo>
             </pago>
@@ -50,17 +50,17 @@
             <codigoPrincipal>SPB-PG001</codigoPrincipal>
             <codigoAuxiliar>002</codigoAuxiliar>
             <descripcion>Cerveza</descripcion>
-            <cantidad>4</cantidad>
+            <cantidad>1</cantidad>
             <precioUnitario>3</precioUnitario>
             <descuento>0</descuento>
-            <precioTotalSinImpuesto>12</precioTotalSinImpuesto>
+            <precioTotalSinImpuesto>3</precioTotalSinImpuesto>
             <impuestos>
                 <impuesto>
                     <codigo>2</codigo>
                     <codigoPorcentaje>3</codigoPorcentaje>
                     <tarifa>12</tarifa>
-                    <baseImponible>12</baseImponible>
-                    <valor>1.44</valor>
+                    <baseImponible>3</baseImponible>
+                    <valor>0.36</valor>
                 </impuesto>
             </impuestos>
         </detalle>

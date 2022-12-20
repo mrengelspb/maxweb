@@ -11,8 +11,14 @@ const module11 = (code) => {
   }
 
   value = list.reduce((a, b) => a + b);
+  let digito = 11 - (value % 11);
+  if (digito === 11) {
+    digito = 0;
+  } else if (digito === 10) {
+    digito = 1;
+  }
 
-  return 11 - (value % 11);
+  return digito;
 }
 
 module.exports = module11;

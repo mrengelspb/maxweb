@@ -8,7 +8,7 @@ import '../styles/facturador.css';
 const Facturador = ({ state }) => {
 
   const [car, setCar] = useState([]);
-  const [formaPago, setFormaPago] = useState('Efectivo');
+  const [formaPago, setFormaPago] = useState('01');
   const [ID, setID] = useState('');
   const [client, setClient] = useState('');
   const [addressI, setAddress] = useState('');
@@ -61,6 +61,7 @@ const Facturador = ({ state }) => {
   const handlerEmitir = async (ev) => {
     console.log(identType);
     ev.preventDefault();
+    const a_today = today.split("/"); 
     const response = await fetch('http://localhost:3000/factura/emitir', {
       method: 'POST',
       headers: {
@@ -80,9 +81,9 @@ const Facturador = ({ state }) => {
         comercial_name: state.nombre_comercial,
         codigo_punto_emision: state.codigo_punto_emision,
         address: state.address,
-        codDoc: state.codDoc,
+        codDoc: formaPago,
         estab: state.estab,
-        date: today,
+        date: `${a_today[1]}/${a_today[0]}/${a_today[2]}`,
         tipo_comprobante: '01',
         lista_productos: car,
         total,

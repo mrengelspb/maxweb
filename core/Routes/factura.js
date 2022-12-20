@@ -85,28 +85,41 @@ factura.post('/factura/emitir', (req, res, next) => {
           fs.writeFileSync("signed.xml", comprobante);
 
           let xml_data = fs.readFileSync("./signed.xml");
-          let xmlBase64 = Buffer.from(xml_data).toString('base64');
+          let xmlBase64 = Buffer.from(xml_data).toString();
+          
+          const xml_arg = 
+          '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ec="http://ec.gob.sri.ws.recepcion">'
+          + '<soapenv:Header/>' +
+          '<soapenv:Body>' +
+            '<ec:validarComprobante>' +
+              '<xml>' + xmlBase64 + '</xml>' +
+              '</ec:validarComprobante>' +
+            '</soapenv:Body>' +
+          '</soapenv:Envelope>';
 
-          const args = {
-            xml: xmlBase64,
-            targetNSAlias: 'tns',
-            targetNamespace: "http://ec.gob.sri.ws.recepcion"
-          };
-          // const args = {claveAccesoComprobante: code};
-          const url = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl';
-          const url2 = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl';
+          const recepcionComprobantesPruebasUrl = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl';
+          const autorizacionComprobantesPruebasUrl = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl';
 
-          soap.createClient(url, {}, function(err, client) {
-              // client.autorizacionComprobante(xmlBase64, targetNSAlias, targetNamespace, function(err, result) {
-              client.validarComprobante(xmlBase64, function(err, result) {
-              let describe = client.describe();
-               if(err){
-                 console.log(err);
-               } 
-                 res.send({result, describe, client});
-               });
-            });
+          const ClientRecepcion = await soap.createClientAsync(recepcionComprobantesPruebasUrl);
+          const responseRecepcion = await ClientRecepcion.validarComprobanteAsync(xml_arg);
 
+          const args2 = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ec="http://ec.gob.sri.ws.autorizacion">'
+          + '<soapenv:Header/>' +
+            '<soapenv:Body>' +
+              '<ec:autorizacionComprobante>' +
+                '<claveAccesoComprobante>' + code + '</claveAccesoComprobante>' +
+              '</ec:autorizacionComprobante>' +
+            '</soapenv:Body>' +
+            '</soapenv:Envelope>';
+
+          console.log(args2);
+          console.log(responseRecepcion[0].RespuestaRecepcionComprobante.estado);
+          if (responseRecepcion[0].RespuestaRecepcionComprobante.estado === "RECIBIDA") {
+            const ClientAutorizacion = await soap.createClientAsync(autorizacionComprobantesPruebasUrl);
+            const responseAutorizacion = await ClientAutorizacion.autorizacionComprobanteAsync(args2);
+  
+            res.send({ responseRecepcion, responseAutorizacion });
+          }
         })
         .catch((err) => {
           console.log({err: err.message, err});

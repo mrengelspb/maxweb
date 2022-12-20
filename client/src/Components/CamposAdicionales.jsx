@@ -12,10 +12,13 @@ const Control = ({propina, handlerPropina, time, timeLimit, handlerTime, handler
     <div>
       <select id="pay" name="pay" value={formaPago} onChange={handlerFormaPago}>
         <optgroup label="Forma de pago" />
-        <option value="01">Efectivo</option>
-        <option value="02">Dinero electrónico</option>
-        <option value="03">Tarjeta de crédito</option>
-        <option value="04">Otros</option>
+        <option value="01">FACTURA</option>
+        <option value="03">LIQUIDACIÓN DE COMPRA DE BIENES Y PRESTACIÓN DE SERVICIOS</option>
+        <option value="04">NOTA DE CRÉDITO</option>
+        <option value="05">NOTA DE DÉBITO</option>
+        <option value="05">NOTA DE DÉBITO</option>
+        <option value="06">GUÍA DE REMISIÓN</option>
+        <option value="07">COMPROBANTE DE RETENCIÓN</option>
       </select>
       <input type="number" min="0" value={time} onChange={handlerTime}/>
       <select ip="timelimit" value={timeLimit} onChange={handlerTimeLimit}>
