@@ -1,6 +1,7 @@
 const express = require('express');
 const factura = express.Router();
 const { dbmysql } = require('../data_providers/DBMysql.js');
+const jwt = require('jsonwebtoken');
 const FacturaController = require('../interface/controller/facturaController.js');
 const Factura = require('../Entities/Factura.js');
 const XmlGenerate = require('../Xml.js');
@@ -12,6 +13,20 @@ const base64 = require('base-64');
 const jsonxml = require('jsontoxml');
 require('dotenv').config();
 
+
+factura.use((req, res, next) => {
+  const authHeader = req.headers["auth"];
+  const token = authHeader;
+  if (token == null) return res.sendStatus(403);
+  jwt.verify(token, "MateoRengelSolucionesPlanB", (err, user) => {
+     if (err) return res.sendStatus(404);
+     req.user = user;
+     next();
+  });
+});
+
+
+
 factura.get("/factura/consultas", (req, res, next) => {
   const query = dbmysql.query('CALL pa_fe_consultas(?, ?)', [1, process.env.RUC]);
   query.then((response) => {
@@ -19,7 +34,7 @@ factura.get("/factura/consultas", (req, res, next) => {
   })
   .catch((err) => {
       console.error(err);
-  })
+  });
 });
 
 factura.post('/factura_con_datos', (req, res, next) => {
@@ -33,7 +48,7 @@ factura.post('/factura_con_datos', (req, res, next) => {
     .catch((err) => {
       console.log(err);
       res.status(400).send({message: err.message}); 
-    })
+    });
 })
 
 factura.post('/factura/emitir', (req, res, next) => {
@@ -84,18 +99,22 @@ factura.post('/factura/emitir', (req, res, next) => {
 
           fs.writeFileSync("signed.xml", comprobante);
 
+          const toBytes = (string) => Array.from(Buffer.from(string, 'utf8'));
+
+
           let xml_data = fs.readFileSync("./signed.xml");
-          let xmlBase64 = Buffer.from(xml_data).toString();
           
           const xml_arg = 
           '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ec="http://ec.gob.sri.ws.recepcion">'
           + '<soapenv:Header/>' +
           '<soapenv:Body>' +
             '<ec:validarComprobante>' +
-              '<xml>' + xmlBase64 + '</xml>' +
+              '<xml>' + base64.encode(xml_data) + '</xml>' +
               '</ec:validarComprobante>' +
             '</soapenv:Body>' +
           '</soapenv:Envelope>';
+
+          console.log(xml_arg);
 
           const recepcionComprobantesPruebasUrl = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl';
           const autorizacionComprobantesPruebasUrl = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl';
@@ -103,7 +122,7 @@ factura.post('/factura/emitir', (req, res, next) => {
           const ClientRecepcion = await soap.createClientAsync(recepcionComprobantesPruebasUrl);
           const responseRecepcion = await ClientRecepcion.validarComprobanteAsync(xml_arg);
 
-          const args2 = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ec="http://ec.gob.sri.ws.autorizacion">'
+          const xml_args2 = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ec="http://ec.gob.sri.ws.autorizacion">'
           + '<soapenv:Header/>' +
             '<soapenv:Body>' +
               '<ec:autorizacionComprobante>' +
@@ -112,11 +131,9 @@ factura.post('/factura/emitir', (req, res, next) => {
             '</soapenv:Body>' +
             '</soapenv:Envelope>';
 
-          console.log(args2);
-          console.log(responseRecepcion[0].RespuestaRecepcionComprobante.estado);
           if (responseRecepcion[0].RespuestaRecepcionComprobante.estado === "RECIBIDA") {
             const ClientAutorizacion = await soap.createClientAsync(autorizacionComprobantesPruebasUrl);
-            const responseAutorizacion = await ClientAutorizacion.autorizacionComprobanteAsync(args2);
+            const responseAutorizacion = await ClientAutorizacion.autorizacionComprobanteAsync(xml_args2);
   
             res.send({ responseRecepcion, responseAutorizacion });
           }

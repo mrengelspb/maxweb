@@ -7,17 +7,24 @@ import Modal from '../Components/Modal';
 // import xml from '../xml.js';
 import '../styles/operator.css';
 import '../styles/action.css';
+import { Navigate } from 'react-router-dom';
 
 export default function Operador({
   state,
 }) {
-  return (
-    <div>
-      <ModalButton action="Finalizar" state={state} />
-      <ModalButton action="Imprimir Ticket" />
-      <ModalButton action="Imprimir Factura" />
-    </div>
-  );
+  const [token, setToken] = useState(localStorage.getItem("token"));
+
+  if (!token) {
+    return (<Navigate to="/" />)
+  } else {
+    return (
+      <div>
+        <ModalButton action="Finalizar" state={state} />
+        <ModalButton action="Imprimir Ticket" />
+        <ModalButton action="Imprimir Factura" />
+      </div>
+    );
+  }
 }
 
 Operador.propTypes = {
@@ -40,7 +47,6 @@ function ModalButton({ action, state }) {
   const [iva, setIva] = useState(0);
   const [total, setTotal] = useState(0);
   const [today, setToday] = useState(new Date().toISOString().substring(0, 10));
-
   useEffect(() => {
     const dateInput = document.getElementById('date');
     dateInput.value = today;
@@ -186,7 +192,6 @@ function ModalButton({ action, state }) {
     return (
       <>
         <Modal>
-
           <form onSubmit={handlerSearch}>
             <input type="number" placeholder="Id producto" onChange={handlerProduct} />
             <input type="number" value={cantidad} onChange={handlerCantidad} placeholder="Cantidad" />

@@ -6,17 +6,17 @@
         <razonSocial>RENGEL RIVERA MATEO SANTIAGO</razonSocial>
         <nombreComercial>Soluciones Plan B</nombreComercial>
         <ruc>0104961925001</ruc>
-        <claveAcceso>2012202201999999999900110010010000004891122334414</claveAcceso>
+        <claveAcceso>2112202201999999999900110010010000005011122334412</claveAcceso>
         <codDoc>01</codDoc>
         <estab>001</estab>
         <ptoEmi>002</ptoEmi>
-        <secuencial>000000490</secuencial>
+        <secuencial>000000502</secuencial>
         <dirMatriz>La republica 2-70</dirMatriz>
         <agenteRetencion>0</agenteRetencion>
         <contribuyenteRimpe>CONTRIBUYENTE RÉGIMEN RIMPE</contribuyenteRimpe>
     </infoTributaria>
     <infoFactura>
-        <fechaEmision>20/12/2022</fechaEmision>
+        <fechaEmision>21/12/2022</fechaEmision>
         <dirEstablecimiento>Terminal Terrestre de Azogues</dirEstablecimiento>
         <obligadoContabilidad>NO</obligadoContabilidad>
         <tipoIdentificacionComprador>04</tipoIdentificacionComprador>

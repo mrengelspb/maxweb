@@ -1,17 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import '../styles/notification.css';
 
-function Notification({ status }) {
+function Notification() {
   return (
-    <div className="notification--container">
-      {status}
+    <div id="notification" className="notification--container notification--container__hidden">
+      This text will we replace from handlerNotification !
     </div>
   );
 }
-
-Notification.propTypes = {
-  status: PropTypes.string.isRequired,
-};
 
 export default Notification;

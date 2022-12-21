@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -15,30 +15,31 @@ import './App.css';
 
 function App() {
   const [state, setState] = useState({});
-  const [status, setStatus] = useState('');
 
-  useEffect(() => {
-    fetch('http://localhost:3000/factura/consultas')
-      .then((response) => response.json())
-      .then((response) => {
-        setState(response[0][0]);
-        console.log(response[0][0]);
-        setStatus('Inicio de sesion exitoso');
-      })
-      .catch((err) => {
-        setStatus(`Vuelve a intentar ${err.message}!`);
-        console.log(status);
-        // console.log({ message: err.message, err });
-      });
-  }, []);
+  const handlerNotification = (text, status, time) => {
+    const notification = document.getElementById('notification');
+    notification.classList.remove('notification--container__hidden');
+    if (status === 200) {
+      notification.classList.add('notification--container__green');
+    } else if (status === 404) {
+      notification.classList.add('notification--container__red');
+    }
+    notification.classList.remove('notification--container__hidden');
+    notification.textContent = text;
+    setTimeout(() => {
+      notification.classList.remove('notification--container__green');
+      notification.classList.remove('notification--container__red');
+      notification.classList.add('notification--container__hidden');
+    }, time);
+  };
 
   return (
     <div className="App">
-      { status !== '' ?? <Notification status={status} /> }
+      <Notification />
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Login />} />
-          <Route exact path="/admin" element={<Dashboard />} />
+          <Route exact path="/" element={<Login handlerNotification={handlerNotification} />} />
+          <Route exact path="/admin" element={<Dashboard setState={setState} state={state} />} />
           <Route exact path="/operador" element={<Operator state={state} />} />
           <Route exact path="/ingreso" element={<Entry />} />
           <Route exact path="/producto" element={<Product />} />

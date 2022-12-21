@@ -1,9 +1,21 @@
 .notification--container {
     width: 150px;
-    height: 150px;
+    height: 40px;
     box-shadow: 0px 0px 5px 3px gray;
     padding: 20px 20px;
     position: absolute;
-    top: 10%;
-    right: 10%;
+    text-align: center;
+    top: 5%;
+    right: 5%;
+}
+
+.notification--container__hidden {
+    display: none;
+}
+
+.notification--container__green {
+    border: 2px solid green;
+}
+.notification--container__red {
+    border: 2px solid red;
 }
