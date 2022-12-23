@@ -3,16 +3,6 @@ const adminController = express.Router();
 const { dbmysql } = require('../data_providers/DBMysql.js');
 const AdminController = require('../interface/controller/AdminController.js');
 
-adminController.get('/admin', (req, res, next) => {
-  if (req.session.data) {
-    res.send(req.session.data);
-  } else {
-    res.send({
-      message: "Session not Found !"
-    });
-  }
-});
-
 adminController.post('/api/v1/admin', (req, res, next) => {
   const data = req.body;
   const adminController = new AdminController();

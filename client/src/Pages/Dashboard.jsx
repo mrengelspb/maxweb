@@ -9,6 +9,7 @@ import '../styles/dashboard.css';
 
 export default function Dashboard({ state, setState, PATH_LOGIN, handlerNotification }) {
   const [token, setToken] = useState(localStorage.getItem('token'));
+
   if (!token) return (<Navigate to={PATH_LOGIN} />);
   return (
     <>
