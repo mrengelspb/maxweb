@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Navigate } from 'react-router-dom';
 import Title from '../Components/Title';
 import Form from '../Components/Form';
 import Input from '../Components/Input';
@@ -7,31 +8,30 @@ import Modal from '../Components/Modal';
 // import xml from '../xml.js';
 import '../styles/operator.css';
 import '../styles/action.css';
-import { Navigate } from 'react-router-dom';
+import Header from '../Components/Header';
 
 export default function Operador({
-  state,
+  state, PATH_LOGIN, handlerNotification,
 }) {
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
-  if (!token) {
-    return (<Navigate to="/" />)
-  } else {
-    return (
-      <div>
-        <ModalButton action="Finalizar" state={state} />
-        <ModalButton action="Imprimir Ticket" />
-        <ModalButton action="Imprimir Factura" />
-      </div>
-    );
-  }
+  if (!token) return (<Navigate to={PATH_LOGIN} />);
+  return (
+    <div>
+      <Header handlerNotification={handlerNotification} />
+      <ModalButton action="Finalizar" state={state} />
+      <ModalButton action="Imprimir Ticket" state={state} />
+      <ModalButton action="Imprimir Factura" state={state} />
+    </div>
+  );
 }
 
 Operador.propTypes = {
-  state: PropTypes.object.isRequired,
+  state: PropTypes.object,
+  PATH_LOGIN: PropTypes.string.isRequired,
 };
 
-function ModalButton({ action, state }) {
+function ModalButton({ action, state,  }) {
   const list = [];
   const [ID, setID] = useState();
   const [client, setClient] = useState();
@@ -130,7 +130,7 @@ function ModalButton({ action, state }) {
         lista_productos: car,
         subTotal,
         iva,
-        total
+        total,
       }),
     })
       .then((response) => response.json())
@@ -193,7 +193,7 @@ function ModalButton({ action, state }) {
       <>
         <Modal>
           <form onSubmit={handlerSearch}>
-            <input type="number" placeholder="Id producto" onChange={handlerProduct} />
+            <input type="number" placeholder="Id producto" value={ID} onChange={handlerProduct} />
             <input type="number" value={cantidad} onChange={handlerCantidad} placeholder="Cantidad" />
             <input type="number" value={descuento} onChange={handlerDescuento} />
             <button type="submit">Buscar</button>
@@ -202,17 +202,17 @@ function ModalButton({ action, state }) {
             </ul>
             <label>
               Sub Total:
-              <input id="number" value={subTotal} onChange={() => {}} />
+              <input id="number" value={subTotal} readOnly />
             </label>
 
             <label>
               Iva:
-              <input id="number" value={iva} onChange={() => {}} />
+              <input id="number" value={iva} readOnly />
             </label>
 
             <label>
               Total:
-              <input id="number" value={total} onChange={() => {}} />
+              <input id="number" value={total} readOnly />
             </label>
           </form>
 
@@ -222,15 +222,15 @@ function ModalButton({ action, state }) {
               <button type="button" onClick={(ev) => handlerSearchBarSlider(ev)}>Factura con Datos</button>
               <div className="sliderContainer hidden">
                 <div className="searchBarContainer">
-                  <input type="text" onChange={handlerId} placeholder="Ingresar Ruc o CI" />
+                  <input type="text" value={ID} onChange={handlerId} placeholder="Ingresar Ruc o CI" />
                   <button type="button" onClick={handlerSearchData}>Buscar</button>
                   <input type="reset" value="Limpiar" />
                 </div>
                 <Input id="date" placeholder="Fecha" value={today} onChange={handlerDate} type="date" />
                 <Input placeholder="Cliente" value={client} onChange={handlerClient} type="text" />
                 <Input placeholder="Dirrección" value={addressI} onChange={handlerAddress} type="text" />
-                <Input placeholder="Email" value={emailI} onClick={handlerEmail} type="email" />
-                <Input placeholder="Teléfono" value={phone} onclick={handlerPhone} type="text" />
+                <input placeholder="Email" value={emailI} onClick={handlerEmail} type="email" />
+                <input placeholder="Teléfono" value={phone} onClick={handlerPhone} type="text" />
                 <label htmlFor="pay">
                   Eligue una forma de pago:
                   <select id="pay" name="pay" value={formaPago} onChange={handlerFormaPago}>
@@ -277,5 +277,5 @@ function ModalButton({ action, state }) {
 
 ModalButton.propTypes = {
   action: PropTypes.string.isRequired,
-  state: PropTypes.object.isRequired,
+  state: PropTypes.object,
 };

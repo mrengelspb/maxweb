@@ -7,6 +7,7 @@
     text-align: center;
     top: 5%;
     right: 5%;
+    color: white;
 }
 
 .notification--container__hidden {
@@ -15,7 +16,9 @@
 
 .notification--container__green {
     border: 2px solid green;
+    background-color: rgb(39, 104, 39);
 }
 .notification--container__red {
     border: 2px solid red;
+    background-color: rgb(158, 38, 38);
 }

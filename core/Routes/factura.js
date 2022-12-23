@@ -18,7 +18,8 @@ factura.use((req, res, next) => {
   const authHeader = req.headers["auth"];
   const token = authHeader;
   if (token == null) return res.sendStatus(403);
-  jwt.verify(token, "MateoRengelSolucionesPlanB", (err, user) => {
+  const privateKey = fs.readFileSync('./token.txt');
+  jwt.verify(token, privateKey, (err, user) => {
      if (err) return res.sendStatus(404);
      req.user = user;
      next();

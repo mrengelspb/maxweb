@@ -8,21 +8,16 @@ export default function SearchTicketForm({data}) {
   let Time = "";
   let Total = "";
 
-  if(data !== null) {
+  if (data) {
     In = data.in.replace("T", " ").slice(0, 19);
-    const hoy = new Date();
-    Out = hoy.toISOString().replace("T", " ").slice(0, 19);
-    const start = new Date(In);
-    const end = new Date(Out);
-    Time = end.getMinutes() - start.getMinutes();
-    // TO DO
-    // Implementar tarifas para calcular el total
-    Total = Time * 9;
+    Out = data.out.replace("T", " ").slice(0, 19);
+    Time = data.time;
+    Total = data.total;
   }
-
+  
   const handlerUpdateTicket = (ev) => {
     ev.preventDefault();
-    fetch('http://localhost:3000/ingreso', {
+    fetch('http://localhost:3000/api/v1/ticket/ingreso', {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json'
@@ -42,12 +37,12 @@ export default function SearchTicketForm({data}) {
 
   return (
     <form className="searchTicketForm" onSubmit={handlerUpdateTicket}>
-      <input type="text" value={In} onChange={() => {}} placeholder="Ingreso" />
-      <input type="text" value={Out} onChange={() => {}} placeholder="Salida" />
-      <input type="text" value={Time} onChange={() => {}} placeholder="Tiempo" />
+      <input type="text" value={In} readOnly placeholder="Ingreso" />
+      <input type="text" value={Out} readOnly placeholder="Salida" />
+      <input type="text" value={Time} readOnly placeholder="Tiempo" />
       <span>Total:{Total}</span>
       <span />
-      <button className="entry--button" type="submit" >Finalizar</button>
+      <button className="entry--button" type="submit">Finalizar</button>
     </form>
   );
 }

@@ -2,8 +2,7 @@ import React from 'react';
 
 const Control = ({propina, handlerPropina, time, timeLimit, handlerTime, handlerTimeLimit,
   formaPago, setFormaPago, handlerEmitir }) => {
-  
-  
+
   const handlerFormaPago = (ev) => {
     setFormaPago(ev.target.value);
   };

@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Navigate, redirect } from "react-router-dom";
+import React, { useState, useRef } from 'react';
+import { Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Title from '../Components/Title';
-import Input from '../Components/Input';
 import '../styles/login.css';
 
-function Login({ handlerNotification }) {
-
-  const [token, setToken] = useState(localStorage.getItem("token"));
+function Login({
+  handlerNotification,
+  HOST,
+  PORT,
+  PATH_LOGIN_API,
+}) {
+  const [token, setToken] = useState(localStorage.getItem('token'));
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
-  
-  // useEffect(() => {
-  //   console.log(localStorage.getItem("token"));
-  //   function loader() {
-  //     if (localStorage.getItem("token") !== undefined) {
-  //       return redirect("/admin");
-  //     }
-  //   }
-  //   loader();
-  // },[]);
+  const buttonRef = useRef(null);
+  const passwordRef = useRef(null);
 
   const handlerUserName = (event) => {
     setUserName(event.target.value);
@@ -29,47 +24,63 @@ function Login({ handlerNotification }) {
     setPassword(event.target.value);
   };
 
-  const SubmitHandler = async (event) => {
-    event.preventDefault();
-    const response = await fetch('http://localhost:3000/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userName,
-        password,
-      }),
-    });
+  const SubmitHandler = async (ev) => {
+    if (ev.key == 'Enter' && ev.type === 'keyDown' || (ev.key === undefined && ev.type === 'click')) {
+      const response = await fetch(`http://${HOST}:${PORT}${PATH_LOGIN_API}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userName,
+          password,
+        }),
+      });
 
-    if (response.ok && response.status === 200) {
-      const data = await response.json();
-        handlerNotification(response.statusText, response.status, 1500);
+      if (response.ok && response.status === 200) {
+        const data = await response.json();
+        handlerNotification(response.statusText, response.status, 5000);
         setTimeout(() => {
-          localStorage.setItem("token", data.token);
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('parking', JSON.stringify(data.parking));
           setToken(data.token);
         }, 2000);
-    } else if (!response.ok && response.status === 404) {
-      handlerNotification(response.statusText, response.status, 1500); 
+      } else if (!response.ok && response.status === 404) {
+        handlerNotification(response.statusText, response.status, 1500);
+      }
     }
   };
 
+  const handlerKeyDownUserName = (ev) => {
+    if (ev.key == 'Enter') {
+      passwordRef.current.focus();
+    }
+  };
 
-  if (token) {
-    return (<Navigate to="/admin" replace={true}/>)
-  } else {
-    return (
-      <main className="login">
-        <form className="login--form" method="post" onSubmit={SubmitHandler}>
-          <Title text="MawWellPOS" />
-          <input className="login--input" placeholder="Nombre de Usuario" type="text" value={userName} onChange={handlerUserName} />
-          <input className="login--input" placeholder="Contraseña" type="password" value={password} onChange={handlerPassword} />
-          { message !== '' ?? <span className="login--infobox login--infobox__state" >{message}</span> }
-          <button type="submit">Ingresar</button>
-        </form>
-      </main>
-    );
-  }
+  const handlerKeyDownButton = (ev) => {
+    if (ev.key == 'Enter') {
+      buttonRef.current.focus();
+    }
+  };
+
+  if (token) return (<Navigate to="/ingreso" />);
+  return (
+    <main className="login">
+      <form className="login--form" method="post" >
+        <Title text="MawWellPOS" />
+        <input className="login--input" onKeyDown={handlerKeyDownUserName} placeholder="Nombre de Usuario" type="text" value={userName} onChange={handlerUserName} />
+        <input className="login--input" ref={passwordRef} onKeyDown={handlerKeyDownButton} placeholder="Contraseña" type="password" value={password} onChange={handlerPassword} />
+        <button type="button" ref={buttonRef} onKeyDown={SubmitHandler} onClick={SubmitHandler}>Ingresar</button>
+      </form>
+    </main>
+  );
 }
 
 export default Login;
+
+Login.propTypes = {
+  handlerNotification: PropTypes.func.isRequired,
+  HOST: PropTypes.string.isRequired,
+  PORT: PropTypes.number.isRequired,
+  PATH_LOGIN_API: PropTypes.string.isRequired,
+};

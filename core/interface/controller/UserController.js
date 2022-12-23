@@ -4,11 +4,11 @@ class UserController {
     }
 
     search(DB, args) {
-        return DB.query('CALL search(?)', args)
+        return DB.query('CALL pa_ti_search(?)', args)
     }
 
     finalize(DB, args) {
-        return DB.query('CALL finalize(?, ?, ?, ?, ?)', args)            
+        return DB.query('CALL pa_ti_finalize(?, ?, ?, ?, ?)', args)            
     }
 }
 

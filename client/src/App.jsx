@@ -15,6 +15,10 @@ import './App.css';
 
 function App() {
   const [state, setState] = useState({});
+  const HOST = 'localhost';
+  const PORT = 3000;
+  const PATH_LOGIN = '/';
+  const PATH_LOGIN_API = '/api/v1/ingresar';
 
   const handlerNotification = (text, status, time) => {
     const notification = document.getElementById('notification');
@@ -38,12 +42,12 @@ function App() {
       <Notification />
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Login handlerNotification={handlerNotification} />} />
-          <Route exact path="/admin" element={<Dashboard setState={setState} state={state} />} />
-          <Route exact path="/operador" element={<Operator state={state} />} />
-          <Route exact path="/ingreso" element={<Entry />} />
-          <Route exact path="/producto" element={<Product />} />
-          <Route exact path="/facturador" element={<Facturador state={state} />} />
+          <Route exact path="/" element={<Login handlerNotification={handlerNotification} HOST={HOST} PORT={PORT} PATH_LOGIN={PATH_LOGIN} PATH_LOGIN_API={PATH_LOGIN_API} />} />
+          <Route exact path="/admin" element={<Dashboard setState={setState} state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
+          <Route exact path="/operador" element={<Operator state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
+          <Route exact path="/ingreso" element={<Entry state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
+          <Route exact path="/producto" element={<Product PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
+          <Route exact path="/facturador" element={<Facturador state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
           <Route path="*" element={<h1>Page No Found Error 404</h1>} />
         </Routes>
       </BrowserRouter>

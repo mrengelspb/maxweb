@@ -19,9 +19,9 @@ export default function Input({
 }
 
 Input.propTypes = {
-  placeholder: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  handler: PropTypes.elementType.isRequired,
-  id: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  value: PropTypes.string,
+  handler: PropTypes.elementType,
+  id: PropTypes.string,
 };

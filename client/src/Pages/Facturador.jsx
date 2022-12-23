@@ -4,8 +4,9 @@ import Buscador from '../Components/Buscador';
 import Productos from '../Components/Productos';
 import CamposAdicionales from '../Components/CamposAdicionales';
 import '../styles/facturador.css';
+import { Navigate } from 'react-router-dom';
 
-const Facturador = ({ state }) => {
+const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
 
   const [car, setCar] = useState([]);
   const [formaPago, setFormaPago] = useState('01');
@@ -29,6 +30,7 @@ const Facturador = ({ state }) => {
   const [time, setTime] = useState(0);
   const [timeLimit, setTimeLimit] = useState('Dias');
   const [identType, setIdentType] = useState('04');
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   const handlerTable = () => { 
     let totalByItem = 0;
@@ -115,23 +117,27 @@ const Facturador = ({ state }) => {
       }
   };
 
-  return (
-    <>  
-      <Header />
-      <div className='facturador--container'>
-        <Buscador ID={ID} setID={setID} client={client} setClient={setClient} addressI={addressI} setAddress={setAddress} emailI={emailI}
-        setEmail={setEmail} phone={phone} setPhone={setPhone} today={today} setToday={setToday} identType={identType} setIdentType={setIdentType}/>
-        <hr />
-        <Productos car={car} setCar={setCar} handlerTable={handlerTable}/>
-        <hr />
-        <CamposAdicionales time={time} timeLimit={timeLimit} handlerTime={handlerTime} handlerTimeLimit={handlerTimeLimit}
-        handlerEmitir={handlerEmitir} formaPago={formaPago} setFormaPago={setFormaPago} subTotal={subTotal}
-        discounts={discounts} subTotalNeto={subTotalNeto} subTotalConImpuestos={subTotalConImpuestos} 
-        subTotalSinImpuestos={subTotalSinImpuestos} subTotalNoObjetoIva={subTotalNoObjetoIva} 
-        subTotalExcentoIva={subTotalExcentoIva} propina={propina} handlerPropina={handlerPropina} ice={ice} iva={iva} total={total}/>
-      </div>
-    </>
-  )
-}
+  if (!token) {
+    return (<Navigate to={PATH_LOGIN} />);
+  } else {
+    return (
+      <>  
+        <Header handlerNotification={handlerNotification}/>
+        <div className='facturador--container'>
+          <Buscador ID={ID} setID={setID} client={client} setClient={setClient} addressI={addressI} setAddress={setAddress} emailI={emailI}
+          setEmail={setEmail} phone={phone} setPhone={setPhone} today={today} setToday={setToday} identType={identType} setIdentType={setIdentType}/>
+          <hr />
+          <Productos car={car} setCar={setCar} handlerTable={handlerTable}/>
+          <hr />
+          <CamposAdicionales time={time} timeLimit={timeLimit} handlerTime={handlerTime} handlerTimeLimit={handlerTimeLimit}
+          handlerEmitir={handlerEmitir} formaPago={formaPago} setFormaPago={setFormaPago} subTotal={subTotal}
+          discounts={discounts} subTotalNeto={subTotalNeto} subTotalConImpuestos={subTotalConImpuestos} 
+          subTotalSinImpuestos={subTotalSinImpuestos} subTotalNoObjetoIva={subTotalNoObjetoIva} 
+          subTotalExcentoIva={subTotalExcentoIva} propina={propina} handlerPropina={handlerPropina} ice={ice} iva={iva} total={total}/>
+        </div>
+      </>
+    );
+  }
+} 
 
 export default Facturador;

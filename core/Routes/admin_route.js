@@ -1,9 +1,9 @@
 const express = require('express');
-const admin_route = express.Router();
+const adminController = express.Router();
 const { dbmysql } = require('../data_providers/DBMysql.js');
 const AdminController = require('../interface/controller/AdminController.js');
 
-admin_route.get('/admin', (req, res, next) => {
+adminController.get('/admin', (req, res, next) => {
   if (req.session.data) {
     res.send(req.session.data);
   } else {
@@ -13,7 +13,7 @@ admin_route.get('/admin', (req, res, next) => {
   }
 });
 
-admin_route.post('/admin', (req, res, next) => {
+adminController.post('/admin', (req, res, next) => {
   const data = req.body;
   const adminController = new AdminController();
   const today = new Date();
@@ -44,4 +44,4 @@ admin_route.post('/admin', (req, res, next) => {
   })
 });
 
-module.exports = admin_route;
+module.exports = adminController;

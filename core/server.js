@@ -4,7 +4,7 @@ require('dotenv').config();
 const session = require('express-session');
 const TokenGenerator = require('uuid-token-generator');
 const cookieParser = require('cookie-parser');
-const login_route = require('./Routes/login_route.js');
+const sessionController = require('./Routes/sessionController.js');
 const admin_route = require('./Routes/admin_route.js');
 const entry_route = require('./Routes/entry_route.js');
 const product_route = require('./Routes/product_route.js');
@@ -23,7 +23,7 @@ app.use(session({
 }));
 app.use(cors());
 
-app.use("/", login_route);
+app.use("/", sessionController);
 app.use("/", admin_route);
 app.use("/", entry_route);
 app.use("/", product_route);
