@@ -13,7 +13,7 @@ adminController.get('/admin', (req, res, next) => {
   }
 });
 
-adminController.post('/admin', (req, res, next) => {
+adminController.post('/api/v1/admin', (req, res, next) => {
   const data = req.body;
   const adminController = new AdminController();
   const today = new Date();

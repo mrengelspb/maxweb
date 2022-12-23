@@ -7,7 +7,7 @@ const TokenGenerator = require('uuid-token-generator');
 const fs = require('fs');
 const session = require('express-session');
 
-sessionController.post('/api/v1/ingresar', async (req, res, next) => {
+sessionController.post('/api/v1/login', async (req, res, next) => {
   const account = req.body;
   const login = new Login();
   const user = await login.account(dbmysql, account);

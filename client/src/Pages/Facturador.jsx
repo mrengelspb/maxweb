@@ -64,7 +64,7 @@ const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
     console.log(identType);
     ev.preventDefault();
     const a_today = today.split("/"); 
-    const response = await fetch('http://localhost:3000/factura/emitir', {
+    const response = await fetch('http://localhost:3000/api/v1/factura/emision', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 const express = require('express');
-const factura = express.Router();
+const facturaController = express.Router();
 const { dbmysql } = require('../data_providers/DBMysql.js');
 const jwt = require('jsonwebtoken');
 const FacturaController = require('../interface/controller/facturaController.js');
@@ -13,12 +13,12 @@ const base64 = require('base-64');
 const jsonxml = require('jsontoxml');
 require('dotenv').config();
 
-
-factura.use((req, res, next) => {
+facturaController.use((req, res, next) => {
   const authHeader = req.headers["auth"];
   const token = authHeader;
   if (token == null) return res.sendStatus(403);
-  const privateKey = fs.readFileSync('./token.txt');
+  const privateKey = fs.readFileSync('/token.txt');
+  console.log(privateKey);
   jwt.verify(token, privateKey, (err, user) => {
      if (err) return res.sendStatus(404);
      req.user = user;
@@ -26,19 +26,7 @@ factura.use((req, res, next) => {
   });
 });
 
-
-
-factura.get("/factura/consultas", (req, res, next) => {
-  const query = dbmysql.query('CALL pa_fe_consultas(?, ?)', [1, process.env.RUC]);
-  query.then((response) => {
-      res.status(200).send(JSON.parse(JSON.stringify(response)));
-  })
-  .catch((err) => {
-      console.error(err);
-  });
-});
-
-factura.post('/factura_con_datos', (req, res, next) => {
+facturaController.post('api/v1/factura/datos', (req, res, next) => {
   const { identification_number } = req.body;
   const facturaController = new FacturaController();
   const result = facturaController.getClientData(dbmysql, [identification_number]);
@@ -52,7 +40,11 @@ factura.post('/factura_con_datos', (req, res, next) => {
     });
 })
 
-factura.post('/factura/emitir', (req, res, next) => {
+facturaController.post('/api/v1/factura/consumidor/final', (req, res, next) => {
+  res.send({ msg: "Workin in Implementation !"});
+});
+
+facturaController.post('/api/v1/factura/emision', (req, res, next) => {
   let code = "";
   
   const {
@@ -146,4 +138,4 @@ factura.post('/factura/emitir', (req, res, next) => {
     .catch((err) => { err.message, err});
 });
 
-module.exports = factura;
+module.exports = facturaController;

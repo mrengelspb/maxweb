@@ -21,7 +21,7 @@ const Product = ({ handlerNotification }) => {
   
   const handlerCreateProduct = (ev) => {
     ev.preventDefault();
-    fetch('http://localhost:3000/producto', {
+    fetch('http://localhost:3000/api/v1/producto', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const Product = ({ handlerNotification }) => {
 
   const handlerSearchProduct = (ev) => {
     ev.preventDefault();
-    fetch(`http://localhost:3000/producto/${id}`, {
+    fetch(`http://localhost:3000/api/v1/producto/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

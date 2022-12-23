@@ -3,11 +3,11 @@ const User = require('../Entities/User.js');
 class Login {
   async account (DB, account) {
     let response = await DB.query('CALL pa_op_loginUser(?, ?)', [account.userName, account.password]);
-    response = JSON.parse(JSON.stringify(response[0][0]));
+    response = JSON.parse(JSON.stringify(response[0]));
     if (response.length === 0) {
       return 404;
     }
-    const user = new User(response);
+    const user = new User(response[0]);
     return user;
   }
 

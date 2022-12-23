@@ -1,10 +1,10 @@
 const express = require('express');
-const product_route = express.Router();
+const productController = express.Router();
 const { dbmysql } = require('../data_providers/DBMysql.js');
 const { ProductInterator } = require('../Use_Cases/Product.js');
 
 
-product_route.get('/producto/:id', (req, res, next) => {
+productController.get('/api/v1/producto/:id', (req, res, next) => {
   const { id } = req.params;
   const productInteractor = new ProductInterator();
   const result = productInteractor.getProduct(dbmysql, [id]);
@@ -24,7 +24,7 @@ product_route.get('/producto/:id', (req, res, next) => {
     });
 });
 
-product_route.post('/producto', (req, res, next) => {
+productController.post('api/v1/producto', (req, res, next) => {
   const { description, cost } = req.body;
   const productInteractor = new ProductInterator();
   const result = productInteractor.create(dbmysql, [description, cost]);
@@ -39,4 +39,4 @@ product_route.post('/producto', (req, res, next) => {
 });
 
 
-module.exports = product_route;
+module.exports = productController;

@@ -18,7 +18,7 @@ function App() {
   const HOST = 'localhost';
   const PORT = 3000;
   const PATH_LOGIN = '/';
-  const PATH_LOGIN_API = '/api/v1/ingresar';
+  const PATH_LOGIN_API = '/api/v1/login';
 
   const handlerNotification = (text, status, time) => {
     const notification = document.getElementById('notification');

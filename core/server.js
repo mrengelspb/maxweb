@@ -5,10 +5,10 @@ const session = require('express-session');
 const TokenGenerator = require('uuid-token-generator');
 const cookieParser = require('cookie-parser');
 const sessionController = require('./Routes/sessionController.js');
-const admin_route = require('./Routes/admin_route.js');
-const entry_route = require('./Routes/entry_route.js');
-const product_route = require('./Routes/product_route.js');
-const factura = require('./Routes/factura.js');
+const adminController = require('./Routes/adminController.js');
+const entryController = require('./Routes/entryController.js');
+const productController = require('./Routes/productController.js');
+const facturaController = require('./Routes/facturaController.js');
 
 const app = express();
 const tokgen = new TokenGenerator(); 
@@ -24,10 +24,10 @@ app.use(session({
 app.use(cors());
 
 app.use("/", sessionController);
-app.use("/", admin_route);
-app.use("/", entry_route);
-app.use("/", product_route);
-app.use("/", factura);
+app.use("/", adminController);
+app.use("/", entryController);
+app.use("/", productController);
+app.use("/", facturaController);
 
 
 app.listen(process.env.PORT, () => {

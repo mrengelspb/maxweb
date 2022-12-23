@@ -1,6 +1,6 @@
 const express = require('express');
 const { Login } = require('../Use_Cases/Login');
-const entry_route = express.Router();
+const entryController = express.Router();
 const { dbmysql } = require('../data_providers/DBMysql.js');
 const Admin = require('../Use_Cases/Admin.js');
 const Operator = require('../Use_Cases/Operator.js');
@@ -8,7 +8,7 @@ const Supervisor = require('../Use_Cases/Supervisor.js');
 const User = require('../Entities/User');
 const Tariff = require('../Tariff');
 
-entry_route.post('/api/v1/ticket/:id', async (req, res, next) => {
+entryController.post('/api/v1/ticket/:id', async (req, res, next) => {
   const { id } = req.params;
   const { ID_parking } = req.body;
   let user = new Admin();
@@ -35,7 +35,7 @@ entry_route.post('/api/v1/ticket/:id', async (req, res, next) => {
 });
 
 
-entry_route.put("/api/v1/ticket/ingreso", (req, res, next) => {
+entryController.put("/api/v1/ticket/ingreso", (req, res, next) => {
     const args = [
       req.body.ID_ticket,
       req.body.out,
@@ -52,4 +52,4 @@ entry_route.put("/api/v1/ticket/ingreso", (req, res, next) => {
     })
 });
 
-module.exports = entry_route;
+module.exports = entryController;
