@@ -9,37 +9,6 @@ import '../styles/dashboard.css';
 
 export default function Dashboard({ state, setState, PATH_LOGIN, handlerNotification }) {
   const [token, setToken] = useState(localStorage.getItem('token'));
-
-  useEffect(() => {
-    async function consultas() {
-      const response = await fetch('http://localhost:3000/factura/consultas', {
-        method: 'GET',
-        headers: {
-          auth: token,
-        },
-      });
-      if (response.ok && response.status === 200) {
-        const data = await response.json();
-        console.log(data[0][0]);
-        setState(data[0][0]);
-      } else {
-        console.error('Los datos no se han cargado correctamente!');
-      }
-
-      // fetch('http://localhost:3000/admin')
-      // .then((response) => response.json())
-      // .then((res) => {
-      //   setState(res[0]);
-      // })
-      // .catch((err) => {
-      //   console.log(err, err);
-      // });
-    }
-    if (token) {
-      consultas();
-    }
-  }, [token]);
-
   if (!token) return (<Navigate to={PATH_LOGIN} />);
   return (
     <>
