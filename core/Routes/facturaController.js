@@ -17,7 +17,7 @@ facturaController.use((req, res, next) => {
   const authHeader = req.headers["auth"];
   const token = authHeader;
   if (token == null) return res.sendStatus(403);
-  const privateKey = fs.readFileSync('/token.txt');
+  const privateKey = fs.readFileSync('./token.txt');
   console.log(privateKey);
   jwt.verify(token, privateKey, (err, user) => {
      if (err) return res.sendStatus(404);

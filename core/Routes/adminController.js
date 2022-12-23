@@ -2,6 +2,20 @@ const express = require('express');
 const adminController = express.Router();
 const { dbmysql } = require('../data_providers/DBMysql.js');
 const AdminController = require('../interface/controller/AdminController.js');
+const fs = require('fs');
+const jwt = require('jsonwebtoken');
+
+adminController.use((req, res, next) => {
+  const authHeader = req.headers["auth"];
+  const token = authHeader;
+  if (token == null) return res.sendStatus(403);
+  const privateKey = fs.readFileSync('./token.txt');
+  jwt.verify(token, privateKey, (err, user) => {
+     if (err) return res.sendStatus(404);
+     req.user = user;
+     next();
+  });
+});
 
 adminController.post('/api/v1/admin', (req, res, next) => {
   const data = req.body;

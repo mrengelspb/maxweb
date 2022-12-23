@@ -10,14 +10,13 @@ const Product = ({ handlerNotification }) => {
 
   const handlerDes = (ev) => {
     setDes(ev.target.value);
-  }
+  };
   const handlerCost = (ev) => {
     setCost(ev.target.value);
-  }
-
+  };
   const handlerId = (ev) => {
     setId(ev.target.value);
-  }
+  };
   
   const handlerCreateProduct = (ev) => {
     ev.preventDefault();
@@ -25,10 +24,11 @@ const Product = ({ handlerNotification }) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        auth: token,
       },
       body: JSON.stringify({
         description: des,
-        cost
+        cost,
       }),
     })
       .then((response => response.json()))
@@ -44,6 +44,7 @@ const Product = ({ handlerNotification }) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        auth: token,
       },
     })
       .then((response => response.json()))
@@ -52,31 +53,28 @@ const Product = ({ handlerNotification }) => {
         console.log(err);
       });
   }
-  console.log(token);
-  if (!token) {
-    return (<Navigate to={PATH_LOGIN} />)
-  } else {
-    return (
-      <>
-        <Header handlerNotification={handlerNotification} />
-        <div className="product--container">
-          <div className="product--register">
-            <form onSubmit={handlerCreateProduct}>
-              <input type="text" placeholder="Descripción" value={des} onChange={handlerDes}/>
-              <input type="text" placeholder="Precio" value={cost} onChange={handlerCost}/>
-              <button type="submit">Agregar Producto</button>
-            </form>
-          </div>
-          <div className="product--search">
-            <form onSubmit={handlerSearchProduct}>
-              <input type="text" placeholder='Ingresar codigo del producto' value={id} onChange={handlerId}/>
-              <button type='submit'>Buscar</button>
-            </form>
-          </div>
+
+  if (!token) return (<Navigate to={PATH_LOGIN} />);
+  return (
+    <>
+      <Header handlerNotification={handlerNotification} />
+      <div className="product--container">
+        <div className="product--register">
+          <form onSubmit={handlerCreateProduct}>
+            <input type="text" placeholder="Descripción" value={des} onChange={handlerDes}/>
+            <input type="text" placeholder="Precio" value={cost} onChange={handlerCost}/>
+            <button type="submit">Agregar Producto</button>
+          </form>
         </div>
-      </>
-    )
-  }
+        <div className="product--search">
+          <form onSubmit={handlerSearchProduct}>
+            <input type="text" placeholder='Ingresar codigo del producto' value={id} onChange={handlerId}/>
+            <button type='submit'>Buscar</button>
+          </form>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default Product;

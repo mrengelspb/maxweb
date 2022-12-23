@@ -2,7 +2,21 @@ const express = require('express');
 const productController = express.Router();
 const { dbmysql } = require('../data_providers/DBMysql.js');
 const { ProductInterator } = require('../Use_Cases/Product.js');
+const fs = require('fs');
+const jwt = require('jsonwebtoken');
 
+productController.use((req, res, next) => {
+  const authHeader = req.headers["auth"];
+  const token = authHeader;
+  if (token == null) return res.sendStatus(403);
+  const privateKey = fs.readFileSync('./token.txt');
+  console.log(privateKey);
+  jwt.verify(token, privateKey, (err, user) => {
+     if (err) return res.sendStatus(404);
+     req.user = user;
+     next();
+  });
+});
 
 productController.get('/api/v1/producto/:id', (req, res, next) => {
   const { id } = req.params;

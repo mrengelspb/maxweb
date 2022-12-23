@@ -1,0 +1,10 @@
+.tariff--container {
+    width: 100vw;
+    height: 100px;
+    padding: 0px 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    box-sizing: border-box;
+}

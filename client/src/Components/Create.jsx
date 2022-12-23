@@ -15,14 +15,16 @@ function Create() {
   const [Email, setEmail] = useState('');
   const [BirthDate, setBirthDate] = useState('');
   const [Role, setRole] = useState('');
+  const token = localStorage.getItem('token');
 
 
   const handleNewUser = (ev) => {
     ev.preventDefault();
-    fetch('http://localhost:3000/admin', {
+    fetch('http://localhost:3000/api/v1/admin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        auth: token,
       },
       body: JSON.stringify({
         IdentificationNumber,

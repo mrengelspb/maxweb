@@ -21,8 +21,12 @@ class Tariff {
   }
 
   calculateTotal(time, tariff) {
-    console.log(this.list)
-    return time * parseFloat(this.list[tariff].value);
+    if (time <= this.list[tariff].min_fraction) {
+      return Total = this.list[tariff].min_value;
+    }
+    const days = Math.floor(time / (60 * 24));
+    const fraction = Math.ceil(time / this.list[tariff].fraction);
+    return parseFloat(fraction * parseFloat(this.list[tariff].value)).toFixed(2);
   }
 }
 

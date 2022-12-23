@@ -7,6 +7,7 @@ import '../styles/action.css';
 
 export default function Action({ children, text }) {
   const handlerOpenModal = (ev) => {
+    console.log(ev.target.localName);
     if (ev.target.localName === 'button') {
       const modal = ev.target.previousSibling;
       modal.classList.add('active');
