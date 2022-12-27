@@ -7,13 +7,16 @@ import '../styles/action.css';
 
 export default function Action({ children, text }) {
   const handlerOpenModal = (ev) => {
-    console.log(ev.target.localName);
     if (ev.target.localName === 'button') {
       const modal = ev.target.previousSibling;
       modal.classList.add('active');
     }
     if (ev.target.localName === 'p' || ev.target.localName === 'svg') {
       const modal = ev.target.parentNode.previousSibling;
+      modal.classList.add('active');
+    }
+    if (ev.target.localName == 'path'){
+      const modal = ev.target.parentNode.parentNode.previousSibling;
       modal.classList.add('active');
     }
   };
