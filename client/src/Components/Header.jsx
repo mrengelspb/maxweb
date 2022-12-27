@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../styles/header.css';
 import { List, XLg, PersonCircle } from 'react-bootstrap-icons';
@@ -52,10 +53,21 @@ export default function Header({ handlerNotification }) {
               </div>
               <p className="menu--text">Bienvenido User, role</p>
             </li>
-            <li className="nav--item">Menu 1</li>
-            <li className="nav--item">Menu 2</li>
-            <li className="nav--item">Menu 3</li>
-            <li className="nav--item">Menu 4</li>
+            <li className="nav--item">
+              <Link to="/caja" >Caja</Link>
+              </li>
+            <li className="nav--item">
+              <Link to="/admin">Admin</Link>
+            </li>
+            <li className="nav--item">
+              <Link to="/operador">Operador</Link>
+            </li>
+            <li className="nav--item">
+              <Link to="/ingreso">Ingreso</Link>
+            </li>
+            <li className="nav--item">
+              <Link to="/facturador">Facturador</Link>
+            </li>
             <li className="nav--item">
               <button type="button" onClick= {handlerCloseSession}>Terminar Session</button>
             </li>

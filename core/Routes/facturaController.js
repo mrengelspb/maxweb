@@ -18,7 +18,6 @@ facturaController.use((req, res, next) => {
   const token = authHeader;
   if (token == null) return res.sendStatus(403);
   const privateKey = fs.readFileSync('./token.txt');
-  console.log(privateKey);
   jwt.verify(token, privateKey, (err, user) => {
      if (err) return res.sendStatus(404);
      req.user = user;
@@ -106,8 +105,6 @@ facturaController.post('/api/v1/factura/emision', (req, res, next) => {
               '</ec:validarComprobante>' +
             '</soapenv:Body>' +
           '</soapenv:Envelope>';
-
-          console.log(xml_arg);
 
           const recepcionComprobantesPruebasUrl = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl';
           const autorizacionComprobantesPruebasUrl = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl';

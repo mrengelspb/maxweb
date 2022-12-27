@@ -22,3 +22,15 @@
     border: 2px solid red;
     background-color: rgb(158, 38, 38);
 }
+
+.notification--container__orange {
+    border: 2px solid orange;
+    background-color: rgb(171, 126, 41);
+    color: black;
+}
+
+.notification--container__yellow {
+    border: 2px solid yellow;
+    background-color: rgb(171, 171, 66);
+    color: black;
+}

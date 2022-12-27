@@ -11,6 +11,7 @@ import Entry from './Pages/Entry';
 import Product from './Pages/Product';
 import Facturador from './Pages/Facturador';
 import Notification from './Components/Notification';
+import Caja from './Pages/Caja';
 import './App.css';
 
 function App() {
@@ -27,12 +28,18 @@ function App() {
       notification.classList.add('notification--container__green');
     } else if (status === 404) {
       notification.classList.add('notification--container__red');
+    } else if (status == 403) {
+      notification.classList.add('notification--container__orange');
+    } else if (status == 500) {
+      notification.classList.add('notification--container__yellow');
     }
     notification.classList.remove('notification--container__hidden');
     notification.textContent = text;
     setTimeout(() => {
       notification.classList.remove('notification--container__green');
       notification.classList.remove('notification--container__red');
+      notification.classList.remove('notification--container__orange');
+      notification.classList.remove('notification--container__yellow');
       notification.classList.add('notification--container__hidden');
     }, time);
   };
@@ -48,6 +55,7 @@ function App() {
           <Route exact path="/ingreso" element={<Entry state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
           <Route exact path="/producto" element={<Product PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
           <Route exact path="/facturador" element={<Facturador state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
+          <Route exact path="/caja" element={<Caja state={state} handlerNotification={handlerNotification} /> } />
           <Route path="*" element={<h1>Page No Found Error 404</h1>} />
         </Routes>
       </BrowserRouter>

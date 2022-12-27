@@ -29,7 +29,6 @@ entryController.post('/api/v1/ticket/:id', async (req, res, next) => {
   let user = new Admin();
   const response =  await user.search(dbmysql, id);
 
-  console.log(response);
   const data = JSON.parse(JSON.stringify(response[0]));
 
   if (data.length === 0) {

@@ -23,7 +23,7 @@ sessionController.post('/api/v1/login', async (req, res, next) => {
         res.status(400).send({msg : 'Error'});
       } else {
         const info_parking = await login.getDataBusiness(dbmysql, user.identification);
-        res.status(200).send({ token: token, parking: info_parking });
+        res.status(200).send({ token: token, parking: {...info_parking, idOperador: user.idOperador} });
       }
     });
   }
