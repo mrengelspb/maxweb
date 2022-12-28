@@ -22,7 +22,7 @@ sessionController.post('/api/v1/login', async (req, res, next) => {
       if (err) {
         res.status(400).send({msg : 'Error'});
       } else {
-        const info_parking = await login.getDataBusiness(dbmysql, user.identification);
+        const info_parking = await login.getDataBusiness(dbmysql, user.id_parking);
         res.status(200).send({ token: token, parking: {...info_parking, idOperador: user.idOperador} });
       }
     });
@@ -31,7 +31,7 @@ sessionController.post('/api/v1/login', async (req, res, next) => {
 
 sessionController.get('/api/v1/logout', (req, res, next) => {
   const authHeader = req.headers["auth"];
-   jwt.sign(authHeader, "", { expiresIn: 1 } , (logout, err) => {
+    jwt.sign(authHeader, "", { expiresIn: 1 } , (logout, err) => {
       if (logout) {
          res.send({msg : 'Has sido desconectado' });
       } else {

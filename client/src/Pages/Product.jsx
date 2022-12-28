@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import Header from '../Components/Header';
 import { Navigate } from 'react-router-dom';
 
 const Product = ({ handlerNotification }) => {
   const [id, setId] = useState("");
   const [des, setDes] = useState("");
   const [cost, setCost] = useState("");
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(sessionStorage.getItem("token"));
 
   const handlerDes = (ev) => {
     setDes(ev.target.value);
@@ -57,7 +56,6 @@ const Product = ({ handlerNotification }) => {
   if (!token) return (<Navigate to={PATH_LOGIN} />);
   return (
     <>
-      <Header handlerNotification={handlerNotification} />
       <div className="product--container">
         <div className="product--register">
           <form onSubmit={handlerCreateProduct}>

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../Components/Header';
 import '../styles/caja.css';
 
 function Caja({ state, handlerNotification}) {
 
   const parking = JSON.parse(localStorage.getItem('parking'));
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
   const [_totalBox, setTotalBox] = useState(0);
   const [box, setBox] = useState({
     '_01C': 0,
@@ -114,7 +113,6 @@ function Caja({ state, handlerNotification}) {
   };
 
   return (<>
-    <Header state={state} handlerNotification={handlerNotification} />
     <div className="caja--container">
       <form className="caja--form" onSubmit={ handlerOpeningBox }>
         <label htmlFor="01C">

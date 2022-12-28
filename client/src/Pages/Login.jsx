@@ -10,7 +10,7 @@ function Login({
   PORT,
   PATH_LOGIN_API,
 }) {
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [token, setToken] = useState(sessionStorage.getItem('token'));
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const buttonRef = useRef(null);
@@ -41,7 +41,7 @@ function Login({
         const data = await response.json();
         handlerNotification(response.statusText, response.status, 5000);
         setTimeout(() => {
-          localStorage.setItem('token', data.token);
+          sessionStorage.setItem('token', data.token);
           localStorage.setItem('parking', JSON.stringify(data.parking));
           setToken(data.token);
         }, 2000);

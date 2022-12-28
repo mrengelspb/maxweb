@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
+import Header from './Components/Header';
 import Login from './Pages/Login';
 import Dashboard from './Pages/Dashboard';
 import Operator from './Pages/Operator';
@@ -28,9 +29,9 @@ function App() {
       notification.classList.add('notification--container__green');
     } else if (status === 404) {
       notification.classList.add('notification--container__red');
-    } else if (status == 403) {
+    } else if (status === 403) {
       notification.classList.add('notification--container__orange');
-    } else if (status == 500) {
+    } else if (status === 500) {
       notification.classList.add('notification--container__yellow');
     }
     notification.classList.remove('notification--container__hidden');
@@ -48,6 +49,7 @@ function App() {
     <div className="App">
       <Notification />
       <BrowserRouter>
+        <Header handlerNotification={handlerNotification} />
         <Routes>
           <Route exact path="/" element={<Login handlerNotification={handlerNotification} HOST={HOST} PORT={PORT} PATH_LOGIN={PATH_LOGIN} PATH_LOGIN_API={PATH_LOGIN_API} />} />
           <Route exact path="/admin" element={<Dashboard setState={setState} state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
@@ -55,7 +57,7 @@ function App() {
           <Route exact path="/ingreso" element={<Entry state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
           <Route exact path="/producto" element={<Product PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
           <Route exact path="/facturador" element={<Facturador state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
-          <Route exact path="/caja" element={<Caja state={state} handlerNotification={handlerNotification} /> } />
+          <Route exact path="/caja" element={<Caja state={state} handlerNotification={handlerNotification} />} />
           <Route path="*" element={<h1>Page No Found Error 404</h1>} />
         </Routes>
       </BrowserRouter>

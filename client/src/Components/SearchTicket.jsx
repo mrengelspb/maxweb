@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Search, Trash } from 'react-bootstrap-icons';
 
-export default function SearchTicket({ setData, handlerNotification, tariff }) {
+export default function SearchTicket({ setTicket, handlerNotification, tariff }) {
   const [ID_ticket, setIdTicket] = useState('');
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
 
   const handlerIdTicket = (ev) => {
     setIdTicket(ev.target.value);
@@ -25,9 +25,14 @@ export default function SearchTicket({ setData, handlerNotification, tariff }) {
       });
       if (response.ok && response.status === 200) {
         const data = await response.json();
-        setData(data);
-        const entryHTML = document.getElementById('entry--button');
-        entryHTML.focus();
+        console.log(data);
+        if (data.state === "2") {
+          handlerNotification("Ticket Finalizado !", 500, 2000);
+        } else {
+          setTicket(data);
+          const entryHTML = document.getElementById('entry--button');
+          entryHTML.focus();
+        }
       } else {
         handlerNotification(response.statusText, response.status, 3000);
       }   

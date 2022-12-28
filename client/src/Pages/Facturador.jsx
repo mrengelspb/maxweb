@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Header from '../Components/Header';
 import Buscador from '../Components/Buscador';
 import Productos from '../Components/Productos';
 import CamposAdicionales from '../Components/CamposAdicionales';
@@ -30,7 +29,7 @@ const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
   const [time, setTime] = useState(0);
   const [timeLimit, setTimeLimit] = useState('Dias');
   const [identType, setIdentType] = useState('04');
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(sessionStorage.getItem("token"));
 
   const handlerTable = () => { 
     let totalByItem = 0;
@@ -122,7 +121,6 @@ const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
   } else {
     return (
       <>  
-        <Header handlerNotification={handlerNotification}/>
         <div className='facturador--container'>
           <Buscador ID={ID} setID={setID} client={client} setClient={setClient} addressI={addressI} setAddress={setAddress} emailI={emailI}
           setEmail={setEmail} phone={phone} setPhone={setPhone} today={today} setToday={setToday} identType={identType} setIdentType={setIdentType}/>

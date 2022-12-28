@@ -4,16 +4,14 @@ import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 import Title from '../Components/Title';
 import Action from '../Components/Action';
-import Header from '../Components/Header';
 import '../styles/dashboard.css';
 
 export default function Dashboard({ state, setState, PATH_LOGIN, handlerNotification }) {
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [token, setToken] = useState(sessionStorage.getItem('token'));
 
   if (!token) return (<Navigate to={PATH_LOGIN} />);
   return (
     <>
-      <Header state={state} handlerNotification={handlerNotification} />
       <div className="dashboard">
         <Title text="Panel de Control" />
 

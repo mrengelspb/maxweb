@@ -2,6 +2,7 @@ const express = require('express');
 const { Login } = require('../Use_Cases/Login');
 const entryController = express.Router();
 const { dbmysql } = require('../data_providers/DBMysql.js');
+const ParkingInteractor = require('../Use_Cases/ParkingInteractor.js');
 const Admin = require('../Use_Cases/Admin.js');
 const Operator = require('../Use_Cases/Operator.js');
 const Supervisor = require('../Use_Cases/Supervisor.js');
@@ -58,12 +59,17 @@ entryController.post('/api/v1/ticket/:id', async (req, res, next) => {
 
 
 entryController.put("/api/v1/ticket/ingreso", (req, res, next) => {
+    Date.prototype.addMins = function(m) {
+      this.setTime(this.getTime() + (m*60*1000));
+      return this;
+    } 
     const args = [
       req.body.ID_ticket,
       new Date(req.body.out).toISOString().replace("T", " ").split(".")[0],
       req.body.state,
       req.body.min_used,
       req.body.total,
+      new Date(req.body.out).addMins(10).toISOString().replace("T", " ").split(".")[0],
     ]
     let user = new Admin();
     const result = user.finalize(dbmysql, args)
@@ -72,6 +78,18 @@ entryController.put("/api/v1/ticket/ingreso", (req, res, next) => {
     }).catch((err) => {
       res.status(404).send({err, message: err.message});
     })
+});
+
+entryController.post('/api/v1/espacios', async (req, res, next) => {
+  const { ID_parking } = req.body;
+  const parkingInteractor = new ParkingInteractor();
+  let data = await parkingInteractor.spaceAvaliables(dbmysql, ID_parking);
+  data = JSON.parse(JSON.stringify(data[0][0])); 
+  if (data.length !== 0) {
+    res.status(200).send(data);
+  } else {
+    res.status(400).send();
+  }
 });
 
 module.exports = entryController;

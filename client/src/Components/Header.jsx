@@ -26,8 +26,8 @@ export default function Header({ handlerNotification }) {
 
     if (response.ok) {
       const data = await response.json();
-      localStorage.removeItem('token');
-      localStorage.removeItem('parking');
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('parking');
       handlerNotification(data.msg, response.status, 2000);
       location.reload();
     } else {

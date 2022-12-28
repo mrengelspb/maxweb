@@ -8,17 +8,15 @@ import Modal from '../Components/Modal';
 // import xml from '../xml.js';
 import '../styles/operator.css';
 import '../styles/action.css';
-import Header from '../Components/Header';
 
 export default function Operador({
   state, PATH_LOGIN, handlerNotification,
 }) {
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [token, setToken] = useState(sessionStorage.getItem('token'));
 
   if (!token) return (<Navigate to={PATH_LOGIN} />);
   return (
     <div>
-      <Header handlerNotification={handlerNotification} />
       <ModalButton action="Finalizar" state={state} />
       <ModalButton action="Imprimir Ticket" state={state} />
       <ModalButton action="Imprimir Factura" state={state} />

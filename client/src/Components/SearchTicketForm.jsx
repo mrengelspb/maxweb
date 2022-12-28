@@ -1,14 +1,13 @@
-import React, {useState} from 'react';
-import { Rss } from 'react-bootstrap-icons';
+import React, { useState } from 'react';
 import '../styles/searchTicketForm.css';
 
-export default function SearchTicketForm({ data, handlerNotification}) {
+export default function SearchTicketForm({ ticket, setTicket, handlerNotification, handlerAvaliablePlace }) {
 
   let In = '';
   let Out = '';
   let Time = '';
   let Total = '';
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
 
   const timeFormat = (time) => {
     let hours;
@@ -33,55 +32,57 @@ export default function SearchTicketForm({ data, handlerNotification}) {
     return `${days} dias ${hours} horas ${minutes} minutos`;
   }
 
-  if (data) {
-    In = data.in;
-    Out = data.out;
-    Time = timeFormat(data.time);
-    Total = data.total;
+  if (ticket) {
+    In = ticket.in;
+    Out = ticket.out;
+    Time = timeFormat(ticket.time);
+    Total = ticket.total;
   }
-  
+
   const handlerUpdateTicket = async (ev) => {
     ev.preventDefault();
-    const response = await fetch('http://localhost:3000/api/v1/ticket/ingreso', {
-      method: "PUT",
-      headers: {
-        'Content-Type': 'application/json',
-        auth: token,
-      },
-      body: JSON.stringify({
-        ID_ticket: data.ID_ticket,
-        out: Out,
-        total: Total,
-        state: 2,
-        min_used: data.time,
-      })
-    });
-
-    if (response.ok && response.status === 200){
-      const data = await response.json();
-      console.log(data);
-      handlerNotification(response.statusText, response.status, 3000);
+    if (ticket === null) {
+      handlerNotification("Campos vacios !", 500, 2000);
     } else {
-      console.log(response);
-      const data = await response.json();
-      console.log(data);
-      handlerNotification(response.statusText, response.status, 3000);
+      const response = await fetch('http://localhost:3000/api/v1/ticket/ingreso', {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+          auth: token,
+        },
+        body: JSON.stringify({
+          ID_ticket: ticket.ID_ticket,
+          out: Out,
+          total: Total,
+          state: 2,
+          min_used: ticket.time,
+        })
+      });
+      if (response.ok && response.status === 200){
+        const data = await response.json();
+        handlerNotification(response.statusText, response.status, 3000);
+        setTicket(null);
+        handlerAvaliablePlace();
+      } else {
+        const data = await response.json();
+        handlerNotification(response.statusText, response.status, 3000);
+      }
     }
   }
 
   return (
     <form className="searchTicketForm" onSubmit={handlerUpdateTicket}>
-      <label htmlFor="">
+      <label htmlFor="in">
         Ingreso:
-        <input type="text" value={In} readOnly />
+        <input type="text" value={In} id="in" readOnly />
       </label>
-      <label htmlFor="">
+      <label htmlFor="out">
         Salida:
-        <input type="text" value={Out} readOnly />
+        <input type="text" value={Out} id="out" readOnly />
       </label>
-      <label htmlFor="">
+      <label htmlFor="time">
         Tiempo del servicio:
-        <span>{Time}</span>
+        <span id="time">{Time}</span>
       </label>
       <span>Total: ${Total}</span>
       <span />
