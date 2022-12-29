@@ -1,23 +1,51 @@
+:root {
+    --black-background: #000000;
+    --gray-background: #0000007C;
+    --white-background: #FFFFFF;
+    --gray-color: #B5B5B5;
+    --title-type: 'Montserrat', sans-serif;
+    --title-weigth: 'bold';
+    --title-color: var(--gray-color);
+    --title-size: 38px;
+}
 .login {
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--gray-background);
 }
 
 .login--form {
-    width: 50vw;
+    width: 470px;
+    height: 310px;
     padding: 20px;
     text-align: center;
+    background-color: var(--white-background);
     box-shadow: 0px 0px 5px 2px gray;
+    box-sizing: border-box;
+    border-radius: 36px;
 }
 
+.login--title {
+    font-family: var(--title-type);
+    font-size: var(--title-size);
+    font-weight: var(--title-weigth);
+    color: var(--title-color);
+    margin: 40px 0px;
+}
+
+.login--wrapperInput {
+    display: flex;
+    border-bottom:1px solid var(--gray-color);
+    margin-bottom: 40px;
+}
 .login--input {
     width: 100%;
     padding: 5px 5px;
-    margin-bottom: 10px;
     box-sizing: border-box;
+    border: none;
 }
 
 .login--infobox {

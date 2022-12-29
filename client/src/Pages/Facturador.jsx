@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Header from '../Components/Header';
 import Buscador from '../Components/Buscador';
 import Productos from '../Components/Productos';
 import CamposAdicionales from '../Components/CamposAdicionales';
@@ -30,6 +31,8 @@ const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
   const [timeLimit, setTimeLimit] = useState('Dias');
   const [identType, setIdentType] = useState('04');
   const [token, setToken] = useState(sessionStorage.getItem("token"));
+  const [emit, setEmit] = useState(false);
+  const parking = JSON.parse(localStorage.getItem('parking'));
 
   const handlerTable = () => { 
     let totalByItem = 0;
@@ -67,23 +70,24 @@ const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        auth: token
       },
       body: JSON.stringify({
-        ambiente_codigo: state.Ambiente_Codigo,
-        emision_codigo: state.Emision_codigo,
-        numero_serie: state.serial_number,
+        ambiente_codigo: parking.Ambiente_Codigo,
+        emision_codigo: parking.Emision_codigo,
+        numero_serie: parking.serial_number,
         identification_number: ID,
-        id_fe_emisoragret: state.id_fe_emisoragret,
-        dir_establecimiento_matriz: state.dir_establecimiento_matriz,
-        contribuyente_especial: state.contribuyente_especial,
-        obligado_a_llevar_contabilidad: state.obligado_a_llevar_contabilidad,
-        numero_RUC: state.numero_RUC,
-        razon_social: state.razon_social,
-        comercial_name: state.nombre_comercial,
-        codigo_punto_emision: state.codigo_punto_emision,
-        address: state.address,
+        id_fe_emisoragret: parking.id_fe_emisoragret,
+        dir_establecimiento_matriz: parking.dir_establecimiento_matriz,
+        contribuyente_especial: parking.contribuyente_especial,
+        obligado_a_llevar_contabilidad: parking.obligado_a_llevar_contabilidad,
+        numero_RUC: parking.numero_RUC,
+        razon_social: parking.razon_social,
+        comercial_name: parking.nombre_comercial,
+        codigo_punto_emision: parking.codigo_punto_emision,
+        address: parking.address,
         codDoc: formaPago,
-        estab: state.estab,
+        estab: parking.estab,
         date: `${a_today[1]}/${a_today[0]}/${a_today[2]}`,
         tipo_comprobante: '01',
         lista_productos: car,
@@ -112,30 +116,30 @@ const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
 
       if (response.status == 200) {
         const data = await response.json();
+        setEmit(true);
         console.log(data);
       }
   };
 
-  if (!token) {
-    return (<Navigate to={PATH_LOGIN} />);
-  } else {
-    return (
-      <>  
-        <div className='facturador--container'>
-          <Buscador ID={ID} setID={setID} client={client} setClient={setClient} addressI={addressI} setAddress={setAddress} emailI={emailI}
-          setEmail={setEmail} phone={phone} setPhone={setPhone} today={today} setToday={setToday} identType={identType} setIdentType={setIdentType}/>
-          <hr />
-          <Productos car={car} setCar={setCar} handlerTable={handlerTable}/>
-          <hr />
-          <CamposAdicionales time={time} timeLimit={timeLimit} handlerTime={handlerTime} handlerTimeLimit={handlerTimeLimit}
-          handlerEmitir={handlerEmitir} formaPago={formaPago} setFormaPago={setFormaPago} subTotal={subTotal}
-          discounts={discounts} subTotalNeto={subTotalNeto} subTotalConImpuestos={subTotalConImpuestos} 
-          subTotalSinImpuestos={subTotalSinImpuestos} subTotalNoObjetoIva={subTotalNoObjetoIva} 
-          subTotalExcentoIva={subTotalExcentoIva} propina={propina} handlerPropina={handlerPropina} ice={ice} iva={iva} total={total}/>
-        </div>
-      </>
-    );
-  }
+  if (emit) return (<Navigate to="/ingreso" />);
+  if (!token) return (<Navigate to={PATH_LOGIN} />);
+  return (
+    <>  
+      <Header handlerNotification={handlerNotification} />
+      <div className='facturador--container'>
+        <Buscador handlerNotification={handlerNotification} ID={ID} setID={setID} client={client} setClient={setClient} addressI={addressI} setAddress={setAddress} emailI={emailI}
+        setEmail={setEmail} phone={phone} setPhone={setPhone} today={today} setToday={setToday} identType={identType} setIdentType={setIdentType}/>
+        <hr />
+        <Productos handlerNotification={handlerNotification} car={car} setCar={setCar} handlerTable={handlerTable}/>
+        <hr />
+        <CamposAdicionales time={time} timeLimit={timeLimit} handlerTime={handlerTime} handlerTimeLimit={handlerTimeLimit}
+        handlerEmitir={handlerEmitir} formaPago={formaPago} setFormaPago={setFormaPago} subTotal={subTotal}
+        discounts={discounts} subTotalNeto={subTotalNeto} subTotalConImpuestos={subTotalConImpuestos} 
+        subTotalSinImpuestos={subTotalSinImpuestos} subTotalNoObjetoIva={subTotalNoObjetoIva} 
+        subTotalExcentoIva={subTotalExcentoIva} propina={propina} handlerPropina={handlerPropina} ice={ice} iva={iva} total={total}/>
+      </div>
+    </>
+  );
 } 
 
 export default Facturador;

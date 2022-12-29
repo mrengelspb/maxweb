@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter,
   Routes,
   Route,
 } from 'react-router-dom';
-import Header from './Components/Header';
 import Login from './Pages/Login';
 import Dashboard from './Pages/Dashboard';
 import Operator from './Pages/Operator';
@@ -13,10 +12,14 @@ import Product from './Pages/Product';
 import Facturador from './Pages/Facturador';
 import Notification from './Components/Notification';
 import Caja from './Pages/Caja';
+import Informes from './Pages/Informes';
+import Ticket from './Views/Reports/Ticket';
 import './App.css';
 
 function App() {
   const [state, setState] = useState({});
+  const [token, setToken] = useState(sessionStorage.getItem('token'));
+
   const HOST = 'localhost';
   const PORT = 3000;
   const PATH_LOGIN = '/';
@@ -44,12 +47,12 @@ function App() {
       notification.classList.add('notification--container__hidden');
     }, time);
   };
+  let header;
 
   return (
     <div className="App">
       <Notification />
       <BrowserRouter>
-        <Header handlerNotification={handlerNotification} />
         <Routes>
           <Route exact path="/" element={<Login handlerNotification={handlerNotification} HOST={HOST} PORT={PORT} PATH_LOGIN={PATH_LOGIN} PATH_LOGIN_API={PATH_LOGIN_API} />} />
           <Route exact path="/admin" element={<Dashboard setState={setState} state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
@@ -58,7 +61,11 @@ function App() {
           <Route exact path="/producto" element={<Product PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
           <Route exact path="/facturador" element={<Facturador state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
           <Route exact path="/caja" element={<Caja state={state} handlerNotification={handlerNotification} />} />
+          <Route exact path="/informes" element={<Informes handlerNotification={handlerNotification} />}>
+            <Route exact path="ticket" element={<Ticket handlerNotification={handlerNotification}/>} />
+          </Route>
           <Route path="*" element={<h1>Page No Found Error 404</h1>} />
+            
         </Routes>
       </BrowserRouter>
     </div>

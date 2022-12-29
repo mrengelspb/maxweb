@@ -38,12 +38,14 @@ export default function Header({ handlerNotification }) {
   return (
     <header className="header">
       <button type="button" onClick={() => handleOpenMenu()} className="header--icon">
-        <List size={32} />
+        <List size={32} color={"white"} />
       </button>
+
+      <img className="header--logo" src="/assets/logo.svg" alt="Your SVG" />
 
       <div className="header--menu hidden">
         <button type="button" onClick={() => handleCloseMenu()} className="header--menu__close">
-          <XLg size={30} />
+          <XLg size={30} color={"white"} />
         </button>
         <nav className="header--nav">
           <ul className="nav--list">

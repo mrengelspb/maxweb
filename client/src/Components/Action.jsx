@@ -22,15 +22,15 @@ export default function Action({ children, text }) {
   };
 
   return (
-    <>
+    <div className="action--container">
       { text === 'Crear'
         ? <Modal><Create /></Modal>
         : <Modal><Eliminar /></Modal> }
-      <button className="action" type="button" onClick={handlerOpenModal}>
+      <button className="action--button" type="button" onClick={handlerOpenModal}>
         {children}
         <p>{text}</p>
       </button>
-    </>
+    </div>
   );
 }
 

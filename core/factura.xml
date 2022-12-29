@@ -6,40 +6,40 @@
         <razonSocial>RENGEL RIVERA MATEO SANTIAGO</razonSocial>
         <nombreComercial>Soluciones Plan B</nombreComercial>
         <ruc>0104961925001</ruc>
-        <claveAcceso>2112202201999999999900110010010000005011122334412</claveAcceso>
+        <claveAcceso>2912202201999999999900110010010000005021122334414</claveAcceso>
         <codDoc>01</codDoc>
         <estab>001</estab>
         <ptoEmi>002</ptoEmi>
-        <secuencial>000000502</secuencial>
+        <secuencial>000000503</secuencial>
         <dirMatriz>La republica 2-70</dirMatriz>
         <agenteRetencion>0</agenteRetencion>
         <contribuyenteRimpe>CONTRIBUYENTE RÉGIMEN RIMPE</contribuyenteRimpe>
     </infoTributaria>
     <infoFactura>
-        <fechaEmision>21/12/2022</fechaEmision>
-        <dirEstablecimiento>Terminal Terrestre de Azogues</dirEstablecimiento>
+        <fechaEmision>29/12/2022</fechaEmision>
+        <dirEstablecimiento>La Republica 2-70</dirEstablecimiento>
         <obligadoContabilidad>NO</obligadoContabilidad>
         <tipoIdentificacionComprador>04</tipoIdentificacionComprador>
         <razonSocialComprador>PRUEBAS SERVICIO DE RENTAS INTERNAS</razonSocialComprador>
         <identificacionComprador>9999999999001</identificacionComprador>
         <direccionComprador>Dir Pruebas SRI</direccionComprador>
-        <totalSinImpuestos>3</totalSinImpuestos>
+        <totalSinImpuestos>2.5</totalSinImpuestos>
         <totalDescuento>0</totalDescuento>
         <totalConImpuestos>
             <totalImpuesto>
                 <codigo>2</codigo>
                 <codigoPorcentaje>3</codigoPorcentaje>
-                <baseImponible>3.36</baseImponible>
-                <valor>0.36</valor>
+                <baseImponible>2.8</baseImponible>
+                <valor>0.3</valor>
             </totalImpuesto>
         </totalConImpuestos>
         <propina>0</propina>
-        <importeTotal>3.36</importeTotal>
+        <importeTotal>2.8</importeTotal>
         <moneda>DOLAR</moneda>
         <pagos>
             <pago>
                 <formaPago>01</formaPago>
-                <total>3.36</total>
+                <total>2.8</total>
                 <plazo>0</plazo>
                 <unidadTiempo>Dias</unidadTiempo>
             </pago>
@@ -48,19 +48,36 @@
     <detalles>
         <detalle>
             <codigoPrincipal>SPB-PG001</codigoPrincipal>
-            <codigoAuxiliar>002</codigoAuxiliar>
-            <descripcion>Cerveza</descripcion>
+            <codigoAuxiliar>001</codigoAuxiliar>
+            <descripcion>Coca Cola Personal</descripcion>
             <cantidad>1</cantidad>
-            <precioUnitario>3</precioUnitario>
+            <precioUnitario>0.5</precioUnitario>
             <descuento>0</descuento>
-            <precioTotalSinImpuesto>3</precioTotalSinImpuesto>
+            <precioTotalSinImpuesto>0.5</precioTotalSinImpuesto>
             <impuestos>
                 <impuesto>
                     <codigo>2</codigo>
                     <codigoPorcentaje>3</codigoPorcentaje>
                     <tarifa>12</tarifa>
-                    <baseImponible>3</baseImponible>
-                    <valor>0.36</valor>
+                    <baseImponible>0.5</baseImponible>
+                    <valor>0.06</valor>
+                </impuesto>
+            </impuestos>
+        </detalle><detalle>
+            <codigoPrincipal>SPB-PG001</codigoPrincipal>
+            <codigoAuxiliar>003</codigoAuxiliar>
+            <descripcion>Barra Energetica</descripcion>
+            <cantidad>1</cantidad>
+            <precioUnitario>2</precioUnitario>
+            <descuento>0</descuento>
+            <precioTotalSinImpuesto>2</precioTotalSinImpuesto>
+            <impuestos>
+                <impuesto>
+                    <codigo>2</codigo>
+                    <codigoPorcentaje>3</codigoPorcentaje>
+                    <tarifa>12</tarifa>
+                    <baseImponible>2</baseImponible>
+                    <valor>0.24</valor>
                 </impuesto>
             </impuestos>
         </detalle>

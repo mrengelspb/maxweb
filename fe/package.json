@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jsreport-chrome-pdf": "^1.10.0",
+    "jsreport-core": "^2.10.1",
+    "jsreport-handlebars": "^2.1.0",
     "libxmljs": "^0.19.10",
+    "puppeteer": "^19.4.1",
     "xsd-schema-validator": "^0.7.0"
   }
 }

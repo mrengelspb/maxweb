@@ -10,7 +10,6 @@ productController.use((req, res, next) => {
   const token = authHeader;
   if (token == null) return res.sendStatus(403);
   const privateKey = fs.readFileSync('./token.txt');
-  console.log(privateKey);
   jwt.verify(token, privateKey, (err, user) => {
      if (err) return res.sendStatus(404);
      req.user = user;
@@ -18,24 +17,20 @@ productController.use((req, res, next) => {
   });
 });
 
-productController.get('/api/v1/producto/:id', (req, res, next) => {
-  const { id } = req.params;
-  const productInteractor = new ProductInterator();
-  const result = productInteractor.getProduct(dbmysql, [id]);
-  result
-    .then((data) => {
-      try {
-        const json_data = JSON.parse(JSON.stringify(data));
-        res.status(200).send(json_data);
-      } catch (error) {
-        res.status(500).send(JSON.parse({ message: error.message }))
-      }
-    })
-    .catch((err) => {
-      res.status(500).send(JSON.parse({
-        message: err
-      }));
-    });
+productController.get('/api/v1/producto/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const productInteractor = new ProductInterator();
+    let response = await productInteractor.getProduct(dbmysql, [id]);
+    response = JSON.parse(JSON.stringify(response[0]));
+    if (response.length === 0) {
+      res.status(404).send();
+    } else {
+      res.status(200).send(response);
+    }
+  } catch (err) { 
+    res.status(500).send(JSON.parse({ message: err }));
+  }
 });
 
 productController.post('api/v1/producto', (req, res, next) => {

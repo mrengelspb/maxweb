@@ -25,18 +25,20 @@ facturaController.use((req, res, next) => {
   });
 });
 
-facturaController.post('api/v1/factura/datos', (req, res, next) => {
+facturaController.post('/api/v1/factura/datos', async (req, res, next) => {
   const { identification_number } = req.body;
   const facturaController = new FacturaController();
-  const result = facturaController.getClientData(dbmysql, [identification_number]);
-  result
-    .then((response) => {
-      res.status(200).send(JSON.parse(JSON.stringify(response[0])));
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).send({message: err.message}); 
-    });
+  try {
+    let response = await facturaController.getClientData(dbmysql, [identification_number]);
+    response = JSON.parse(JSON.stringify(response[0]));
+    if (response.length === 0) {
+      res.status(404).send();
+    } else {
+      res.status(200).send(response);
+    }
+  } catch (err) {
+    res.status(500).send({message: err.message}); 
+  }
 })
 
 facturaController.post('/api/v1/factura/consumidor/final', (req, res, next) => {

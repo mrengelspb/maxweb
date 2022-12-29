@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Title from '../Components/Title';
+import  { Person, Lock } from 'react-bootstrap-icons';
 import '../styles/login.css';
 
 function Login({
@@ -25,7 +25,7 @@ function Login({
   };
 
   const SubmitHandler = async (ev) => {
-    if (ev.key == 'Enter' && ev.type === 'keyDown' || (ev.key === undefined && ev.type === 'click')) {
+    if (ev.key == 'Enter' && ev.type === 'keydown') {
       const response = await fetch(`http://${HOST}:${PORT}${PATH_LOGIN_API}`, {
         method: 'POST',
         headers: {
@@ -63,14 +63,20 @@ function Login({
     }
   };
 
-  if (token) return (<Navigate to="/ingreso" />);
+  if (token) return (<Navigate to="/caja" />);
   return (
     <main className="login">
-      <form className="login--form" method="post" >
-        <Title text="MawWellPOS" />
-        <input className="login--input" onKeyDown={handlerKeyDownUserName} placeholder="Nombre de Usuario" type="text" value={userName} onChange={handlerUserName} />
-        <input className="login--input" ref={passwordRef} onKeyDown={handlerKeyDownButton} placeholder="Contraseña" type="password" value={password} onChange={handlerPassword} />
-        <button type="button" ref={buttonRef} onKeyDown={SubmitHandler} onClick={SubmitHandler}>Ingresar</button>
+      <form className="login--form">
+        <h1 className="login--title">Iniciar Sesión</h1>
+        <div className='login--wrapperInput'>
+          <Person width={16} color={"gray"}/>
+          <input className="login--input" onKeyDown={handlerKeyDownUserName} type="text" value={userName} onChange={handlerUserName} />
+        </div>
+        <div className='login--wrapperInput'>
+          <Lock width={16} color={"gray"}/>
+          <input className="login--input" ref={passwordRef} onKeyDown={SubmitHandler} type="password" value={password} onChange={handlerPassword} />
+        </div>
+        {/* <button type="button" ref={buttonRef} onKeyDown={SubmitHandler} onClick={SubmitHandler}>Ingresar</button> */}
       </form>
     </main>
   );

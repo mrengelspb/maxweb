@@ -5,24 +5,35 @@
 
 .dashboard--container {
     width: 95%;
-    display: flex;
+    display: block;
     box-sizing: border-box;
     padding: 20px 20px;
 }
 
 .dashboard--tag {
-    width: 10vw;
+    width: 5vw;
     height: 100%;
 }
 
 .dashboard--tag span {
     display: block;
+    text-align: center;
 }
 
 .dashboard--content {
-    width: 90vw;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    box-shadow: 0px 0px 5px 5px gray;
+    margin: 10px 0px;
+    padding: 10px;
+}
+
+.dashboard--actions {
+    display: flex;
+    height: auto;
 }

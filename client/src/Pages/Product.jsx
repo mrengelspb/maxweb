@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import Header from '../Components/Header';
 
 const Product = ({ handlerNotification }) => {
   const [id, setId] = useState("");
@@ -18,6 +19,7 @@ const Product = ({ handlerNotification }) => {
   };
   
   const handlerCreateProduct = (ev) => {
+    console.log(token);
     ev.preventDefault();
     fetch('http://localhost:3000/api/v1/producto', {
       method: 'POST',
@@ -56,6 +58,7 @@ const Product = ({ handlerNotification }) => {
   if (!token) return (<Navigate to={PATH_LOGIN} />);
   return (
     <>
+    <Header handlerNotification={handlerNotification} />
       <div className="product--container">
         <div className="product--register">
           <form onSubmit={handlerCreateProduct}>

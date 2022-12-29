@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 
-const SearchBar = ({car, setCar, handlerTable}) => {
+const SearchBar = ({car, setCar, handlerTable, handlerNotification}) => {
   const [id, setId] = useState(0);
+  const token = sessionStorage.getItem('token');
 
   const handlerProduct = (ev) => {
     setId(ev.target.value);
@@ -12,33 +13,38 @@ const SearchBar = ({car, setCar, handlerTable}) => {
     handlerTable();
   }, [car]);
 
-  const handlerSearchProduct = (ev) => {
+  const handlerSearchProduct = async (ev) => {
     ev.preventDefault();
-    fetch(`http://localhost:3000/producto/${id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        res = res[0][0];
-        res.cantidad = 1;
-        res.descuento = 0;
-        res.total = 1 * res.valor_unitario;
-        console.log(res);
-        setCar([...car, res]);
-      })
-      .catch((err) => {
-        console.log({ message: err.message, err });
+    try {
+      const response = await fetch(`http://localhost:3000/api/v1/producto/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          auth: token,
+        },
       });
-    
-    return false;
+
+      if (response.ok && response.status === 200) {
+        let data = await response.json();
+        data = data[0];
+        data.cantidad = 1;
+        data.descuento = 0;
+        data.total = 1 * data.valor_unitario;
+        console.log(data);
+        setCar([...car, data]);
+        handlerNotification(response.statusText, response.status, 2000);
+      } else {
+        handlerNotification(response.statusText, response.status, 2000);
+      }
+    } catch (err) {
+      handlerNotification(err.message, 500, 2000);
+    }
   };
+  
   return (
     <div className='searchbar--container'>
       <form onSubmit={handlerSearchProduct}>
         <label htmlFor="producto"></label>
-        <input type="" id="producto" onChange={handlerProduct} placeholder='Ingresar Producto'/>
+        <input type="number" id="producto" onChange={handlerProduct} placeholder='Ingresar Producto'/>
         <button type="submit">Agregar</button>
         <Link to="/producto/insertar">Crear Producto</Link>
       </form>

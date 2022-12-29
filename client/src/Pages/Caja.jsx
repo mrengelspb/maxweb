@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Header from '../Components/Header';
+import { Navigate } from 'react-router-dom';
 import '../styles/caja.css';
 
 function Caja({ state, handlerNotification}) {
 
+  const [boxStatus, setBoxStatus] = useState(false);
   const parking = JSON.parse(localStorage.getItem('parking'));
   const token = sessionStorage.getItem('token');
   const [_totalBox, setTotalBox] = useState(0);
@@ -84,6 +87,7 @@ function Caja({ state, handlerNotification}) {
     if (response.ok && response.status === 200) {
       const data = await response.json();
       handlerNotification(response.statusText, response.status, 2000);
+      setBoxStatus(true);
       console.log(data);
     } else {
       handlerNotification(response.statusText, response.status, 2000);
@@ -112,7 +116,10 @@ function Caja({ state, handlerNotification}) {
     });
   };
 
+  if (!token) return (<Navigate to="/" />);
+  if (boxStatus) return (<Navigate to="/ingreso" />);
   return (<>
+    <Header handlerNotification={handlerNotification} />
     <div className="caja--container">
       <form className="caja--form" onSubmit={ handlerOpeningBox }>
         <label htmlFor="01C">

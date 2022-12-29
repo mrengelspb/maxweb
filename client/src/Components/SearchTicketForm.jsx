@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import '../styles/searchTicketForm.css';
 
-export default function SearchTicketForm({ ticket, setTicket, handlerNotification, handlerAvaliablePlace }) {
+export default function SearchTicketForm({ setPaper, ticket, setTicket, handlerNotification, handlerAvaliablePlace }) {
 
   let In = '';
   let Out = '';
@@ -63,6 +64,7 @@ export default function SearchTicketForm({ ticket, setTicket, handlerNotificatio
         handlerNotification(response.statusText, response.status, 3000);
         setTicket(null);
         handlerAvaliablePlace();
+        setPaper(true);
       } else {
         const data = await response.json();
         handlerNotification(response.statusText, response.status, 3000);

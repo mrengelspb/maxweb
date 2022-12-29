@@ -2,8 +2,10 @@ import React from 'react';
 import Title from '../Components/Title';
 
 
-const Buscador = ({ ID, setID, client, setClient, addressI,
+const Buscador = ({ handlerNotification, ID, setID, client, setClient, addressI,
   setAddress, emailI, setEmail, phone, setPhone, today, setToday, identType, setIdentType }) => {
+
+  const token = sessionStorage.getItem('token');
 
   const handlerId = (ev) => {
     setID(ev.target.value);
@@ -29,38 +31,43 @@ const Buscador = ({ ID, setID, client, setClient, addressI,
     setToday(ev.target.value);
   };
 
-  const handlerSearchData = (ev) => {
+  const handlerSearchData = async (ev) => {
     if (ev) {
       ev.preventDefault();
     }
-    fetch('http://localhost:3000/factura_con_datos', {
+    const response = await fetch('http://localhost:3000/api/v1/factura/datos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        auth: token,
       },
       body: JSON.stringify({
         identification_number: ID,
       }),
-    }).then((response) => response.json())
-      .then((response) => {
-        const {
-          first_last_name, second_last_name,
-          first_name, second_name, address,
-          email, phone_number,
-        } = response[0];
-        console.log(response[0])
-        setClient(`${first_last_name} ${second_last_name} ${first_name} ${second_name}`);
-        setAddress(address);
-        setEmail(email);
-        setPhone(phone_number);
-      })
-      .catch((err) => console.log(err));
-  };
+    });
+
+    if (response.ok && response.status == 200) {
+      const data = await response.json();
+      const {
+        first_last_name, second_last_name,
+        first_name, second_name, address,
+        email, phone_number,
+      } = data[0];
+        
+      setClient(`${first_last_name} ${second_last_name} ${first_name} ${second_name}`);
+      setAddress(address);
+      setEmail(email);
+      setPhone(phone_number);
+      handlerNotification(response.statusText, response.status, 2000);
+    } else {
+      handlerNotification(response.statusText, response.status, 2000);
+    }
+  }
 
   const handlerSave = (ev) => {
     ev.preventDefault();
     //guardar datos del usuario
-  }
+  };
 
   const handleKeyDown = (ev) => {
     if (ev.key == 'Enter') {
@@ -71,7 +78,7 @@ const Buscador = ({ ID, setID, client, setClient, addressI,
   const handlerIdentType = (ev) => {
     console.log(ev.target.value);
     setIdentType(ev.target.value);
-  }
+  };
 
   return (
     <div className='buscador--container'>

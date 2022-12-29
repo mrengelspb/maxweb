@@ -1,10 +1,14 @@
+:root {
+    --black-background: #000000;
+}
+
 .header {
     width: 100vw;
-    height: 10vh;
-    background-color: aqua;
+    height: 50px;
+    background-color: var(--black-background);
     padding: 0px 30px;
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
 }
 
@@ -12,6 +16,10 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
+}
+
+.header--logo {
+    margin-left: 200px;
 }
 
 .header--menu {
