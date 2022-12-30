@@ -11,6 +11,7 @@ const productController = require('./Routes/productController.js');
 const facturaController = require('./Routes/facturaController.js');
 const boxController = require('./Routes/boxController.js');
 const ReportController = require('./Routes/reportController.js');
+const downloadController = require('./Routes/downloadController.js');
 
 const app = express();
 const tokgen = new TokenGenerator(); 
@@ -32,6 +33,7 @@ app.use("/", productController);
 app.use("/", facturaController);
 app.use("/", boxController);
 app.use("/", ReportController);
+app.use("/", downloadController);
 
 
 app.listen(process.env.PORT, () => {
