@@ -1,0 +1,23 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.Report--table {
+    width: 70%;
+    overflow: auto;
+    padding: 50px 0px;
+}
+
+.Report--table h1 {
+    margin: 0px;
+}
+
+.Report--body {
+    display: flex;
+}
+
+.Report--type {
+    padding: 15px;
+    border: 1px solid black;
+}

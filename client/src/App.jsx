@@ -13,7 +13,7 @@ import Facturador from './Pages/Facturador';
 import Notification from './Components/Notification';
 import Caja from './Pages/Caja';
 import Informes from './Pages/Informes';
-import Ticket from './Views/Reports/Ticket';
+import Report from './Views/Reports/Report';
 import './App.css';
 
 function App() {
@@ -62,7 +62,7 @@ function App() {
           <Route exact path="/facturador" element={<Facturador state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
           <Route exact path="/caja" element={<Caja state={state} handlerNotification={handlerNotification} />} />
           <Route exact path="/informes" element={<Informes handlerNotification={handlerNotification} />}>
-            <Route exact path="ticket" element={<Ticket handlerNotification={handlerNotification}/>} />
+            <Route exact path="ticket" element={<Report handlerNotification={handlerNotification}/>} />
           </Route>
           <Route path="*" element={<h1>Page No Found Error 404</h1>} />
             

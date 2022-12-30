@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
 const download = require('downloadjs');
-import './styles/ticket.css';
+import './styles/report.css';
 
-export default function ({ handlerNotification }) {
+export default function Report({ handlerNotification }) {
 
   const bodyTable = [];
   const headerTable = [];
-  const [tickets, setTickets] = useState([]);
   const [report, setReport] = useState({});
+  const [tickets, setTickets] = useState([]);
+  const [type, setType] = useState('ticket/in');
   const [since, setSince] = useState(new Date().toISOString().split("T")[0]);
   const [to, setTo] = useState(new Date().toISOString().split("T")[0]);
   const parking = JSON.parse(localStorage.getItem('parking'));
   const token = sessionStorage.getItem('token');
 
+  const handlerTicketIn = (ev) => {
+    setType(ev.target.value);
+  };
+
   const handlerTickerReport = async (ev) => {
     ev.preventDefault();
-    const response = await fetch('http://localhost:3000/api/v1/informes/ticket', {
+    const response = await fetch(`http://localhost:3000/api/v1/report/${type}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,7 +29,9 @@ export default function ({ handlerNotification }) {
       body: JSON.stringify({
         since: since.replaceAll("-", "/") + " 00:00:00",
         to: to.replaceAll("-", "/") + " 23:59:59",
-        parking: parking.ID_parking
+        id_parking: parking.ID_parking,
+        name_parking: parking.nombre_comercial,
+        address_parking: parking.address,
       }),
     });
     if (response.ok && response.status === 200) {
@@ -109,7 +116,7 @@ export default function ({ handlerNotification }) {
 
   return (
     <>
-      <div className="ticketReport--container">
+      <div className="Report--container">
         <header>
           <form method="POST" onSubmit={handlerTickerReport}>
             <label htmlFor="since">Desde: </label>
@@ -122,19 +129,39 @@ export default function ({ handlerNotification }) {
           <button type="button" onClick={handlerExportPDF}>Export PDF</button>
           <button type="button" onClick={handlerExportExcel}>Export Excel </button>
         </header>
-        <div className="ticketReport--body">
-          { tickets.length === 0 ?
-            <h1>Aqui podras ver tu reporte !</h1>
-            :
-            <table>
-              <thead>
-                { headerTable }
-              </thead>
-              <tbody>
-                { bodyTable }
-              </tbody>
-            </table>
-          }
+        <div className="Report--body">
+          <div className="Report--table">
+            { tickets.length === 0 ?
+              <h1>Aqui podras ver tu reporte !</h1>
+              :
+              <table>
+                <thead>
+                  { headerTable }
+                </thead>
+                <tbody>
+                  { bodyTable }
+                </tbody>
+              </table>
+            }
+          </div>
+          <div className="Report--type">
+            <div>
+              <input type="radio" name="report" id="ticket/in" value="ticket/in" checked={type === "ticket/in"} onChange={handlerTicketIn} />
+              <label htmlFor="ticket/in">Ticket Ingresos</label>
+            </div>
+            <div>
+              <input type="radio" name="report" id="ticket/out" value="ticket/out" checked={type === "ticket/out"} onChange={handlerTicketIn} />
+              <label htmlFor="ticket/out">Ticket Salidas</label>
+            </div>
+            <div>
+              <input type="radio" name="report" id="card/in" value="card/in" checked={type === "card/in"} onChange={handlerTicketIn} />
+              <label htmlFor="card/in">Ticket Salidas</label>
+            </div>
+            <div>
+              <input type="radio" name="report" id="card/out" value="card/out" checked={type === "card/out"} onChange={handlerTicketIn} />
+              <label htmlFor="card/out">Ticket Salidas</label>
+            </div>
+          </div>
         </div>
       </div>
     </>
