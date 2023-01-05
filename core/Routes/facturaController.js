@@ -10,6 +10,7 @@ const SignedXml = require('xml-crypto').SignedXml;
 const p12 = require('p12-pem');
 const soap = require('soap');
 const base64 = require('base-64');
+const utf8 = require('utf8');
 const jsonxml = require('jsontoxml');
 require('dotenv').config();
 
@@ -93,20 +94,12 @@ facturaController.post('/api/v1/factura/emision', (req, res, next) => {
 
           fs.writeFileSync("signed.xml", comprobante);
 
-          const toBytes = (string) => Array.from(Buffer.from(string, 'utf8'));
+          let xml_data = fs.readFileSync("./signed.xml", {encoding: 'utf8'});
+          const bytes = utf8.encode(xml_data);
 
-
-          let xml_data = fs.readFileSync("./signed.xml");
-          
-          const xml_arg = 
-          '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ec="http://ec.gob.sri.ws.recepcion">'
-          + '<soapenv:Header/>' +
-          '<soapenv:Body>' +
-            '<ec:validarComprobante>' +
-              '<xml>' + base64.encode(xml_data) + '</xml>' +
-              '</ec:validarComprobante>' +
-            '</soapenv:Body>' +
-          '</soapenv:Envelope>';
+          const xml_arg = {
+            xml: base64.encode(bytes)
+          } 
 
           const recepcionComprobantesPruebasUrl = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl';
           const autorizacionComprobantesPruebasUrl = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl';
@@ -114,21 +107,14 @@ facturaController.post('/api/v1/factura/emision', (req, res, next) => {
           const ClientRecepcion = await soap.createClientAsync(recepcionComprobantesPruebasUrl);
           const responseRecepcion = await ClientRecepcion.validarComprobanteAsync(xml_arg);
 
-          const xml_args2 = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ec="http://ec.gob.sri.ws.autorizacion">'
-          + '<soapenv:Header/>' +
-            '<soapenv:Body>' +
-              '<ec:autorizacionComprobante>' +
-                '<claveAccesoComprobante>' + code + '</claveAccesoComprobante>' +
-              '</ec:autorizacionComprobante>' +
-            '</soapenv:Body>' +
-            '</soapenv:Envelope>';
-
-          if (responseRecepcion[0].RespuestaRecepcionComprobante.estado === "RECIBIDA") {
-            const ClientAutorizacion = await soap.createClientAsync(autorizacionComprobantesPruebasUrl);
-            const responseAutorizacion = await ClientAutorizacion.autorizacionComprobanteAsync(xml_args2);
-  
-            res.send({ responseRecepcion, responseAutorizacion });
+          const xml_args2 = {
+            claveAccesoComprobante: code
           }
+
+          const ClientAutorizacion = await soap.createClientAsync(autorizacionComprobantesPruebasUrl);
+          const responseAutorizacion = await ClientAutorizacion.autorizacionComprobanteAsync(xml_args2);
+
+          res.send({ responseRecepcion, responseAutorizacion, describe: ClientAutorizacion.describe() });
         })
         .catch((err) => {
           console.log({err: err.message, err});

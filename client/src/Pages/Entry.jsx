@@ -9,7 +9,7 @@ import AvailableParkings from '../Components/AvailableParkings';
 import Tariff from '../Components/Tariff';
 import '../styles/entry.css';
 
-export default function Entry({ state, PATH_LOGIN, handlerNotification }) {  
+export default function Entry({ isOpenBox, setIsOpenBox, PATH_LOGIN, handlerNotification }) {  
   const [ticket, setTicket] = useState(null);
   const [paper, setPaper] = useState(false);
   const [tariff, setTariff] = useState('diurna');
@@ -37,7 +37,7 @@ export default function Entry({ state, PATH_LOGIN, handlerNotification }) {
   if (!token) return (<Navigate to={PATH_LOGIN} />);
   return (
     <>
-    <Header handlerNotification={handlerNotification} />
+    <Header setIsOpenBox={setIsOpenBox} isOpenBox={isOpenBox} handlerNotification={handlerNotification} />
       <div className="entry">
         <div className="entry--info">
           <SearchTicket setTicket={setTicket} handlerNotification={handlerNotification}  tariff={tariff} />

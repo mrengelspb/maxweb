@@ -7,7 +7,7 @@ import Title from '../Components/Title';
 import Action from '../Components/Action';
 import '../styles/dashboard.css';
 
-export default function Dashboard({ state, setState, PATH_LOGIN, handlerNotification }) {
+export default function Dashboard({ setIsOpenBox, isOpenBox, PATH_LOGIN, handlerNotification }) {
   const [token, setToken] = useState(sessionStorage.getItem('token'));
   const [reportTicket, setReportTicket] = useState(false); 
   const handlerReportTickets = () => {
@@ -18,7 +18,7 @@ export default function Dashboard({ state, setState, PATH_LOGIN, handlerNotifica
   if (!token) return (<Navigate to={PATH_LOGIN} />);
   return (
     <>
-      <Header handlerNotification={handlerNotification} />
+      <Header setIsOpenBox={setIsOpenBox} isOpenBox={isOpenBox} handlerNotification={handlerNotification} />
       <div className="dashboard">
         <Title text="Panel de Control" />
 

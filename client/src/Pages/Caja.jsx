@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../Components/Header';
 import { Navigate } from 'react-router-dom';
 import '../styles/caja.css';
 
-function Caja({ state, handlerNotification}) {
+function Caja({ type, handlerNotification, setIsOpenBox, setCaja, caja }) {
 
   const [boxStatus, setBoxStatus] = useState(false);
   const parking = JSON.parse(localStorage.getItem('parking'));
@@ -50,11 +49,12 @@ function Caja({ state, handlerNotification}) {
       const sum = total01C + total05C + total10C + total25C + total50C + total100C
       + total1B + total2B +  total5B + total10B + total20B + total50B + total100B + totalCheques;
       setTotalBox(parseFloat(sum.toFixed(2)));
+      setCaja(_totalBox);
   }, [box]);
 
   const handlerOpeningBox = async (ev) => {
     ev.preventDefault();
-    const response  = await fetch('http://localhost:3000/api/v1/caja/abrir', {
+    let response  = await fetch('http://localhost:3000/api/v1/caja/registro', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ function Caja({ state, handlerNotification}) {
         cliente: parking.idOperador,
         sitio: parking.ID_parking,
         tipo: 'parking',
-        valor_sistema: _totalBox,
+        valor_sistema: caja,
         valor_ingresado: _totalBox,
         _01C: box['_01C'],
         _05C: box['_05C'],
@@ -81,47 +81,72 @@ function Caja({ state, handlerNotification}) {
         _100B: box['_100B'],
         nCheques: box['_numberCheques'],
         tCheques: box['_totalCheques'],
+        type,
       }),
     });
-    console.log(response);
+
     if (response.ok && response.status === 200) {
       const data = await response.json();
       handlerNotification(response.statusText, response.status, 2000);
-      setBoxStatus(true);
-      console.log(data);
+      console.log(type);
+      if (type === 'Cerrar') {
+        let response = await fetch('http://localhost:3000/api/v1/logout', {
+          method: 'GET',
+          headers: {
+            auth: token
+          }
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          sessionStorage.removeItem('token');
+          sessionStorage.removeItem('parking');
+          handlerNotification(data.msg, response.status, 2000);
+          location.reload();
+        } else {
+          handlerNotification("Error Vuelva a intentar !", 404, 2000);
+        }
+      } else {
+        setBoxStatus(true);
+        setIsOpenBox(1);
+      }
     } else {
       handlerNotification(response.statusText, response.status, 2000);
     }
 
   }
 
-  const handlerReset = (ev) => {
-    setBox({
-      '_01C': 0,
-      '_05C': 0,
-      '_10C': 0,
-      '_25C': 0,
-      '_50C': 0,
-      '_100C': 0,
-      '_1B': 0,
-      '_2B': 0,
-      '_5B': 0,
-      '_10B': 0,
-      '_20B': 0,
-      '_50B': 0,
-      '_100B': 0,
-      '_numberCheques': 0,
-      '_totalCheques': 0,
-  
-    });
+  const handlerCancel = async (ev) => {
+    if (type === 'Cerrar') {
+        setBoxStatus(true);
+        setIsOpenBox(1);
+    } else {
+      const response = await fetch('http://localhost:3000/api/v1/logout', {
+        method: 'GET',
+        headers: {
+          auth: token
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('parking');
+        handlerNotification(data.msg, response.status, 2000);
+        location.reload();
+      } else {
+        handlerNotification("Error Vuelva a intentar !", 404, 2000);
+      }
+    }
+    
   };
 
   if (!token) return (<Navigate to="/" />);
   if (boxStatus) return (<Navigate to="/ingreso" />);
   return (<>
-    <Header handlerNotification={handlerNotification} />
     <div className="caja--container">
       <form className="caja--form" onSubmit={ handlerOpeningBox }>
+        <h3>{type} Caja</h3>
         <label htmlFor="01C">
           01C: <input type="number" name="_01C" id="01C" value={box['_01C']} onChange={handlerBox} />
         </label>
@@ -187,8 +212,10 @@ function Caja({ state, handlerNotification}) {
         </label>
 
         <div className="caja--actions">
-          <input type="reset" value="Limpiar" onClick={handlerReset} />
-          <button type="submit">Aperturar Caja</button>
+          <button type="button" onClick={handlerCancel}>Cancelar</button>
+          <button type="submit">{
+            type === 'Cerrar' ? 'Cerrar Caja' : 'Abrir Caja'
+          }</button>
         </div>
       </form>
     </div>

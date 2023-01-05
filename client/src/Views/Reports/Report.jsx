@@ -44,7 +44,7 @@ export default function Report({ handlerNotification }) {
     }
   };
 
-  const handlerExportPDF = async () => {
+  const handlerExportPDF = async (ev) => {
     const response = await fetch('http://localhost:3000/api/v1/download/informe/pdf/ticket', {
       method: 'GET',
       headers: {
@@ -61,7 +61,8 @@ export default function Report({ handlerNotification }) {
   };
 
 
-  const handlerExportExcel = async () => {
+  const handlerExportExcel = async (ev) => {
+    console.log(ev.target.value);
     const response = await fetch('http://localhost:3000/api/v1/download/informe/excel/ticket', {
       method: 'GET',
       headers: {
@@ -80,39 +81,29 @@ export default function Report({ handlerNotification }) {
   const handlerSince = (ev) => { setSince(ev.target.value); };
   const handlerTo = (ev) => { setTo(ev.target.value) };
 
+  // fix unique key value
   if (tickets.length !== 0) {
-    const key = Object.keys(tickets[0]);
-    console.log(key);
     headerTable.push(
-      <tr key={key[1]}>
-        <th>#</th>
-        <th>{key[0]}</th>
-        <th>{key[11]}</th>
-        <th>{key[1]}</th>
-        <th>{key[2]}</th>
-        <th>{key[6]}</th>
-        <th>{key[3]}</th>
-        <th>{key[8]}</th>
-        <th>{key[9]}</th>
+      <tr>
+        {
+          tickets.fields.map((f, index) => {
+            return (<th key={index}>{f}</th>)
+          })
+        }
       </tr>
     );
-  }
 
-  for (const ticket of tickets) {
-    bodyTable.push(
-      <tr key={ticket.ID_ticket}>
-        <td>{tickets.indexOf(ticket) + 1}</td>
-        <td>{ticket.ID_ticket}</td>
-        <td>{ticket.ID_operator}</td>
-        <td>{ticket.in}</td>
-        <td>{ticket.out}</td>     
-        <td>{ticket.state}</td>     
-        <td>{ticket.expiration_date}</td>    
-        <td>{ticket.minutes_used}</td>
-        <td>{ticket.value_pay}</td>
-      </tr>
-    )
+    for (let row of tickets.body) {
+      bodyTable.push(
+        <tr>
+          { row.map((v, index) => {
+            return (<td key={index + 1}>{v}</td>);
+          })}
+        </tr>
+      )
+    }
   }
+  
 
   return (
     <>
@@ -155,11 +146,11 @@ export default function Report({ handlerNotification }) {
             </div>
             <div>
               <input type="radio" name="report" id="card/in" value="card/in" checked={type === "card/in"} onChange={handlerTicketIn} />
-              <label htmlFor="card/in">Ticket Salidas</label>
+              <label htmlFor="card/in">Tarjetas Ingresos</label>
             </div>
             <div>
               <input type="radio" name="report" id="card/out" value="card/out" checked={type === "card/out"} onChange={handlerTicketIn} />
-              <label htmlFor="card/out">Ticket Salidas</label>
+              <label htmlFor="card/out">Tarjetas Salidas</label>
             </div>
           </div>
         </div>

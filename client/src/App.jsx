@@ -12,12 +12,13 @@ import Product from './Pages/Product';
 import Facturador from './Pages/Facturador';
 import Notification from './Components/Notification';
 import Caja from './Pages/Caja';
-import Informes from './Pages/Informes';
+import ReportPage from './Pages/Report';
 import Report from './Views/Reports/Report';
 import './App.css';
 
 function App() {
-  const [state, setState] = useState({});
+  const [caja, setCaja] = useState({});
+  const [isOpenBox, setIsOpenBox] = useState(0);
   const [token, setToken] = useState(sessionStorage.getItem('token'));
 
   const HOST = 'localhost';
@@ -57,11 +58,12 @@ function App() {
           <Route exact path="/" element={<Login handlerNotification={handlerNotification} HOST={HOST} PORT={PORT} PATH_LOGIN={PATH_LOGIN} PATH_LOGIN_API={PATH_LOGIN_API} />} />
           <Route exact path="/admin" element={<Dashboard setState={setState} state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
           <Route exact path="/operador" element={<Operator state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
-          <Route exact path="/ingreso" element={<Entry state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
+          <Route exact path="/ingreso" element={<Entry setIsOpenBox={setIsOpenBox} isOpenBox={isOpenBox} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
           <Route exact path="/producto" element={<Product PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
           <Route exact path="/facturador" element={<Facturador state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
-          <Route exact path="/caja" element={<Caja state={state} handlerNotification={handlerNotification} />} />
-          <Route exact path="/informes" element={<Informes handlerNotification={handlerNotification} />}>
+          <Route exact path="/caja/abrir" element={<Caja type="Abrir" setCaja={setCaja} setIsOpenBox={setIsOpenBox} handlerNotification={handlerNotification} />} />
+          <Route exact path="/caja/cerrar" element={<Caja type="Cerrar" caja={caja} setIsOpenBox={setIsOpenBox} handlerNotification={handlerNotification} />} />
+          <Route exact path="/informes" element={<ReportPage handlerNotification={handlerNotification} />}>
             <Route exact path="ticket" element={<Report handlerNotification={handlerNotification}/>} />
           </Route>
           <Route path="*" element={<h1>Page No Found Error 404</h1>} />

@@ -38,7 +38,9 @@ class Factura {
 
     var p12 = forge.pkcs12.pkcs12FromAsn1(p12Asn1, mi_pwd_p12);
 
+    
     var certBags = p12.getBags({ bagType: forge.pki.oids.certBag })
+    var issuer = certBags[forge.oids.certBag][0].cert.issuer;
     var cert = certBags[forge.oids.certBag][0].cert;
     var pkcs8bags = p12.getBags({ bagType: forge.pki.oids.pkcs8ShroudedKeyBag });
     var pkcs8 = pkcs8bags[forge.oids.pkcs8ShroudedKeyBag][0];
@@ -50,6 +52,7 @@ class Factura {
 
     let certificateX509_pem = forge.pki.certificateToPem(cert);
 
+    
     let certificateX509 = certificateX509_pem;
     certificateX509 = certificateX509.substr(certificateX509.indexOf('\n'));
     certificateX509 = certificateX509.substr(0, certificateX509.indexOf('\n-----END CERTIFICATE-----'));
@@ -126,7 +129,8 @@ class Factura {
     SignedProperties += '</etsi:CertDigest>';
     SignedProperties += '<etsi:IssuerSerial>';
     SignedProperties += '<ds:X509IssuerName>';
-    SignedProperties += 'CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC';
+    // 'CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC';
+    SignedProperties += `${issuer.attributes[3].shortName}=${issuer.attributes[3].value},${issuer.attributes[2].shortName}=${issuer.attributes[2].value},${issuer.attributes[1].shortName}=${issuer.attributes[1].value},${issuer.attributes[0].shortName}=${issuer.attributes[0].value}`
     SignedProperties += '</ds:X509IssuerName>';
     SignedProperties += '<ds:X509SerialNumber>';
 

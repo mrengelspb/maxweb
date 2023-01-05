@@ -1,12 +1,13 @@
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
+    text-align: center;
 }
 
 .Report--table {
-    width: 70%;
-    overflow: auto;
-    padding: 50px 0px;
+    width: 75%;
+    overflow-x: auto;
+    padding: 50px 10px;
 }
 
 .Report--table h1 {
@@ -18,6 +19,7 @@ table, th, td {
 }
 
 .Report--type {
+    margin: 0px 20px;
     padding: 15px;
     border: 1px solid black;
 }

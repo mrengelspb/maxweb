@@ -17,13 +17,13 @@ boxController.use((req, res, next) => {
   });
 });
 
-boxController.post('/api/v1/caja/abrir', async (req, res, next) => {
+boxController.post('/api/v1/caja/registro', async (req, res, next) => {
   const { cliente, sitio, tipo, valor_sistema, valor_ingresado, _01C, _05C, _10C, _25C, _50C, _100C,
-    _1B, _2B, _5B, _10B, _20B, _50B, _100B, nCheques, tCheques } = req.body;
+    _1B, _2B, _5B, _10B, _20B, _50B, _100B, nCheques, tCheques, type } = req.body;
 
   const boxInteractor = new BoxInteractor();
   const result = await boxInteractor.createLog(dbmysql, [cliente, sitio, tipo, valor_sistema, valor_ingresado, _01C, _05C, _10C, _25C, _50C,
-    _100C, _1B, _2B, _5B, _10B, _20B, _50B, _100B, nCheques, tCheques]);
+    _100C, _1B, _2B, _5B, _10B, _20B, _50B, _100B, nCheques, tCheques, type]);
   res.send(result);
 });
 

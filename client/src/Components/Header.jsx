@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../styles/header.css';
 import { List, XLg, PersonCircle } from 'react-bootstrap-icons';
 
-export default function Header({ handlerNotification }) {
+export default function Header({ isOpenBox, setIsOpenBox, handlerNotification }) {
   const [token, setToken] = useState(localStorage.getItem('token'));
+  const [boxStatus, setBoxStatus] = useState(false);
+  const [box, setBox] = useState(false);
   const handleOpenMenu = () => {
     const menu = document.getElementsByClassName('header--menu');
     menu[0].classList.remove('hidden');
@@ -17,24 +19,26 @@ export default function Header({ handlerNotification }) {
   }
 
   const handlerCloseSession = async () => {
-    const response = await fetch('http://localhost:3000/api/v1/logout', {
-      method: 'GET',
-      headers: {
-        auth: token
-      }
-    });
+    setIsOpenBox(2);
+    // const response = await fetch('http://localhost:3000/api/v1/logout', {
+    //   method: 'GET',
+    //   headers: {
+    //     auth: token
+    //   }
+    // });
 
-    if (response.ok) {
-      const data = await response.json();
-      sessionStorage.removeItem('token');
-      sessionStorage.removeItem('parking');
-      handlerNotification(data.msg, response.status, 2000);
-      location.reload();
-    } else {
-      handlerNotification("Error Vuelva a intentar !", 404, 2000);
-    }
+    // if (response.ok) {
+    //   const data = await response.json();
+    //   sessionStorage.removeItem('token');
+    //   sessionStorage.removeItem('parking');
+    //   handlerNotification(data.msg, response.status, 2000);
+    //   location.reload();
+    // } else {
+    //   handlerNotification("Error Vuelva a intentar !", 404, 2000);
+    // }
   }
 
+  if (isOpenBox == 2) return (<Navigate to="/caja/cerrar" />)
   return (
     <header className="header">
       <button type="button" onClick={() => handleOpenMenu()} className="header--icon">

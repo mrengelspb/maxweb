@@ -26,7 +26,7 @@ const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
   const [ice, setIce] = useState(0);
   const [iva, setIva] = useState(0);
   const [discounts, setDiscounts] = useState(0);
-  const [today, setToday] = useState(new Date().toLocaleString("en-US").split(",")[0]);
+  const [today, setToday] = useState(new Date().toISOString().split("T")[0]);
   const [time, setTime] = useState(0);
   const [timeLimit, setTimeLimit] = useState('Dias');
   const [identType, setIdentType] = useState('04');
@@ -41,13 +41,13 @@ const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
       disc += (car[i].total * car[i].descuento) / 100;
       totalByItem += car[i].total;
     }
-    setSubTotal(totalByItem - disc);
-    setDiscounts(disc);
-    setSubTotalNeto(totalByItem - disc);
-    setSubTotalConImpuestos((totalByItem - disc) + ((totalByItem - disc) * 12 / 100));
+    setSubTotal(parseFloat(totalByItem - disc).toFixed(2));
+    setDiscounts(parseFloat(disc).toFixed(2));
+    setSubTotalNeto(parseFloat(totalByItem - disc).toFixed(2));
+    setSubTotalConImpuestos(parseFloat((totalByItem - disc) + ((totalByItem - disc) * 12 / 100)).toFixed(2));
     setSubTotalSinImpuestos(totalByItem);
-    setIva((totalByItem - disc) * 12 / 100);
-    setTotal((totalByItem - disc) + ((totalByItem - disc) * 12 / 100));
+    setIva(parseFloat((totalByItem - disc) * 12 / 100).toFixed(2));
+    setTotal(parseFloat((totalByItem - disc) + ((totalByItem - disc) * 12 / 100)).toFixed(2));
   };
 
   const handlerTime = (ev) => {
@@ -65,7 +65,7 @@ const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
   const handlerEmitir = async (ev) => {
     console.log(identType);
     ev.preventDefault();
-    const a_today = today.split("/"); 
+    const a_today = today.split("-"); 
     const response = await fetch('http://localhost:3000/api/v1/factura/emision', {
       method: 'POST',
       headers: {
@@ -76,7 +76,7 @@ const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
         ambiente_codigo: parking.Ambiente_Codigo,
         emision_codigo: parking.Emision_codigo,
         numero_serie: parking.serial_number,
-        identification_number: ID,
+        identification_number: parking.numero_RUC,
         id_fe_emisoragret: parking.id_fe_emisoragret,
         dir_establecimiento_matriz: parking.dir_establecimiento_matriz,
         contribuyente_especial: parking.contribuyente_especial,
@@ -88,7 +88,7 @@ const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
         address: parking.address,
         codDoc: formaPago,
         estab: parking.estab,
-        date: `${a_today[1]}/${a_today[0]}/${a_today[2]}`,
+        date: `${a_today[2]}/${a_today[1]}/${a_today[0]}`,
         tipo_comprobante: '01',
         lista_productos: car,
         total,

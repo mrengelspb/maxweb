@@ -63,7 +63,7 @@ function Login({
     }
   };
 
-  if (token) return (<Navigate to="/caja" />);
+  if (token) return (<Navigate to="/caja/abrir" />);
   return (
     <main className="login">
       <form className="login--form">
