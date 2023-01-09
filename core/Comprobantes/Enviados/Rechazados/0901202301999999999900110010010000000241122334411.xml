@@ -6,11 +6,11 @@
         <razonSocial>RENGEL RIVERA MATEO SANTIAGO</razonSocial>
         <nombreComercial>Soluciones Plan B</nombreComercial>
         <ruc>0104961925001</ruc>
-        <claveAcceso>0901202301010496192500110010010000005641122334410</claveAcceso>
+        <claveAcceso>0901202301999999999900110010010000000241122334411</claveAcceso>
         <codDoc>01</codDoc>
         <estab>001</estab>
         <ptoEmi>002</ptoEmi>
-        <secuencial>000000565</secuencial>
+        <secuencial>000000025</secuencial>
         <dirMatriz>La republica 2-70</dirMatriz>
         <contribuyenteRimpe>CONTRIBUYENTE RÉGIMEN RIMPE</contribuyenteRimpe>
     </infoTributaria>
@@ -26,7 +26,6 @@
         <totalDescuento>0.00</totalDescuento>
         <totalConImpuestos>
             <totalImpuesto>
-                <codigo>2</codigo>
                 <codigoPorcentaje>3</codigoPorcentaje>
                 <baseImponible>3.36</baseImponible>
                 <tarifa>12</tarifa>
@@ -38,11 +37,11 @@
         <moneda>DOLAR</moneda>
         <pagos>
             <pago>
-                <formaPago>01</formaPago>
-                <total>3.36</total>
-                <plazo>0</plazo>
-                <unidadTiempo>Dias</unidadTiempo>
-            </pago>
+            <formaPago>01</formaPago>
+            <total>3.36</total>
+            <plazo>0</plazo>
+            <unidadTiempo>Dias</unidadTiempo>
+        </pago>
         </pagos>
     </infoFactura>
     <detalles>
@@ -53,7 +52,7 @@
             <cantidad>1</cantidad>
             <precioUnitario>3</precioUnitario>
             <descuento>0</descuento>
-           <precioTotalSinImpuesto>3</precioTotalSinImpuesto>
+            <precioTotalSinImpuesto>3</precioTotalSinImpuesto>
             <impuestos>
                 <impuesto>
                     <codigo>2</codigo>
@@ -70,34 +69,34 @@
         <campoAdicional nombre="Correo ">ventas@solucionesplanb.com.ec</campoAdicional>
         <campoAdicional nombre="Ciudad ">CUENCA</campoAdicional>
     </infoAdicional>
-<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature48730">
-<ds:SignedInfo Id="Signature-SignedInfo334987">
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature424626">
+<ds:SignedInfo Id="Signature-SignedInfo995548">
 <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
 <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
-<ds:Reference Id="SignedPropertiesID457028" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature48730-SignedProperties759353">
+<ds:Reference Id="SignedPropertiesID406154" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature424626-SignedProperties792446">
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>77RHdLFBBnDl2xLTXxPeBSGfP0o=</ds:DigestValue>
+<ds:DigestValue>lleW2AK7KIC6yhEZlw3q3VuJBm8=</ds:DigestValue>
 </ds:Reference>
-<ds:Reference URI="#Certificate293153">
+<ds:Reference URI="#Certificate862760">
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>+F+rJgDm3vRq4L3QIDeTD4E46LM=</ds:DigestValue>
+<ds:DigestValue>kBGE77Bsg2+mboiUT4mOvPA6g44=</ds:DigestValue>
 </ds:Reference>
-<ds:Reference Id="Reference-ID-46707" URI="#comprobante">
+<ds:Reference Id="Reference-ID-918034" URI="#comprobante">
 <ds:Transforms>
 <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>dsbDnX19+wxNrF/pypt9RRsKI3k=</ds:DigestValue>
+<ds:DigestValue>m2IambYSYg7EQr5x3dKU3+UVAZo=</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
-<ds:SignatureValue Id="SignatureValue973413">
-FPKEb4aLw37QF7Y9YaQw/MjnbLC9xUaLXLap/wL4wWxHP+A0Fy2MVF6vFk3phaS4SOPmormVcTgd
-lA8H+5yehWpgP2JfdYWXVeWGAFEEew71gfNox54RHr6Wq1C/zd2UG+RmSLrcNNffS1Oph6CnpmBR
-cNDKStHp9ilJeB0hgQIohxK1gE4U8Q7zL8AQ2Cs8t1QjqHM7woF7ihoGhPQCs+sZzHsHs8RQzVSS
-bFVw5XQwMN2SfyKcieJ38rbthrbsUncnt8Q13s2XHq7m0HgqA37Y08eQqCYw5yPJb4av0WpUC081
-jyYh9J4i+KCZKmY8aRiCbjDTgOqZZWuijTPrrw==
+<ds:SignatureValue Id="SignatureValue345291">
+CLg2PYC1K/ogO7NmtRR/DmdB/wH2r59RJDIPZgwh1syYAGFmmjicWKPKOBCDXmt6VImKybCaMx7Z
+H7r/QUDLj0AayDsHmaqituVZvwDYgLHGo0x/qOhJ+jgorVOYucgtybDmqb5GNKZD3I8PXcO58mnO
+chCbhUjAh1jung0HHSLP1FVb4PYZ9j/c1rrW7wxFAFogabRxNqltoGaNDny55/qP9TRrEJXIPl7T
+KwzFnq/MlLWPcnOs/ZBcpfem0judObujFSWr0dAly/8oy/XNKzu1Rt787TWSDUtzwd9tfrHv5f3l
+4fiO2r3diw3opS/+D4xNnK7cN5cojZDoig9/3Q==
 </ds:SignatureValue>
-<ds:KeyInfo Id="Certificate293153">
+<ds:KeyInfo Id="Certificate862760">
 <ds:X509Data>
 <ds:X509Certificate>
 MIIL3TCCCcWgAwIBAgIEBoPbiTANBgkqhkiG9w0BAQsFADCBmTELMAkGA1UEBhMCRUMxHTAbBgNV
@@ -169,4 +168,4 @@ L4xnAf/eWzndcl5CCFSx6lgPG/0+BNvAkExsbQ==
 </ds:RSAKeyValue>
 </ds:KeyValue>
 </ds:KeyInfo>
-<ds:Object Id="Signature48730-Object341380"><etsi:QualifyingProperties Target="#Signature48730"><etsi:SignedProperties Id="Signature48730-SignedProperties759353"><etsi:SignedSignatureProperties><etsi:SigningTime>2023-01-09T14:19:04-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>3g2mH9u6q5AUcGYNaAQ4pPZ4oP0=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AUTORIDAD DE CERTIFICACION SUBCA-2 SECURITY DATA,OU=ENTIDAD DE CERTIFICACION DE INFORMACION,O=SECURITY DATA S.A. 2,C=EC</ds:X509IssuerName><ds:X509SerialNumber>109304713</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-46707"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature></factura>
+<ds:Object Id="Signature424626-Object810093"><etsi:QualifyingProperties Target="#Signature424626"><etsi:SignedProperties Id="Signature424626-SignedProperties792446"><etsi:SignedSignatureProperties><etsi:SigningTime>2023-01-09T16:51:24-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>3g2mH9u6q5AUcGYNaAQ4pPZ4oP0=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AUTORIDAD DE CERTIFICACION SUBCA-2 SECURITY DATA,OU=ENTIDAD DE CERTIFICACION DE INFORMACION,O=SECURITY DATA S.A. 2,C=EC</ds:X509IssuerName><ds:X509SerialNumber>109304713</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-918034"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature></factura>

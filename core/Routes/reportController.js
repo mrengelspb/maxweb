@@ -41,7 +41,7 @@ ReportController.post('/api/v1/report/:field/:type', async (req, res, next) => {
         state = 2
     }
     
-    const report = await reportInteractor.getReportTickets(action, since, to, id_parking, state, field, type, name_parking, address_parking);
+    const report = await reportInteractor.getReport(action, since, to, id_parking, state, field, type, name_parking, address_parking);
     if (report == 404) {
         res.status(report).send();
     } else if (report === 500) {

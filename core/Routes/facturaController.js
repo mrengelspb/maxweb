@@ -88,24 +88,13 @@ facturaController.post('/api/v1/factura/emision', (req, res, next) => {
             propina, time, timeLimit, total, formaPago, iva);
 
           fs.writeFileSync(`./Comprobantes/Generados/${code}.xml`, xml);
-
           const contenido_p12 = fs.readFileSync('./mateo_rengel.p12');
           const comprobante = factura.firmarComprobante(contenido_p12, 'Gasper1baby', xml);
-
+          fs.unlinkSync(`./Comprobantes/Generados/${code}.xml`);
           fs.writeFileSync(`./Comprobantes/Firmados/${code}.xml`, comprobante);
           let xml_data = fs.readFileSync(`./Comprobantes/Firmados/${code}.xml`, {encoding: 'utf8'});
 
-          validator.validateXML(xml_data, './factura_V1.0.0.xsd', (err, result) => {
-            if (err) {
-              console.log(err);
-            }
-            if (result.valid) {
-              console.log("Esquema exitoso...");
-            }
-          });
-
           const bytes = utf8.encode(xml_data);
-
           const xml_arg = {
             xml: base64.encode(bytes)
           } 
@@ -115,14 +104,27 @@ facturaController.post('/api/v1/factura/emision', (req, res, next) => {
 
           const ClientRecepcion = await soap.createClientAsync(recepcionComprobantesPruebasUrl);
           const responseRecepcion = await ClientRecepcion.validarComprobanteAsync(xml_arg);
-          const xml_args2 = {
-            claveAccesoComprobante: code
+
+          if (responseRecepcion[0].RespuestaRecepcionComprobante.estado === "RECIBIDA") {
+            fs.unlinkSync(`./Comprobantes/Firmados/${code}.xml`);
+            fs.writeFileSync(`./Comprobantes/Enviados/${code}.xml`, comprobante);
+
+            const xml_args2 = {
+              claveAccesoComprobante: code
+            }
+            const ClientAutorizacion = await soap.createClientAsync(autorizacionComprobantesPruebasUrl);
+            const responseAutorizacion = await ClientAutorizacion.autorizacionComprobanteAsync(xml_args2);
+          
+              if (responseAutorizacion[0].RespuestaAutorizacionComprobante.autorizaciones.autorizacion.estado == "EN PROCESO") {
+                fs.unlinkSync(`./Comprobantes/Enviados/${code}.xml`);
+                fs.writeFileSync(`./Comprobantes/Autorizados/${code}.xml`, comprobante);
+              }
+              res.send({ responseRecepcion, responseAutorizacion, describe: ClientAutorizacion.describe() });
+          } else {
+            res.send({ responseRecepcion });
+            fs.unlinkSync(`./Comprobantes/Firmados/${code}.xml`);
+            fs.writeFileSync(`./Comprobantes/Enviados/Rechazados/${code}.xml`, comprobante);
           }
-
-          const ClientAutorizacion = await soap.createClientAsync(autorizacionComprobantesPruebasUrl);
-          const responseAutorizacion = await ClientAutorizacion.autorizacionComprobanteAsync(xml_args2);
-
-          res.send({ responseRecepcion, responseAutorizacion, describe: ClientAutorizacion.describe() });
         })
         .catch((err) => {
           console.log({err: err.message, err});

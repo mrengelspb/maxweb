@@ -7,7 +7,7 @@ class ReportInteractor {
         this.Pdfmake = Pdfmake;
         this.Excel = Excel
     }
-    async getReportTickets(action, since, to, parking, state, field, type, name_parking, address_parking) {
+    async getReport(action, since, to, parking, state, field, type, name_parking, address_parking) {
         try {
             let a_since = since.split(" ")[0].split("/");
             let a_to = to.split(" ")[0].split("/");
@@ -79,10 +79,6 @@ class ReportInteractor {
             console.log(error)
             return (500);
         }
-    }
-
-    async getReportCards(action, since, to, parking, state, field, type) {
-
     }
 }
 

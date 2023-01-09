@@ -11,22 +11,23 @@ const totalConImpuestos = (productos, iva, total) => {
 }
 
 const pagos = (time, timeLimit, total, formaPago) => {
+    total = parseFloat(total).toFixed(2);
     let pagos = "";
     if (time === 0) {
         pagos += `<pago>
-                <formaPago>${formaPago}</formaPago>
-                <total>${total}</total>
-                <plazo>${time}</plazo>
-                <unidadTiempo>${timeLimit}</unidadTiempo>
-            </pago>`;
+            <formaPago>${formaPago}</formaPago>
+            <total>${total}</total>
+            <plazo>${time}</plazo>
+            <unidadTiempo>${timeLimit}</unidadTiempo>
+        </pago>`;
     } else {
         for(let i = 0; i < time; i++) {
             pagos += `<pago>
-                        <formaPago>${formaPago}</formaPago>
-                        <total>${total/time}</total>
-                        <plazo>${time}</plazo>
-                        <unidadTiempo>${timeLimit}</unidadTiempo>
-                </pago>`;
+                <formaPago>${formaPago}</formaPago>
+                <total>${parseFloat(total/time).toFixed(2)}</total>
+                <plazo>${time}</plazo>
+                <unidadTiempo>${timeLimit}</unidadTiempo>
+            </pago>`;
         }
     }
     return pagos;
@@ -42,7 +43,7 @@ const detalle = (productos) => {
             <cantidad>${item.cantidad}</cantidad>
             <precioUnitario>${item.valor_unitario}</precioUnitario>
             <descuento>${item.descuento}</descuento>
-           <precioTotalSinImpuesto>${item.total}</precioTotalSinImpuesto>
+            <precioTotalSinImpuesto>${item.total}</precioTotalSinImpuesto>
             <impuestos>
                 <impuesto>
                     <codigo>${item.codigo_impuesto}</codigo>

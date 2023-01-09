@@ -6,11 +6,11 @@
         <razonSocial>RENGEL RIVERA MATEO SANTIAGO</razonSocial>
         <nombreComercial>Soluciones Plan B</nombreComercial>
         <ruc>0104961925001</ruc>
-        <claveAcceso>0901202301010496192500110010010000005651122334416</claveAcceso>
+        <claveAcceso>0901202301999999999900110010010000000261122334412</claveAcceso>
         <codDoc>01</codDoc>
         <estab>001</estab>
         <ptoEmi>002</ptoEmi>
-        <secuencial>000000566</secuencial>
+        <secuencial>000000027</secuencial>
         <dirMatriz>La republica 2-70</dirMatriz>
         <contribuyenteRimpe>CONTRIBUYENTE RÉGIMEN RIMPE</contribuyenteRimpe>
     </infoTributaria>
@@ -22,25 +22,45 @@
         <razonSocialComprador>PRUEBAS SERVICIO DE RENTAS INTERNAS</razonSocialComprador>
         <identificacionComprador>9999999999001</identificacionComprador>
         <direccionComprador>Dir Pruebas SRI</direccionComprador>
-        <totalSinImpuestos>3.00</totalSinImpuestos>
-        <totalDescuento>0.00</totalDescuento>
+        <totalSinImpuestos>8.88</totalSinImpuestos>
+        <totalDescuento>0.12</totalDescuento>
         <totalConImpuestos>
             <totalImpuesto>
                 <codigo>2</codigo>
                 <codigoPorcentaje>3</codigoPorcentaje>
-                <baseImponible>3.36</baseImponible>
+                <baseImponible>9.95</baseImponible>
                 <tarifa>12</tarifa>
-                <valor>0.36</valor>
+                <valor>1.07</valor>
             </totalImpuesto>
         </totalConImpuestos>
         <propina>0</propina>
-        <importeTotal>3.36</importeTotal>
+        <importeTotal>9.95</importeTotal>
         <moneda>DOLAR</moneda>
         <pagos>
             <pago>
                 <formaPago>01</formaPago>
-                <total>3.36</total>
-                <plazo>0</plazo>
+                <total>1.99</total>
+                <plazo>5</plazo>
+                <unidadTiempo>Dias</unidadTiempo>
+            </pago><pago>
+                <formaPago>01</formaPago>
+                <total>1.99</total>
+                <plazo>5</plazo>
+                <unidadTiempo>Dias</unidadTiempo>
+            </pago><pago>
+                <formaPago>01</formaPago>
+                <total>1.99</total>
+                <plazo>5</plazo>
+                <unidadTiempo>Dias</unidadTiempo>
+            </pago><pago>
+                <formaPago>01</formaPago>
+                <total>1.99</total>
+                <plazo>5</plazo>
+                <unidadTiempo>Dias</unidadTiempo>
+            </pago><pago>
+                <formaPago>01</formaPago>
+                <total>1.99</total>
+                <plazo>5</plazo>
                 <unidadTiempo>Dias</unidadTiempo>
             </pago>
         </pagos>
@@ -53,7 +73,7 @@
             <cantidad>1</cantidad>
             <precioUnitario>3</precioUnitario>
             <descuento>0</descuento>
-           <precioTotalSinImpuesto>3</precioTotalSinImpuesto>
+            <precioTotalSinImpuesto>3</precioTotalSinImpuesto>
             <impuestos>
                 <impuesto>
                     <codigo>2</codigo>
@@ -63,6 +83,23 @@
                     <valor>0.36</valor>
                 </impuesto>
             </impuestos>
+        </detalle><detalle>
+            <codigoPrincipal>SPB-PG001</codigoPrincipal>
+            <codigoAuxiliar>003</codigoAuxiliar>
+            <descripcion>Barra Energetica</descripcion>
+            <cantidad>3</cantidad>
+            <precioUnitario>2</precioUnitario>
+            <descuento>2</descuento>
+            <precioTotalSinImpuesto>6</precioTotalSinImpuesto>
+            <impuestos>
+                <impuesto>
+                    <codigo>2</codigo>
+                    <codigoPorcentaje>3</codigoPorcentaje>
+                    <tarifa>12</tarifa>
+                    <baseImponible>6.00</baseImponible>
+                    <valor>0.72</valor>
+                </impuesto>
+            </impuestos>
         </detalle>
     </detalles>
     <infoAdicional>
@@ -70,34 +107,34 @@
         <campoAdicional nombre="Correo ">ventas@solucionesplanb.com.ec</campoAdicional>
         <campoAdicional nombre="Ciudad ">CUENCA</campoAdicional>
     </infoAdicional>
-<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature814643">
-<ds:SignedInfo Id="Signature-SignedInfo553948">
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature334518">
+<ds:SignedInfo Id="Signature-SignedInfo527903">
 <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
 <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
-<ds:Reference Id="SignedPropertiesID614887" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature814643-SignedProperties411966">
+<ds:Reference Id="SignedPropertiesID208518" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature334518-SignedProperties396912">
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>/39j3nm0wdRoXfDvbwJ9XqaQUZM=</ds:DigestValue>
+<ds:DigestValue>4yLg1xFg401qn3a/3xsV0yI5Dsk=</ds:DigestValue>
 </ds:Reference>
-<ds:Reference URI="#Certificate739501">
+<ds:Reference URI="#Certificate843357">
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>A0cYaqj5jebVGcmKIgYk2f3DhN4=</ds:DigestValue>
+<ds:DigestValue>WEJKsZlJgNhj7ZfCs1it69oeOkE=</ds:DigestValue>
 </ds:Reference>
-<ds:Reference Id="Reference-ID-568511" URI="#comprobante">
+<ds:Reference Id="Reference-ID-952412" URI="#comprobante">
 <ds:Transforms>
 <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>2ed20EyNJK0BmJR59tHO3ZyFfA4=</ds:DigestValue>
+<ds:DigestValue>0E+BwrouAAcrAkdEfwgjgVhb7O8=</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
-<ds:SignatureValue Id="SignatureValue831897">
-Ka6GjZqV5RFOKXvk3ORKMCu/vyOQspsjQF6pknSAgF5YwB/QIPW1F+Ylt/DtQ/pzYPyMTjLQaf+L
-tHrkjNh5irkceD5TOAduAlZxuBMvB9yxPpTwlSnymSqYWxjMX6uDwzz/rdqvNTcumO4fmsc3QLry
-1Q5PK1BQKK4/hSXK3vhDcSMbA0DRA9v9Yglj3pxvNHKjtDTCnh5g2uCxivmkA7yVYsIQxQTOiRF1
-YXlCLKMv5jPzKUy2xUtdW8k0L443TlfYUjXfT01uPqQxwcSOctT5aJFGXMzn4enCcSbSfWVOiSK4
-wgaDQ8EfwfQXZUuRCxTMt2GdPc8n7MekavRF1A==
+<ds:SignatureValue Id="SignatureValue875182">
+FAZG62JG30MAibGSzjvYnSEZgIFmWpiLuN5kJq3UDG5YRezbKc9hV26LbqRPJaCeUeGPpbhSTONP
+er8uNjw1kXcdn6ktWWxtecpZ76YMLZvyFmcboqDjGPSNS4K+My3qB/qS5JZwzIIyCkuoJma0AcWd
+OHso6AE+Ku/y0DDwxLg6F6YOHEjyrRrHwytxQKcCG2bSE8TCzAVuZm9YH5xYOUqdPEim53yyudBV
+FYkOtwNBQ05GgQQMzwv9Ondx3WTQWLOGk3zelLcXMRqsWZfZFQGQrgEH2B2zwbujHLiEyLuwkZdc
+93i8dGiNiR4ow50E9utAegpWlc5XaThzjSj4GA==
 </ds:SignatureValue>
-<ds:KeyInfo Id="Certificate739501">
+<ds:KeyInfo Id="Certificate843357">
 <ds:X509Data>
 <ds:X509Certificate>
 MIIL3TCCCcWgAwIBAgIEBoPbiTANBgkqhkiG9w0BAQsFADCBmTELMAkGA1UEBhMCRUMxHTAbBgNV
@@ -169,4 +206,4 @@ L4xnAf/eWzndcl5CCFSx6lgPG/0+BNvAkExsbQ==
 </ds:RSAKeyValue>
 </ds:KeyValue>
 </ds:KeyInfo>
-<ds:Object Id="Signature814643-Object735215"><etsi:QualifyingProperties Target="#Signature814643"><etsi:SignedProperties Id="Signature814643-SignedProperties411966"><etsi:SignedSignatureProperties><etsi:SigningTime>2023-01-09T14:19:06-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>3g2mH9u6q5AUcGYNaAQ4pPZ4oP0=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AUTORIDAD DE CERTIFICACION SUBCA-2 SECURITY DATA,OU=ENTIDAD DE CERTIFICACION DE INFORMACION,O=SECURITY DATA S.A. 2,C=EC</ds:X509IssuerName><ds:X509SerialNumber>109304713</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-568511"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature></factura>
+<ds:Object Id="Signature334518-Object558403"><etsi:QualifyingProperties Target="#Signature334518"><etsi:SignedProperties Id="Signature334518-SignedProperties396912"><etsi:SignedSignatureProperties><etsi:SigningTime>2023-01-09T16:56:18-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>3g2mH9u6q5AUcGYNaAQ4pPZ4oP0=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AUTORIDAD DE CERTIFICACION SUBCA-2 SECURITY DATA,OU=ENTIDAD DE CERTIFICACION DE INFORMACION,O=SECURITY DATA S.A. 2,C=EC</ds:X509IssuerName><ds:X509SerialNumber>109304713</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-952412"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature></factura>
