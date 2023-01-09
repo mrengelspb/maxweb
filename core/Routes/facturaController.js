@@ -6,12 +6,11 @@ const FacturaController = require('../interface/controller/facturaController.js'
 const Factura = require('../Entities/Factura.js');
 const XmlGenerate = require('../Xml.js');
 const fs = require('fs');
-const SignedXml = require('xml-crypto').SignedXml;
-const p12 = require('p12-pem');
+const validator = require('xsd-schema-validator');
 const soap = require('soap');
 const base64 = require('base-64');
+const convert = require('xml-js');
 const utf8 = require('utf8');
-const jsonxml = require('jsontoxml');
 require('dotenv').config();
 
 facturaController.use((req, res, next) => {
@@ -73,7 +72,7 @@ facturaController.post('/api/v1/factura/emision', (req, res, next) => {
       const zeroPad = (num, places) => String(num).padStart(places, '0');
       const secuencial = zeroPad(parseInt(response.state) + 1, 9)
       const args = [tipo_comprobante, ambiente_codigo, numero_serie, emision_codigo, code.slice(-1), 11223344,
-        date, 0, 0, 0, 0, 0, date, identification_number, razon_social, secuencial, id_fe_emisoragret,
+        date, 0, 0, 0, 0, 0, new Date(date).toISOString().replace("T", " ").split(".")[0], ID, client, secuencial, id_fe_emisoragret,
         subTotal, discounts, subTotalNeto, subTotalConImpuestos, subTotalSinImpuestos, subTotalNoObjetoIva,
         subTotalExcentoIva, ice, iva, propina, total, code];
 
@@ -88,13 +87,23 @@ facturaController.post('/api/v1/factura/emision', (req, res, next) => {
             obligado_a_llevar_contabilidad, identType, client, ID, addressI, subTotalNeto, discounts,
             propina, time, timeLimit, total, formaPago, iva);
 
-          fs.writeFileSync('./factura.xml', xml);
+          fs.writeFileSync(`./Comprobantes/Generados/${code}.xml`, xml);
+
           const contenido_p12 = fs.readFileSync('./mateo_rengel.p12');
           const comprobante = factura.firmarComprobante(contenido_p12, 'Gasper1baby', xml);
 
-          fs.writeFileSync("signed.xml", comprobante);
+          fs.writeFileSync(`./Comprobantes/Firmados/${code}.xml`, comprobante);
+          let xml_data = fs.readFileSync(`./Comprobantes/Firmados/${code}.xml`, {encoding: 'utf8'});
 
-          let xml_data = fs.readFileSync("./signed.xml", {encoding: 'utf8'});
+          validator.validateXML(xml_data, './factura_V1.0.0.xsd', (err, result) => {
+            if (err) {
+              console.log(err);
+            }
+            if (result.valid) {
+              console.log("Esquema exitoso...");
+            }
+          });
+
           const bytes = utf8.encode(xml_data);
 
           const xml_arg = {
@@ -106,7 +115,6 @@ facturaController.post('/api/v1/factura/emision', (req, res, next) => {
 
           const ClientRecepcion = await soap.createClientAsync(recepcionComprobantesPruebasUrl);
           const responseRecepcion = await ClientRecepcion.validarComprobanteAsync(xml_arg);
-
           const xml_args2 = {
             claveAccesoComprobante: code
           }

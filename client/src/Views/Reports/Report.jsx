@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-const download = require('downloadjs');
 import './styles/report.css';
+const download = require('downloadjs');
 
 export default function Report({ handlerNotification }) {
 
@@ -62,7 +62,6 @@ export default function Report({ handlerNotification }) {
 
 
   const handlerExportExcel = async (ev) => {
-    console.log(ev.target.value);
     const response = await fetch('http://localhost:3000/api/v1/download/informe/excel/ticket', {
       method: 'GET',
       headers: {
@@ -87,7 +86,7 @@ export default function Report({ handlerNotification }) {
       <tr>
         {
           tickets.fields.map((f, index) => {
-            return (<th key={index}>{f}</th>)
+            return (<th key={(index + 1) * 100}>{f}</th>)
           })
         }
       </tr>
@@ -151,6 +150,14 @@ export default function Report({ handlerNotification }) {
             <div>
               <input type="radio" name="report" id="card/out" value="card/out" checked={type === "card/out"} onChange={handlerTicketIn} />
               <label htmlFor="card/out">Tarjetas Salidas</label>
+            </div>
+            <div>
+              <input type="radio" name="report" id="box/status" value="box/status" checked={type === "box/status"} onChange={handlerTicketIn} />
+              <label htmlFor="box/status">Caja</label>
+            </div>
+            <div>
+              <input type="radio" name="report" id="paper/status" value="paper/status" checked={type === "paper/status"} onChange={handlerTicketIn} />
+              <label htmlFor="paper/status">Factura</label>
             </div>
           </div>
         </div>

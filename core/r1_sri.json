@@ -1,0 +1,501 @@
+{
+  "declaration": {
+    "attributes": {
+      "version": "1.0",
+      "encoding": "UTF-8",
+      "standalone": "yes"
+    }
+  },
+  "elements": [
+    {
+      "type": "element",
+      "name": "factura",
+      "attributes": {
+        "id": "comprobante",
+        "version": "1.0.0"
+      },
+      "elements": [
+        {
+          "type": "element",
+          "name": "infoTributaria",
+          "elements": [
+            {
+              "type": "element",
+              "name": "ambiente",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "1"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "tipoEmision",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "1"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "razonSocial",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "RENGEL RIVERA MATEO SANTIAGO"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "nombreComercial",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "SOLUCIONES PLAN B"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "ruc",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "0104961925001"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "claveAcceso",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "0901202301010496192500110010020000000021234567819"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "codDoc",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "01"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "estab",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "001"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "ptoEmi",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "002"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "secuencial",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "000000002"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "dirMatriz",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "LA REPUBLICA 2 70"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "contribuyenteRimpe",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "CONTRIBUYENTE RÉGIMEN RIMPE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "element",
+          "name": "infoFactura",
+          "elements": [
+            {
+              "type": "element",
+              "name": "fechaEmision",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "09/01/2023"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "dirEstablecimiento",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "LA REPUBLICA 2 70"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "obligadoContabilidad",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "NO"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "tipoIdentificacionComprador",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "07"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "razonSocialComprador",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "CONSUMIDOR FINAL"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "identificacionComprador",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "9999999999999"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "totalSinImpuestos",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "1.00"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "totalDescuento",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "0.00"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "totalConImpuestos",
+              "elements": [
+                {
+                  "type": "element",
+                  "name": "totalImpuesto",
+                  "elements": [
+                    {
+                      "type": "element",
+                      "name": "codigo",
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "2"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "element",
+                      "name": "codigoPorcentaje",
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "2"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "element",
+                      "name": "baseImponible",
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "1.00"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "element",
+                      "name": "tarifa",
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "12.00"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "element",
+                      "name": "valor",
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "0.12"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "propina",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "0.00"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "importeTotal",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "1.12"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "moneda",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "DOLAR"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "name": "pagos",
+              "elements": [
+                {
+                  "type": "element",
+                  "name": "pago",
+                  "elements": [
+                    {
+                      "type": "element",
+                      "name": "formaPago",
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "01"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "element",
+                      "name": "total",
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "1.12"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "element",
+          "name": "detalles",
+          "elements": [
+            {
+              "type": "element",
+              "name": "detalle",
+              "elements": [
+                {
+                  "type": "element",
+                  "name": "codigoPrincipal",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "001"
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "name": "codigoAuxiliar",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "001"
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "name": "descripcion",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "P1"
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "name": "cantidad",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "1"
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "name": "precioUnitario",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "1"
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "name": "descuento",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "0"
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "name": "precioTotalSinImpuesto",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "1.00"
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "name": "impuestos",
+                  "elements": [
+                    {
+                      "type": "element",
+                      "name": "impuesto",
+                      "elements": [
+                        {
+                          "type": "element",
+                          "name": "codigo",
+                          "elements": [
+                            {
+                              "type": "text",
+                              "text": "2"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "element",
+                          "name": "codigoPorcentaje",
+                          "elements": [
+                            {
+                              "type": "text",
+                              "text": "2"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "element",
+                          "name": "tarifa",
+                          "elements": [
+                            {
+                              "type": "text",
+                              "text": "12.00"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "element",
+                          "name": "baseImponible",
+                          "elements": [
+                            {
+                              "type": "text",
+                              "text": "1.00"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "element",
+                          "name": "valor",
+                          "elements": [
+                            {
+                              "type": "text",
+                              "text": "0.12"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

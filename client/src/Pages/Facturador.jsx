@@ -7,7 +7,16 @@ import '../styles/facturador.css';
 import { Navigate } from 'react-router-dom';
 
 const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
-
+  
+  /* Datos cliente 
+    identificacion
+    tipo identificacion
+    fecha emision,
+    razon social,
+    dirreccion,
+    email,
+    telefono
+  */
   const [car, setCar] = useState([]);
   const [formaPago, setFormaPago] = useState('01');
   const [ID, setID] = useState('');
@@ -63,7 +72,6 @@ const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
   };
 
   const handlerEmitir = async (ev) => {
-    console.log(identType);
     ev.preventDefault();
     const a_today = today.split("-"); 
     const response = await fetch('http://localhost:3000/api/v1/factura/emision', {
@@ -76,7 +84,7 @@ const Facturador = ({ state, PATH_LOGIN, handlerNotification }) => {
         ambiente_codigo: parking.Ambiente_Codigo,
         emision_codigo: parking.Emision_codigo,
         numero_serie: parking.serial_number,
-        identification_number: parking.numero_RUC,
+        identification_number: ID,
         id_fe_emisoragret: parking.id_fe_emisoragret,
         dir_establecimiento_matriz: parking.dir_establecimiento_matriz,
         contribuyente_especial: parking.contribuyente_especial,

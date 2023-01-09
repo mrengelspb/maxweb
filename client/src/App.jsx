@@ -17,9 +17,9 @@ import Report from './Views/Reports/Report';
 import './App.css';
 
 function App() {
-  const [caja, setCaja] = useState({});
+  const [caja, setCaja] = useState(0);
+  const [state, setState] = useState({});
   const [isOpenBox, setIsOpenBox] = useState(0);
-  const [token, setToken] = useState(sessionStorage.getItem('token'));
 
   const HOST = 'localhost';
   const PORT = 3000;
@@ -48,7 +48,6 @@ function App() {
       notification.classList.add('notification--container__hidden');
     }, time);
   };
-  let header;
 
   return (
     <div className="App">
@@ -61,9 +60,9 @@ function App() {
           <Route exact path="/ingreso" element={<Entry setIsOpenBox={setIsOpenBox} isOpenBox={isOpenBox} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
           <Route exact path="/producto" element={<Product PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
           <Route exact path="/facturador" element={<Facturador state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
-          <Route exact path="/caja/abrir" element={<Caja type="Abrir" setCaja={setCaja} setIsOpenBox={setIsOpenBox} handlerNotification={handlerNotification} />} />
-          <Route exact path="/caja/cerrar" element={<Caja type="Cerrar" caja={caja} setIsOpenBox={setIsOpenBox} handlerNotification={handlerNotification} />} />
-          <Route exact path="/informes" element={<ReportPage handlerNotification={handlerNotification} />}>
+          <Route exact path="/caja/abrir" element={<Caja type="Abrir" caja={caja} setCaja={setCaja} setIsOpenBox={setIsOpenBox} handlerNotification={handlerNotification} />} />
+          <Route exact path="/caja/cerrar" element={<Caja type="Cerrar" caja={caja} setCaja={setCaja} setIsOpenBox={setIsOpenBox} handlerNotification={handlerNotification} />} />
+          <Route exact path="/informes" element={<ReportPage setCaja={setCaja} setIsOpenBox={setIsOpenBox} handlerNotification={handlerNotification} />}>
             <Route exact path="ticket" element={<Report handlerNotification={handlerNotification}/>} />
           </Route>
           <Route path="*" element={<h1>Page No Found Error 404</h1>} />

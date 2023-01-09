@@ -7,6 +7,7 @@ function Caja({ type, handlerNotification, setIsOpenBox, setCaja, caja }) {
   const [boxStatus, setBoxStatus] = useState(false);
   const parking = JSON.parse(localStorage.getItem('parking'));
   const token = sessionStorage.getItem('token');
+  const caja_id = localStorage.getItem('caja');
   const [_totalBox, setTotalBox] = useState(0);
   const [box, setBox] = useState({
     '_01C': 0,
@@ -49,46 +50,66 @@ function Caja({ type, handlerNotification, setIsOpenBox, setCaja, caja }) {
       const sum = total01C + total05C + total10C + total25C + total50C + total100C
       + total1B + total2B +  total5B + total10B + total20B + total50B + total100B + totalCheques;
       setTotalBox(parseFloat(sum.toFixed(2)));
-      setCaja(_totalBox);
+      setCaja(parseFloat(sum.toFixed(2)));
   }, [box]);
 
-  const handlerOpeningBox = async (ev) => {
+  const handlerSumbitBox = async (ev) => {
     ev.preventDefault();
-    let response  = await fetch('http://localhost:3000/api/v1/caja/registro', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        auth: token
-      },
-      body: JSON.stringify({
-        cliente: parking.idOperador,
-        sitio: parking.ID_parking,
-        tipo: 'parking',
-        valor_sistema: caja,
-        valor_ingresado: _totalBox,
-        _01C: box['_01C'],
-        _05C: box['_05C'],
-        _10C: box['_10C'],
-        _25C: box['_25C'],
-        _50C: box['_50C'],
-        _100C: box['_100C'],
-        _1B: box['_1B'],
-        _2B: box['_2B'],
-        _5B: box['_5B'],
-        _10B: box['_10B'],
-        _20B: box['_20B'],
-        _50B: box['_50B'],
-        _100B: box['_100B'],
-        nCheques: box['_numberCheques'],
-        tCheques: box['_totalCheques'],
-        type,
-      }),
-    });
+    let response;
+    if (type === 'Cerrar') {
+      response  = await fetch('http://localhost:3000/api/v1/caja/registro/actualizar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          auth: token
+        },
+        body: JSON.stringify({
+          id_box: localStorage.getItem("caja"),
+          valor_cierre: _totalBox,
+          valor_sistema: caja,
+          valor_neto: caja,
+          fecha_cierre: new Date().toISOString().replace("T", " ").split(".")[0],
+          type: 'Finalizado'
+        }),
+      });
+    } else {
+      response  = await fetch('http://localhost:3000/api/v1/caja/registro/ingreso', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          auth: token
+        },
+        body: JSON.stringify({
+          cliente: parking.idOperador,
+          sitio: parking.ID_parking,
+          valor_apertura: _totalBox,
+          valor_sistema: _totalBox,
+          valor_neto: _totalBox,
+          fecha_apertura: new Date().toISOString().replace("T", " ").split(".")[0],
+          _01C: box['_01C'],
+          _05C: box['_05C'],
+          _10C: box['_10C'],
+          _25C: box['_25C'],
+          _50C: box['_50C'],
+          _100C: box['_100C'],
+          _1B: box['_1B'],
+          _2B: box['_2B'],
+          _5B: box['_5B'],
+          _10B: box['_10B'],
+          _20B: box['_20B'],
+          _50B: box['_50B'],
+          _100B: box['_100B'],
+          nCheques: box['_numberCheques'],
+          tCheques: box['_totalCheques'],
+          type: 'Pendiente',
+          id_operator: parking.idOperador,
+        }),
+      });
+    }
 
     if (response.ok && response.status === 200) {
       const data = await response.json();
       handlerNotification(response.statusText, response.status, 2000);
-      console.log(type);
       if (type === 'Cerrar') {
         let response = await fetch('http://localhost:3000/api/v1/logout', {
           method: 'GET',
@@ -100,20 +121,21 @@ function Caja({ type, handlerNotification, setIsOpenBox, setCaja, caja }) {
         if (response.ok) {
           const data = await response.json();
           sessionStorage.removeItem('token');
-          sessionStorage.removeItem('parking');
+          localStorage.removeItem('parking');
+          localStorage.removeItem('caja');
           handlerNotification(data.msg, response.status, 2000);
           location.reload();
         } else {
           handlerNotification("Error Vuelva a intentar !", 404, 2000);
         }
       } else {
+        localStorage.setItem("caja", data[0][0]['LAST_INSERT_ID()']);
         setBoxStatus(true);
         setIsOpenBox(1);
       }
     } else {
       handlerNotification(response.statusText, response.status, 2000);
     }
-
   }
 
   const handlerCancel = async (ev) => {
@@ -131,7 +153,8 @@ function Caja({ type, handlerNotification, setIsOpenBox, setCaja, caja }) {
       if (response.ok) {
         const data = await response.json();
         sessionStorage.removeItem('token');
-        sessionStorage.removeItem('parking');
+        localStorage.removeItem('parking');
+        localStorage.removeItem('caja');
         handlerNotification(data.msg, response.status, 2000);
         location.reload();
       } else {
@@ -140,12 +163,13 @@ function Caja({ type, handlerNotification, setIsOpenBox, setCaja, caja }) {
     }
     
   };
-
+  
   if (!token) return (<Navigate to="/" />);
+  if (type === 'Abrir' && caja_id !== null) return (<Navigate to="/admin" />);
   if (boxStatus) return (<Navigate to="/ingreso" />);
   return (<>
     <div className="caja--container">
-      <form className="caja--form" onSubmit={ handlerOpeningBox }>
+      <form className="caja--form" onSubmit={ handlerSumbitBox }>
         <h3>{type} Caja</h3>
         <label htmlFor="01C">
           01C: <input type="number" name="_01C" id="01C" value={box['_01C']} onChange={handlerBox} />

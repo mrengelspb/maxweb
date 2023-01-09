@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../styles/header.css';
 import { List, XLg, PersonCircle } from 'react-bootstrap-icons';
@@ -18,8 +18,10 @@ export default function Header({ isOpenBox, setIsOpenBox, handlerNotification })
     menu[0].classList.add('hidden');
   }
 
+  const navigate = useNavigate();
   const handlerCloseSession = async () => {
-    setIsOpenBox(2);
+    navigate("/caja/cerrar");
+    // location.href = "/caja/cerrar";
     // const response = await fetch('http://localhost:3000/api/v1/logout', {
     //   method: 'GET',
     //   headers: {
@@ -38,7 +40,6 @@ export default function Header({ isOpenBox, setIsOpenBox, handlerNotification })
     // }
   }
 
-  if (isOpenBox == 2) return (<Navigate to="/caja/cerrar" />)
   return (
     <header className="header">
       <button type="button" onClick={() => handleOpenMenu()} className="header--icon">
