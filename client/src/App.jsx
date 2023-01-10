@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -12,6 +12,7 @@ import Product from './Pages/Product';
 import Facturador from './Pages/Facturador';
 import Notification from './Components/Notification';
 import Caja from './Pages/Caja';
+import Card from './Pages/Card';
 import ReportPage from './Pages/Report';
 import Report from './Views/Reports/Report';
 import './App.css';
@@ -62,11 +63,11 @@ function App() {
           <Route exact path="/facturador" element={<Facturador state={state} PATH_LOGIN={PATH_LOGIN} handlerNotification={handlerNotification} />} />
           <Route exact path="/caja/abrir" element={<Caja type="Abrir" caja={caja} setCaja={setCaja} setIsOpenBox={setIsOpenBox} handlerNotification={handlerNotification} />} />
           <Route exact path="/caja/cerrar" element={<Caja type="Cerrar" caja={caja} setCaja={setCaja} setIsOpenBox={setIsOpenBox} handlerNotification={handlerNotification} />} />
+          <Route exact path="/tarjeta" element={<Card caja={caja} setCaja={setCaja} setIsOpenBox={setIsOpenBox} handlerNotification={handlerNotification} />} />
           <Route exact path="/informes" element={<ReportPage setCaja={setCaja} setIsOpenBox={setIsOpenBox} handlerNotification={handlerNotification} />}>
-            <Route exact path="ticket" element={<Report handlerNotification={handlerNotification}/>} />
+            <Route exact path="ticket" element={<Report handlerNotification={handlerNotification} />} />
           </Route>
           <Route path="*" element={<h1>Page No Found Error 404</h1>} />
-            
         </Routes>
       </BrowserRouter>
     </div>

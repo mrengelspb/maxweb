@@ -10,7 +10,7 @@ class Login {
     const user = new User(response[0]);
     return user;
   }
-
+ 
   async getDataBusiness(DB, identification_number) {
     let response = await DB.query('CALL pa_fe_consultas(?, ?)', [1, identification_number]);
     response = JSON.parse(JSON.stringify(response[0][0]));
