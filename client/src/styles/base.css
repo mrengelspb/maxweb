@@ -1,0 +1,16 @@
+:root {
+    --black-background: #000000;
+    --gray-background: #0000007C;
+    --white-background: #FFFFFF;
+    --gray-color: #B5B5B5;
+    --title-type: 'Montserrat', sans-serif;
+    --title-weigth: 'bold';
+    --title-color: var(--gray-color);
+    --title-size: 38px;
+    --text-color-dark: #000000;
+    --text-color-light: #FFFFFF;
+}
+
+* {
+    box-sizing: border-box;
+}

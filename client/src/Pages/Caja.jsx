@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import '../styles/caja.css';
 
-function Caja({ type, handlerNotification, setIsOpenBox, setCaja, caja }) {
-
+function Caja({ type, handlerNotification, setCaja, caja }) {
   const [boxStatus, setBoxStatus] = useState(false);
   const parking = JSON.parse(localStorage.getItem('parking'));
   const token = sessionStorage.getItem('token');
   const caja_id = localStorage.getItem('caja');
   const [_totalBox, setTotalBox] = useState(0);
+  const navigate = useNavigate();
   const [box, setBox] = useState({
     '_01C': 0,
     '_05C': 0,
@@ -124,14 +125,13 @@ function Caja({ type, handlerNotification, setIsOpenBox, setCaja, caja }) {
           localStorage.removeItem('parking');
           localStorage.removeItem('caja');
           handlerNotification(data.msg, response.status, 2000);
-          location.reload();
+          navigate("/");
         } else {
           handlerNotification("Error Vuelva a intentar !", 404, 2000);
         }
       } else {
         localStorage.setItem("caja", data[0][0]['LAST_INSERT_ID()']);
         setBoxStatus(true);
-        setIsOpenBox(1);
       }
     } else {
       handlerNotification(response.statusText, response.status, 2000);
@@ -141,7 +141,6 @@ function Caja({ type, handlerNotification, setIsOpenBox, setCaja, caja }) {
   const handlerCancel = async (ev) => {
     if (type === 'Cerrar') {
         setBoxStatus(true);
-        setIsOpenBox(1);
     } else {
       const response = await fetch('http://localhost:3000/api/v1/logout', {
         method: 'GET',
@@ -156,7 +155,7 @@ function Caja({ type, handlerNotification, setIsOpenBox, setCaja, caja }) {
         localStorage.removeItem('parking');
         localStorage.removeItem('caja');
         handlerNotification(data.msg, response.status, 2000);
-        location.reload();
+        navigate("/");
       } else {
         handlerNotification("Error Vuelva a intentar !", 404, 2000);
       }
@@ -247,3 +246,10 @@ function Caja({ type, handlerNotification, setIsOpenBox, setCaja, caja }) {
 };
 
 export default Caja;
+
+Caja.propTypes = {
+  type: PropTypes.string.isRequired,
+  handlerNotification: PropTypes.func.isRequired,
+  setCaja: PropTypes.func.isRequired,
+  caja: PropTypes.func.isRequired,
+}

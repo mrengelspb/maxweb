@@ -24,6 +24,7 @@
         "radix": "off",
         "jsx-a11y/label-has-associated-control": "off",
         "space-infix-ops": "off",
-        "react/require-default-props": "off"
+        "react/require-default-props": "off",
+        "quote-props": "off"
     }
 }

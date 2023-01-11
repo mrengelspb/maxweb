@@ -3,7 +3,7 @@ import '../styles/notification.css';
 
 function Notification() {
   return (
-    <div id="notification" className="notification--container notification--container__hidden">
+    <div id="notification" className="notification--container notification--container__hidden slideInUp">
       This text will we replace from handlerNotification !
     </div>
   );
